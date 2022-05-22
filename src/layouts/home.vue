@@ -1,9 +1,19 @@
 <template>
-  <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
-    <RouterView />
-    <Footer />
-    <div class="mt-5 mx-auto text-center opacity-75 dark:opacity-50 text-sm">
-      [Home Layout]
-    </div>
-  </main>
+  <div class="page">
+    <section-hi @locale-change="toggleLocales($event)" />
+    <section-skills />
+  </div>
 </template>
+
+<script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
+
+const { locale } = useI18n()
+
+const toggleLocales = (l: string) => {
+  locale.value = l
+}
+</script>
+
+<style scoped>
+</style>

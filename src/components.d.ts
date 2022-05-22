@@ -5,11 +5,21 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Counter: typeof import('./components/Counter.vue')['default']
-    Footer: typeof import('./components/Footer.vue')['default']
-    README: typeof import('./components/README.md')['default']
+    AppChip: typeof import('./components/AppChip.vue')['default']
+    AppFooter: typeof import('./components/AppFooter.vue')['default']
+    AppIcon3d: typeof import('./components/AppIcon3d.vue')['default']
+    AppLocaleSwitcher: typeof import('./components/AppLocaleSwitcher.vue')['default']
+    AppSidebar: typeof import('./components/AppSidebar.vue')['default']
+    AppSocials: typeof import('./components/AppSocials.vue')['default']
+    AppSubtitle: typeof import('./components/AppSubtitle.vue')['default']
+    AppTitle: typeof import('./components/AppTitle.vue')['default']
+    AppTooltip: typeof import('./components/AppTooltip.vue')['default']
+    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    Logo: typeof import('./components/logo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SectionHi: typeof import('./components/SectionHi.vue')['default']
+    SectionSkills: typeof import('./components/SectionSkills.vue')['default']
   }
 }
 

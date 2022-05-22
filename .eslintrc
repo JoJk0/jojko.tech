@@ -1,3 +1,17 @@
 {
-  "extends": "@antfu"
+  "extends": "@antfu",
+  "rules": {
+      "vue/component-tags-order": [
+        "error",
+        {
+          "order": [
+            [
+              "template",
+              "script"
+            ],
+            "style"
+          ]
+        }
+      ]
+  }
 }

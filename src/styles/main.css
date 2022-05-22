@@ -1,4 +1,3 @@
-@import './markdown.css';
 
 html,
 body,
@@ -6,10 +5,9 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-html.dark {
-  background: #121212;
+  background: var(--jjk-background-color);
+  color: var(--jjk-text-color);
+  font-family: var(--jjk-font-family);
 }
 
 #nprogress {
@@ -17,7 +15,7 @@ html.dark {
 }
 
 #nprogress .bar {
-  background: rgb(13,148,136);
+  background: var(--jjk-primary-color);
   opacity: 0.75;
   position: fixed;
   z-index: 1031;
