@@ -23,7 +23,7 @@ import {
   Vector3,
 } from 'three'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
-import { cssVarToHex, getAngle } from '../utils'
+import { cssVarToHex, getAngle, variables } from '../utils'
 
 export interface MainJPoints {
   top: Vector3
@@ -34,113 +34,14 @@ export interface MainJPoints {
   end: Vector3
 }
 
-export const drawCircle = (
-  points: MainJPoints,
-  divisions: number,
-  radius: number,
-  material: Material,
-  tubularSegments: number,
-  radialSegments: number,
-) => {
-  const { top, start, middle, middle2, middle3, end } = points
-
-  const curveQuad1 = new QuadraticBezierCurve3(start, middle, middle2)
-  const curveQuad2 = new QuadraticBezierCurve3(middle2, middle3, end)
-  // const curveCatmull = new CubicBezierCurve3(start, middle, middle3, end);
-  // console.log(curveCatmull.getSpacedPoints(divisions));
-  // const circleCurve = new EllipseCurve(
-  //   centre.x,
-  //   centre.y,
-  //   10,
-  //   10,
-  //   0,
-  //   Math.PI * 2,
-  //   false,
-  //   0
-  // );
-  const lineCurve = new LineCurve3(top, start)
-
-  const path = new CurvePath<Vector3>()
-  path.add(lineCurve)
-  // path.add(curveCatmull);
-  path.add(curveQuad1)
-  path.add(curveQuad2)
-
-  // const test = (scene: Scene) => {
-  //   const geo = new TubeGeometry(
-  //     curveCatmull,
-  //     tubularSegments,
-  //     1,
-  //     radialSegments,
-  //     false
-  //   );
-  //   const mesh = new Mesh(geo, material);
-  //   scene.add(mesh);
-  // };
-
-  return {
-    ...drawCurvedPill(
-      path,
-      divisions,
-      radius,
-      material,
-      tubularSegments,
-      radialSegments,
-    ),
-    // test,
-  }
-}
-
-export const drawPoint = (
-  point: Vector3,
-  radius: number,
-  material: Material,
-) => {
-  /* Main dot */
-  const mainDotGeo = new SphereGeometry(radius, 32, 32)
-  const mainDot = new Mesh(mainDotGeo, material)
-  mainDot.position.set(point.x, point.y, point.z)
-
-  const addToScene = (scene: Scene) => {
-    scene.add(mainDot)
-  }
-
-  const setProgress = (e: InputEvent | number) => {
-    const progress
-      = typeof e === 'number'
-        ? e
-        : parseFloat((e?.target as HTMLInputElement)?.value)
-    mainDot.scale.set(progress, progress, progress)
-  }
-
-  return {
-    addToScene,
-    setProgress,
-  }
-}
-
-export const drawRect = (
-  points: {
-    start: Vector3
-    end: Vector3
-  },
-  divisions: number,
-  radius: number,
-  material: Material,
-  tubularSegments: number,
-  radialSegments: number,
-) => {
-  const lineCurve = new LineCurve3(points.start, points.end)
-  const path = new CurvePath<Vector3>()
-  path.add(lineCurve)
-  return drawCurvedPill(
-    path,
-    divisions,
-    radius,
-    material,
-    tubularSegments,
-    radialSegments,
-  )
+export const addShadow = (model: Object3D) => {
+  model.traverse((n) => {
+    if (n.type === 'Mesh') {
+      n.castShadow = true
+      n.receiveShadow = true
+      // if(n.material.map) n.material.map.anisotropy = 16;
+    }
+  })
 }
 
 export const drawCurvedPill = (
@@ -240,49 +141,94 @@ export const drawCurvedPill = (
   }
 }
 
-// export const drawExtrude = (scene: Scene, points: MainJPoints) => {
-//   // const length = 12,
-//   //   width = 8;
+export const drawCircle = (
+  points: MainJPoints,
+  divisions: number,
+  radius: number,
+  material: Material,
+  tubularSegments: number,
+  radialSegments: number,
+) => {
+  const { top, start, middle, middle2, middle3, end } = points
 
-//   // const shape = new Shape();
-//   // shape.moveTo(0, 0);
-//   // shape.lineTo(length, width);
-//   // shape.lineTo(length, 0);
-//   const { top, start, middle, middle2, middle3, end } = points;
+  const curveQuad1 = new QuadraticBezierCurve3(start, middle, middle2)
+  const curveQuad2 = new QuadraticBezierCurve3(middle2, middle3, end)
 
-//   const curveQuad1 = new QuadraticBezierCurve3(start, middle, middle2);
-//   const curveQuad2 = new QuadraticBezierCurve3(middle2, middle3, end);
+  const lineCurve = new LineCurve3(top, start)
 
-//   const path = new CurvePath<Vector3>();
-//   // path.add(lineCurve);
-//   // path.add(circleCurve);
-//   path.add(curveQuad1);
-//   path.add(curveQuad2);
+  const path = new CurvePath<Vector3>()
+  path.add(lineCurve)
+  path.add(curveQuad1)
+  path.add(curveQuad2)
 
-//   const extrudeSettings: ExtrudeGeometryOptions = {
-//     steps: 200,
-//     depth: 1,
-//     bevelEnabled: true,
-//     bevelThickness: 5,
-//     bevelSize: 5,
-//     bevelOffset: 0,
-//     bevelSegments: 50,
-//     extrudePath: path,
-//     curveSegments: 200,
-//   };
+  return {
+    ...drawCurvedPill(
+      path,
+      divisions,
+      radius,
+      material,
+      tubularSegments,
+      radialSegments,
+    ),
+    // test,
+  }
+}
 
-//   const geometry = new ExtrudeGeometry(undefined, extrudeSettings);
-//   const material = new MeshPhysicalMaterial({
-//     color: 0xffffff,
-//     side: DoubleSide,
-//   });
-//   const mesh = new Mesh(geometry, material);
-//   scene.add(mesh);
-// };
+export const drawPoint = (
+  point: Vector3,
+  radius: number,
+  material: Material,
+) => {
+  /* Main dot */
+  const mainDotGeo = new SphereGeometry(radius, 32, 32)
+  const mainDot = new Mesh(mainDotGeo, material)
+  mainDot.position.set(point.x, point.y, point.z)
+
+  const addToScene = (scene: Scene) => {
+    scene.add(mainDot)
+  }
+
+  const setProgress = (e: InputEvent | number) => {
+    const progress
+      = typeof e === 'number'
+        ? e
+        : parseFloat((e?.target as HTMLInputElement)?.value)
+    mainDot.scale.set(progress, progress, progress)
+  }
+
+  return {
+    addToScene,
+    setProgress,
+  }
+}
+
+export const drawRect = (
+  points: {
+    start: Vector3
+    end: Vector3
+  },
+  divisions: number,
+  radius: number,
+  material: Material,
+  tubularSegments: number,
+  radialSegments: number,
+) => {
+  const lineCurve = new LineCurve3(points.start, points.end)
+  const path = new CurvePath<Vector3>()
+  path.add(lineCurve)
+  return drawCurvedPill(
+    path,
+    divisions,
+    radius,
+    material,
+    tubularSegments,
+    radialSegments,
+  )
+}
 
 export const getGroundMaterial = () => {
   const options = {
-    color: cssVarToHex('--jjk-background-color'),
+    color: variables.colorBackground,
     metalness: 0,
     roughness: 1,
     transmission: 1,
@@ -320,7 +266,7 @@ export const getGroundMaterial = () => {
   })
 }
 export const getClayMaterial = (colorProp?: ColorRepresentation) => {
-  const color = colorProp || cssVarToHex('--jjk-primary-color')
+  const color = colorProp || variables.colorPrimary
   const materialSide = DoubleSide
   const textureLoader = new TextureLoader()
   const normalMapTexture = textureLoader.load(
@@ -525,12 +471,3 @@ export const addHelpers = (scene: Scene) => {
   scene.add(gridHelper)
 }
 
-export const addShadow = (model: Object3D) => {
-  model.traverse((n) => {
-    if (n.type === 'Mesh') {
-      n.castShadow = true
-      n.receiveShadow = true
-      // if(n.material.map) n.material.map.anisotropy = 16;
-    }
-  })
-}

@@ -1,8 +1,8 @@
 <template>
   <div class="locale" @click="toggleLocales">
-    <div v-if="locale === 'pl'" i-twemoji-flag-poland />
-    <div v-else-if="locale === 'es'" i-twemoji-flag-spain />
-    <div v-else i-twemoji-flag-united-kingdom />
+    <i-twemoji-flag-poland v-if="locale === 'pl'" />
+    <i-twemoji-flag-spain v-else-if="locale === 'es'" />
+    <i-twemoji-flag-united-kingdom v-else />
   </div>
 </template>
 

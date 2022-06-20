@@ -1,6 +1,31 @@
-/* GRADIENTS */
 
-$main-gradient: linear-gradient(5deg,var(--jjk-secondary-color) 26%,var(--jjk-primary-color) 59%);
+
+// @import '~vuetify/styles/main.sass';
+
+// Colours
+$color-primary: #00ffce;
+$color-secondary: #797ef7;
+$color-text: #c5fffe;
+$color-background: #001427;
+
+:export {
+    colorPrimary: $color-primary;
+    colorSecondary: $color-secondary;
+    colorText: $color-text;
+    colorBackground: $color-background;
+}
+
+// Globals
+$body-font-family: 'Quicksand', 'Open Sans', 'sans-serif';
+$border-radius-root: 2em;
+$font-size-root: 14px;
+
+$mild-shadow: 0.1em 0.1em 2em rgba(0, 0, 0, 0.4);
+$hover-shadow: 0.1em 0.1em 3em rgba(0, 0, 0, 0.6);
+
+/* GRADIENTS */
+$main-gradient: #{linear-gradient(5deg,$color-secondary 26%,$color-primary 59%)};
+$button-gradient: #{linear-gradient(15deg,$color-secondary,$color-primary 59%)};
 
 /* DIMENSIONS */
 $container-max-width: 80rem;
@@ -9,6 +34,31 @@ $container-margin: 1rem;
 /* BORDER RADIUS */
 $base-border-radius: 2.5rem;
 $button-border-radius: $base-border-radius $base-border-radius*0.7 $base-border-radius $base-border-radius*0.7;
+
+// Variables must come before the import
+$btn-letter-spacing: 0;
+$btn-font-weight: 400;
+$list-item-title-font-size: 0.929rem;
+$list-item-dense-title-font-size: 0.929rem;
+$list-item-dense-title-font-weight: initial;
+$fab-icon-sizes: (
+  'small': 20
+);
+$btn-sizes: (
+  'default': 41,
+  'large': 54
+);
+
+$typography: (
+  'h1': (
+    'size': 3.3125rem,
+    'line-height': 1.15em
+  ),
+  'h2': (
+    'size': 2.25rem,
+    'line-height': 1.5em
+  )
+);
 
 /* VUE TRANSITIONS */ 
 

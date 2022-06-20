@@ -1,3 +1,4 @@
+import type { I18NString } from './modules/i18n'
 import type { I18n } from './utils'
 import { defineData } from './utils'
 
@@ -6,6 +7,7 @@ export interface JJKData {
   socials: JJKSocial[]
   skillCategories: JJKSkillCategory[]
   skills: JJKSkill[]
+  topics: JJKTopic[]
 }
 
 export interface JJKSocial {
@@ -32,6 +34,13 @@ export interface JJKSkillCategory {
   name: I18n<string, SkillCategoryKeys>
   skillNames?: SkillNames[]
   relatedCategoryNames?: SkillCategoryKeys[]
+}
+
+export interface JJKTopic {
+  id: string
+  name: I18NString
+  draftText: I18NString
+  sentText: I18NString
 }
 
 export type SkillNames =
@@ -102,7 +111,7 @@ export type SkillCategoryKeys =
   | 'IDE'
   | 'OPERATING_SYSTEMS_PROFICIENCY'
 
-export default defineData<JJKData>({
+export default defineData({
   myNames: ['Jacob.', 'Jakub.', 'Kuba.', 'jojko.'],
   socials: [
     {
@@ -614,4 +623,114 @@ export default defineData<JJKData>({
       relatedSkillNames: ['JavaScript', 'Vue.js', 'Jest'],
     },
   ],
-})
+  topics: [
+    {
+      id: 'COFFEE',
+      name: {
+        en: '❤️ coffee',
+        pl: '❤️ kawie',
+        es: '❤️ café',
+      },
+      draftText: {
+        en: 'Did you know Guatemala is my favourite coffee region?...',
+        pl: 'Czy wiesz, że Guatemala jest moim ulubionym regionem kawy?...',
+        es: '¿Sabías que Guatemala es mi región favorita de café?...',
+      },
+      sentText: {
+        en: 'You\'re a boss! Thanks for your interest about me. \nI would love to talk to you or meet for a coffee ❤️.',
+        pl: 'Pjona 👊! Dzięki za zainteresowanie się mną. \nChętnie z Tobą porozmawiam lub spotkam się na kawę ❤️.',
+        es: '¡Eres maravillosx! Gracias por su interés acerca de mí. Me encantaría hablar contigo o quedar para tomar un café ❤️.',
+      },
+    },
+    {
+      id: 'HIRING_ME',
+      name: {
+        en: '👔 hiring me',
+        pl: '👔 zatrudnieniu mnie',
+        es: '👔 contratación de mí',
+      },
+      draftText: {
+        en: 'By hiring me you will get a young and talented team member ...',
+        pl: 'Zatrudniając mnie zyskasz młodego i utalentowanego członka zespołu...',
+        es: 'Al contratarme obtendrás un miembro de equipo joven y talentoso...',
+      },
+      sentText: {
+        en: 'You\'re a boss! Thanks for choosing me as a potential candidate. \nI would love to speak to you soon.',
+        pl: 'Pjona 👊! Dzięki za wybór mnie jako potencjalnego kandydata. \nChętnie wkrótce z Tobą porozmawiam.',
+        es: '¡Eres maravillosx! Gracias por elegirme como candidato potencial. Me encantaría hablar contigo pronto.',
+      },
+    },
+    {
+      id: 'COOPERATION',
+      name: {
+        en: '🤝 cooperation',
+        pl: '🤝 współpracy',
+        es: '🤝 cooperación',
+      },
+      draftText: {
+        en: 'I\'m more than happy to co-work on projects ...',
+        pl: 'Bardzo się cieszę ze współpracy przy projektach...',
+        es: 'Estoy más que feliz de colaborar en los proyectos...',
+      },
+      sentText: {
+        en: 'Nice to meet you! I will write to you soon.',
+        pl: 'Miło Cię poznać! Wkrótce napiszę do Ciebie.',
+        es: '¡Me encantaría hablar contigo pronto!',
+      },
+    },
+    {
+      id: 'FREELANCE_PROJECTS',
+      name: {
+        en: '📑 freelance projects',
+        pl: '📑 projektach',
+        es: '📑 proyectos',
+      },
+      draftText: {
+        en: 'Did you know I\'ve started freelancing in 2011? ...',
+        pl: 'Czy wiesz, że rozpocząłem freelancing w 2011?...',
+        es: '¿Sabías que empecé a trabajar como freelancer en 2011?...',
+      },
+      sentText: {
+        en: 'You\'re a boss! Thanks for asking about freelancing. \nI will send you a reply soon.',
+        pl: 'Pjona 👊! Dzięki za zapytanie o freelancing. \nWkrótce się do Ciebie odezwę.',
+        es: '¡Eres maravillosx! Gracias por preguntar sobre freelance. \nEnvíate un mensaje pronto.',
+      },
+    },
+    {
+      id: 'BUGS',
+      name: {
+        en: '🐞 bugs',
+        pl: '🐞 bugach',
+        es: '🐞 errores',
+      },
+      draftText: {
+        en: 'This site is still in early development stages ...',
+        pl: 'Ta strona jest jeszcze w fazie rozwoju...',
+        es: 'Este sitio todavía está en fase de desarrollo...',
+      },
+      sentText: {
+        en: 'You\'re a star! Cheers 🍻 for reporting a bug. \nI will have a look at it and will reply soon.',
+        pl: 'Pjona 👊! Dzięki za zgłoszenie błędu. \nSprawdzę go i odpowiem wkrótce.',
+        es: '¡Eres la leche! ¡Felicidades 🍻 por reportar un error. \nLe echaré un vistazo y te responderé pronto.',
+      },
+    },
+    {
+      id: 'SOCIAL_MEDIA',
+      name: {
+        en: '👩‍💻 social media',
+        pl: '👩‍💻 mediach społecznościowych',
+        es: '👩‍💻 medios sociales',
+      },
+      draftText: {
+        en: 'My Facebook site has been created in 2011 and closed in 2022 due to Meta boycott ...',
+        pl: 'Prowadziłem fanpage na Facebooku od 2011 do 2022 kiedy to zbojkotowałem Meta ...',
+        es: 'Mi sitio de Facebook se creó en 2011 y se cerró en 2022 debido al boicot a Meta...',
+      },
+      sentText: {
+        en: 'All done! Thanks for asking about social media. \nI will send you a reply soon.',
+        pl: 'To tyle! Dzięki za zapytanie o mediach społecznościowych. \nWkrótce się do Ciebie odezwę.',
+        es: '¡Todo listo! Gracias por preguntar sobre medios sociales. \nEnvíate un mensaje pronto.',
+      },
+    },
+  ],
+} as const)

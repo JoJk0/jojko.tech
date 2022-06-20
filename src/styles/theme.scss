@@ -1,0 +1,7 @@
+@use 'sass:color';
+
+div.v-overlay__scrim {
+    background: color.adjust($color-background, $alpha: -0.2);
+    opacity: 1;
+    backdrop-filter: blur(10px);
+}

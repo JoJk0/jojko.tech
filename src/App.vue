@@ -31,3 +31,39 @@ useHead({
   ],
 })
 </script>
+
+<style lang="scss">
+@import "./src/styles/theme";
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: $color-background;
+  color: $color-text;
+  font-family: $body-font-family;
+  color-scheme: dark;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: $color-primary;
+  opacity: 0.75;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+section {
+    padding: 0 max(calc(calc(100vw - $container-max-width) / 2), $container-margin);
+    width: 100vw;
+    min-height: 100vh;
+}
+</style>

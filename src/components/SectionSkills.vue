@@ -22,6 +22,7 @@
       </div>
     </div>
     <logo />
+    <app-skill-search />
   </section>
 </template>
 
@@ -37,16 +38,9 @@ import NodeJSIcon from '~icons/logos/nodejs-icon?raw'
 // const emit = defineEmits({});
 
 const { t } = useI18n()
-
 </script>
 
 <style lang="scss" scoped>
-#skills {
-    padding: 0
-        max(calc(calc(100vw - $container-max-width) / 2), $container-margin);
-    width: 100vw;
-    min-height: 100vh;
-}
 .icons{
     display: flex;
     justify-content: center;

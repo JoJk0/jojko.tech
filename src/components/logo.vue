@@ -1,5 +1,4 @@
 <template>
-  <img v-if="srcSvg" :src="srcSvg">
   <canvas ref="canvasEl" class="canvas" />
   <input
     id="myRange"
@@ -14,16 +13,11 @@
 </template>
 
 <script lang="ts" setup>
-
-import { AmbientLight, AxesHelper, Color, ExtrudeGeometry, GridHelper, Group, HemisphereLight, Mesh, MeshNormalMaterial, PerspectiveCamera, Plane, PlaneGeometry, PointLight, ReinhardToneMapping, Scene, SpotLight, Vector3, WebGLRenderer } from 'three'
+import { AmbientLight, HemisphereLight, PerspectiveCamera, PointLight, ReinhardToneMapping, Scene, SpotLight, WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import { onMounted, ref } from 'vue'
-import { Vue } from '.pnpm/vue-demi@0.12.1_vue@3.2.31/node_modules/vue-demi'
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
-import src from 'gsap/src'
-import { addHelpers, addShadow, drawLogo, getClayMaterial, getGlassMaterial, getGroundMaterial } from '../composables/useLogo'
-import VueIcon from '~icons/vscode-icons/file-type-graphql?raw'
+import { drawLogo } from '../composables/useLogo'
 // const props = defineProps({});
 
 // const emit = defineEmits({});
@@ -35,7 +29,8 @@ const scene = new Scene()
 const logo = drawLogo()
 
 onMounted(() => {
-  if (!canvasEl.value) return
+  if (!canvasEl.value)
+    return
   const camera = new PerspectiveCamera(75, canvasEl.value.clientWidth / canvasEl.value.clientHeight, 1, 10000)
 
   const width = canvasEl.value.clientWidth
@@ -104,7 +99,6 @@ onMounted(() => {
     renderer.render(scene, camera)
   })
 })
-
 </script>
 
 <style lang="scss" scoped>

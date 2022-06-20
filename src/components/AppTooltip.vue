@@ -32,9 +32,9 @@ const [isOpen, set] = useToggle(false);
 .tooltip-container {
     position: relative;
     .tooltip {
-        background: var(--jjk-text-color);
+        background: $color-text;
         border-radius: 2rem;
-        color: var(--jjk-background-color);
+        color: $color-background;
         font-weight: 600;
         font-size: 1rem;
         padding: 0.5em 1em;

@@ -12,16 +12,19 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@vee-validate/i18n": "^4.5.11",
+    "@vee-validate/rules": "^4.5.11",
     "@vueuse/core": "^8.4.2",
     "@vueuse/head": "^0.7.6",
     "gsap": "^3.10.4",
     "nprogress": "^0.2.0",
     "three": "^0.140.2",
+    "vee-validate": "^4.5.11",
     "vue": "^3.2.33",
     "vue-demi": "^0.12.5",
-    "vue-i18n": "^9.1.10",
+    "vue-i18n": "9.2.0-beta.36",
     "vue-router": "^4.0.15",
-    "vuetify": "3.0.0-beta.2",
+    "vuetify": "3.0.0-beta.4",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
@@ -35,7 +38,6 @@
     "@vitejs/plugin-vue": "^2.3.2",
     "@vue/compiler-sfc": "^3.2.35",
     "@vue/test-utils": "^2.0.0-rc.21",
-    "@vuetify/vite-plugin": "1.0.0-alpha.11",
     "critters": "^0.0.16",
     "cross-env": "^7.0.3",
     "cypress": "^9.6.1",
@@ -52,6 +54,7 @@
     "vite-plugin-inspect": "^0.5.0",
     "vite-plugin-pages": "^0.23.0",
     "vite-plugin-vue-layouts": "^0.6.0",
+    "vite-plugin-vuetify": "1.0.0-alpha.12",
     "vite-ssg": "^0.20.0",
     "vite-ssg-sitemap": "^0.2.6",
     "vitest": "^0.12.4",

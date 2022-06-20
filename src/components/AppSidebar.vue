@@ -7,8 +7,8 @@
       @click="scrollToTop"
     >
       <Transition name="fade" mode="out-in">
-        <img v-if="!isHovering" src="../assets/logo.svg" class="logo">
-        <div v-else class="to-top" i-akar-icons-align-to-top />
+        <img v-if="!isHovering" src="../assets/logo.svg" class="logo" alt="logo">
+        <i-akar-icons-align-to-top v-else class="to-top" />
       </Transition>
     </div>
     <app-socials id="sidebar-socials" class="socials" />
@@ -52,7 +52,6 @@ onMounted(() => {
     ease: 'none',
   })
 })
-
 </script>
 
 <style lang="scss" scoped>
@@ -66,9 +65,11 @@ onMounted(() => {
     justify-content: space-between;
     padding: 1em;
     font-size: 2em;
+    z-index: 1101;
     .logo-cnt {
         cursor: pointer;
         height: 10em;
+        width: 1em;
         .to-top {
             font-size: 1em;
         }

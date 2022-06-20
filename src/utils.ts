@@ -1,10 +1,20 @@
 import { Color, Line3, Vector3 } from 'three'
+import type { DeepReadonly } from 'vue'
+import type { JJKData } from './Data'
 import type { AppLocale } from './modules/i18n'
+import { availableLocales } from './modules/i18n'
 
 export type I18n<T extends string, TKey extends string = string> = {
   [key in AppLocale]: T;
 } & {
   key: TKey
+}
+
+export const variables = {
+  colorPrimary: '#00ffce',
+  colorSecondary: '#797ef7',
+  colorText: '#c5fffe',
+  colorBackground: '#001427',
 }
 
 export const resolveCSSVar = (variable: string) =>
@@ -36,7 +46,7 @@ const isNode = () => {
   catch (e) { return false }
 }
 
-export const defineData = <T>(data: T) => {
+export const defineData = <T extends DeepReadonly<JJKData>>(data: T) => {
   if (isNode()) {
     const write = async () => {
       const { writeFileSync } = await import('fs')
@@ -46,4 +56,24 @@ export const defineData = <T>(data: T) => {
     write()
   }
   return data
+}
+
+export interface VersionInfo {
+  number: `${number}.${number}.${number}`
+  date: `${number}-${number}-${number}`
+  channel: 'stable' | 'beta' | 'alpha' | 'dev'
+}
+
+export const defineVersion = <T extends DeepReadonly<VersionInfo>>(options: T) => options
+
+export const versionInfo = defineVersion({
+  number: '8.1.0',
+  date: '2022-06-13',
+  channel: 'dev',
+})
+
+export const guessLocale = () => {
+  const userLangs = navigator.languages ? navigator.languages.map(lang => lang.split('-')[0]) : ['en']
+
+  return userLangs.find(lang => (availableLocales as string[]).includes(lang)) as AppLocale || 'en'
 }

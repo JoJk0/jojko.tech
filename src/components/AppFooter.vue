@@ -1,8 +1,8 @@
 <template>
   <footer>
     <div class="version-status">
-      <div class="top">
-        <div i-charm-info /> <span>ALPHA:</span>
+      <div v-if="isUnstable" class="top">
+        <i-charm-info /> <v-chip>{{ channel.toUpperCase() }}</v-chip>
         <div class="version-info">
           {{ t('UNSTABLE') }}
         </div>
@@ -11,13 +11,21 @@
     </div>
     <app-socials inline />
     <div class="footer">
-      © {{ thisYear }} jojko.tech
+      © 2011 - {{ thisYear }} jojko.tech
+    </div>
+    <div class="version">
+      v{{ number }}
     </div>
   </footer>
 </template>
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
+import { versionInfo } from '~/utils'
+
+const { channel, number } = versionInfo
+
+const isUnstable = ['alpha', 'beta', 'dev'].includes(channel)
 
 // const props = defineProps({});
 
@@ -26,7 +34,6 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const thisYear = new Date().getFullYear()
-
 </script>
 
 <style lang="scss" scoped>
@@ -37,6 +44,23 @@ footer {
   align-items: center;
   gap: 2em;
   padding: 2em;
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    .version-info {
+      font-weight: 500;
+    }
+  }
+    p {
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
+  .version {
+    font-size: 0.7em;
+    opacity: 0.5;
+  }
 }
 </style>
 

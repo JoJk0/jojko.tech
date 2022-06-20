@@ -9,12 +9,14 @@ import AutoImport from 'unplugin-auto-import/vite'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 import Icons from 'unplugin-icons/vite'
-import Vuetify from '@vuetify/vite-plugin'
+import IconsResolver from 'unplugin-icons/resolver'
+import Vuetify from 'vite-plugin-vuetify'
 
 export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+      '~vuetify': 'node_modules/vuetify',
     },
   },
 
@@ -53,7 +55,7 @@ export default defineConfig({
       dts: 'src/auto-imports.d.ts',
     }),
 
-    Vuetify({ autoImport: true }),
+    Vuetify({ autoImport: true, styles: 'sass' }),
 
     // https://github.com/antfu/unplugin-vue-components
     Components({
@@ -62,6 +64,9 @@ export default defineConfig({
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
+      resolvers: [
+        IconsResolver(),
+      ],
     }),
 
     // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n

@@ -21,8 +21,8 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .chip {
-    background: var(--jjk-text-color);
-    color: var(--jjk-background-color);
+    background: $color-text;
+    color: $color-background;
     font-weight: bold;
 }
 </style>

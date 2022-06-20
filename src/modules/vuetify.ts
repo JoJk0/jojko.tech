@@ -10,6 +10,7 @@ const jjkTheme: ThemeDefinition = {
   dark: true,
   colors: {
     'background': '#001427',
+    'surface': '#001427',
     'primary': '#00ffce',
     'primary-darken-1': '#00ffc0',
     'secondary': '#797ef7',

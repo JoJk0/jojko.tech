@@ -4,9 +4,6 @@ import App from './App.vue'
 import { loadFonts } from './modules/webfontloader'
 import generatedRoutes from '~pages'
 
-import './styles/main.css'
-import './styles/colours.css'
-
 loadFonts()
 
 const routes = setupLayouts(generatedRoutes)
