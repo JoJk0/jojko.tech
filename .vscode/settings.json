@@ -11,5 +11,7 @@
   "files.associations": {
     "*.css": "postcss"
   },
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  "xd.globalEditor": false,
+  "xd.lastPackage": "/Users/jojko/Documents/material-theme"
 }

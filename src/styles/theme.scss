@@ -5,3 +5,36 @@ div.v-overlay__scrim {
     opacity: 1;
     backdrop-filter: blur(10px);
 }
+
+::placeholder {
+    color: color.adjust($color-text, $alpha: -0.5);
+}
+
+label {
+    color: $color-text !important;
+    opacity: 1 !important;
+}
+
+// Transitions
+
+.slide-leave-active,
+.slide-enter-active {
+  transition: 1s;
+}
+.slide-enter {
+  transform: translate(100%, 0);
+}
+.slide-leave-to {
+  transform: translate(-100%, 0);
+}
+
+.slideback-leave-active,
+.slideback-enter-active {
+  transition: 1s;
+}
+.slideback-enter {
+  transform: translate(-100%, 0);
+}
+.slideback-leave-to {
+  transform: translate(100%, 0);
+}

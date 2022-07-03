@@ -2,46 +2,45 @@
   <div class="contact-form-email">
     <AppSubtitle>{{ t('NICE_TO_MEET_YOU', { name }) }}</AppSubtitle>
     <v-text-field
-      v-model="email"
+      :model-value="modelValue"
       :label="t('HOW_SHOULD_I_GET_BACK_TO_YOU')"
       :placeholder="t('EMAIL_PLACEHOLDER')"
       variant="outlined"
+      :error="!!errorMessage"
+      :error-messages="errorMessage"
+      @update:model-value="updateValue"
+      @keyup.enter="emit('next', true)"
     />
-    <div v-if="errorMessage" class="error">
-      {{ errorMessage }}
-    </div>
-    <v-card-actions>
-      <v-btn rounded color="primary" block @click="next">
-        Next >
-      </v-btn>
-    </v-card-actions>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { useField } from 'vee-validate'
-import { email as emailValidator, required } from '@vee-validate/rules'
 
-const props = defineProps({
+defineProps({
   name: {
     type: String,
     required: true,
   },
+  modelValue: {
+    type: String,
+    required: true,
+  },
+  errorMessage: {
+    type: String,
+    default: undefined,
+  },
 })
 
 const emit = defineEmits({
-  email: String,
+  'update:modelValue': String,
+  'next': Boolean,
 })
 
 const { t } = useI18n()
 
-const { value: email, errorMessage, validate } = useField<string>('', [required, emailValidator])
-
-const next = async () => {
-  const { valid } = await validate()
-  if (valid)
-    emit('email', email.value)
+const updateValue = (value: string) => {
+  emit('update:modelValue', value)
 }
 </script>
 
@@ -63,6 +62,14 @@ const next = async () => {
     transform: scale(1.2);
     margin: 4rem;
   }
+    .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1em;
+    margin: -0.5rem;
+  }
 }
 </style>
 
@@ -78,7 +85,7 @@ const next = async () => {
 {
     "NICE_TO_MEET_YOU": "Miło cię poznać, {name}.",
     "HOW_SHOULD_I_GET_BACK_TO_YOU": "Jak mam odezwać się do Ciebie?",
-    "EMAIL_PLACEHOLDER": "np. follow.dreams{'@'}sbigthing.io"
+    "EMAIL_PLACEHOLDER": "np. follow.dreams{'@'}bigthing.io"
 }
 </i18n>
 

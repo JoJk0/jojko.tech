@@ -1,11 +1,16 @@
 <template>
-  <p />
+  <p>You're a star!</p>
 </template>
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 
-// const props = defineProps({});
+const props = defineProps({
+  sentText: {
+    type: String,
+    required: true,
+  },
+})
 
 // const emit = defineEmits({});
 

@@ -4,49 +4,43 @@
       {{ t('NAME_LABEL') }}
     </AppSubtitle>
     <v-text-field
-      v-model="name"
+      :model-value="modelValue"
       :label="t('TEXT_LABEL')"
       :placeholder="t('TEXT_PLACEHOLDER')"
       variant="outlined"
       class="input"
       :color="errorMessage ? 'red' : undefined"
+      :error="!!errorMessage"
+      :error-messages="errorMessage"
+      @update:model-value="updateValue"
+      @keyup.enter="emit('next', true)"
     />
-    <div v-if="errorMessage" class="error">
-      {{ errorMessage }}
-    </div>
-    <v-card-actions class="actions">
-      <app-button l primary @click="next">
-        {{ t('NEXT') }}
-        <i-feather-arrow-right />
-      </app-button>
-    </v-card-actions>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { useField } from 'vee-validate'
-import { alpha, required } from '@vee-validate/rules'
 
-const props = defineProps({
-  name: {
+defineProps({
+  modelValue: {
     type: String,
-    default: null,
+    required: true,
+  },
+  errorMessage: {
+    type: String,
+    default: undefined,
   },
 })
 
 const emit = defineEmits({
-  name: String,
+  'update:modelValue': String,
+  'next': Boolean,
 })
 
 const { t } = useI18n()
 
-const { value: name, errorMessage, validate } = useField<string>('', required)
-
-const next = async () => {
-  const { valid } = await validate()
-  if (valid)
-    emit('name', name.value)
+const updateValue = (value: string) => {
+  emit('update:modelValue', value)
 }
 </script>
 
@@ -60,14 +54,6 @@ const next = async () => {
   .input {
     margin: -1em;
   }
-  .actions {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
-    gap: 1em;
-    margin: -1.5rem -2.5rem;
-  }
 }
 </style>
 
@@ -75,8 +61,7 @@ const next = async () => {
 {
     "NAME_LABEL": "First, how should I call you?",
     "TEXT_LABEL": "Your name",
-    "TEXT_PLACEHOLDER": "e.x. Elon Musk",
-    "NEXT": "Next"
+    "TEXT_PLACEHOLDER": "e.x. Elon Musk"
 }
 </i18n>
 
@@ -84,8 +69,7 @@ const next = async () => {
 {
     "NAME_LABEL": "Jak mam się do Ciebie zwracać?",
     "TEXT_LABEL": "Twoje imię",
-    "TEXT_PLACEHOLDER": "np. Elon Musk",
-    "NEXT": "Dalej"
+    "TEXT_PLACEHOLDER": "np. Elon Musk"
 }
 </i18n>
 
@@ -93,7 +77,6 @@ const next = async () => {
 {
     "NAME_LABEL": "Primero, ¿cómo debo llamarte?",
     "TEXT_LABEL": "Tu nombre",
-    "TEXT_PLACEHOLDER": "p.ej. Elon Musk",
-    "NEXT": "Siguiente"
+    "TEXT_PLACEHOLDER": "p.ej. Elon Musk"
 }
 </i18n>
