@@ -2,7 +2,7 @@
   <footer>
     <div class="version-status">
       <div v-if="isUnstable" class="top">
-        <i-charm-info /> <v-chip>{{ channel.toUpperCase() }}</v-chip>
+        <v-chip>{{ channel.toUpperCase() }}</v-chip>
         <div class="version-info">
           {{ t('UNSTABLE') }}
         </div>

@@ -1,9 +1,7 @@
 <template>
-  <v-app>
+  <v-app class="material-theme">
     <v-main>
-      <app-sidebar />
       <router-view />
-      <app-footer />
     </v-main>
   </v-app>
 </template>
@@ -38,7 +36,6 @@ useHead({
 html,
 body,
 #app {
-  height: 100%;
   margin: 0;
   padding: 0;
   background: $color-background;

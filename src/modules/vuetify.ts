@@ -2,8 +2,10 @@
 import 'vuetify/styles'
 
 // Vuetify
-import type { ThemeDefinition } from 'vuetify'
+import type { IconProps, IconSet, ThemeDefinition } from 'vuetify'
+
 import { createVuetify } from 'vuetify'
+import { VLigatureIcon } from 'vuetify/components'
 import type { UserModule } from '~/types'
 
 const jjkTheme: ThemeDefinition = {
@@ -23,12 +25,22 @@ const jjkTheme: ThemeDefinition = {
   },
 }
 
+const md: IconSet = {
+  component: (props: IconProps) => {
+    return h(VLigatureIcon, {
+      ...props,
+      class: 'material-symbols-outlined',
+    })
+  },
+}
+
 export const install: UserModule = ({ app }) => {
   const vuetify = createVuetify({
     theme: {
       defaultTheme: 'jjkTheme',
       themes: { jjkTheme },
     },
+    icons: { defaultSet: 'md', sets: { md } },
   })
   app.use(vuetify)
 }

@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
     AppCard: typeof import('./components/AppCard.vue')['default']
     AppChip: typeof import('./components/AppChip.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
+    AppIcon: typeof import('./components/AppIcon.vue')['default']
     AppIcon3d: typeof import('./components/AppIcon3d.vue')['default']
     AppLocaleSwitcher: typeof import('./components/AppLocaleSwitcher.vue')['default']
     AppSidebar: typeof import('./components/AppSidebar.vue')['default']
@@ -22,6 +23,7 @@ declare module '@vue/runtime-core' {
     ContactFormName: typeof import('./components/ContactFormName.vue')['default']
     ContactFormPreview: typeof import('./components/ContactFormPreview.vue')['default']
     ContactFormResult: typeof import('./components/ContactFormResult.vue')['default']
+    CVRenderer: typeof import('./components/CVRenderer.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     IAkarIconsAlignToTop: typeof import('~icons/akar-icons/align-to-top')['default']
     IBiMarkdown: typeof import('~icons/bi/markdown')['default']
@@ -42,7 +44,9 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SectionContact: typeof import('./components/SectionContact.vue')['default']
     SectionHi: typeof import('./components/SectionHi.vue')['default']
+    SectionPosts: typeof import('./components/SectionPosts.vue')['default']
     SectionSkills: typeof import('./components/SectionSkills.vue')['default']
+    SectionSpotify: typeof import('./components/SectionSpotify.vue')['default']
   }
 }
 

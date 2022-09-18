@@ -3,6 +3,8 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import App from './App.vue'
 import { loadFonts } from './modules/webfontloader'
 import generatedRoutes from '~pages'
+import './styles/material-icons.css'
+import './styles/md3.css'
 
 loadFonts()
 

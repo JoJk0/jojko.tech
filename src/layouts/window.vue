@@ -1,5 +1,3 @@
 <template>
-  <app-sidebar />
   <RouterView />
-  <app-footer />
 </template>
