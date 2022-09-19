@@ -1,0 +1,22 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "Projects": {
+      ".read": true,
+    	".write": false
+    },
+    "Skills": {
+      ".read": true,
+    	".write": false
+    },
+    "UniModules": {
+      ".read": true,
+    	".write": false
+    },
+    "Topics": {
+      ".read": true,
+    	".write": false
+    }
+  }
+}
