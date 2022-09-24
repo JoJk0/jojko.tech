@@ -1,6 +1,7 @@
 import { inject, provide } from 'vue'
 import gsap from 'gsap'
-import { ScrollToPlugin, ScrollTrigger } from 'gsap/all'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { UserModule } from '~/types'
 
 const GSAP = Symbol('GSAP')

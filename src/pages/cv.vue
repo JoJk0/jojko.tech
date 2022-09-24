@@ -1,27 +1,44 @@
 <template>
-  <div id="section-cv">
+  <div id="section-cv" :class="{ mobile }">
     <div class="cv-renderer">
-      <CVRenderer ref="rendererEl" class="h" :data="cvData" />
+      <CVRenderer ref="rendererEl" class="h" :data="cv" :black-and-white="isBlackAndWhite" />
     </div>
-    <div class="right-panel">
-      <AppTitle>CV</AppTitle>
-      <p>Grab a fresh copy of my CV:</p>
-      <AppButton primary prepend-icon="download" @click="downloadPdf">
-        Colour
-      </AppButton>
-      <AppButton prepend-icon="download">
-        Black and white
-      </AppButton>
+    <div class="right-panel" :class="{ mobile }">
+      <AppTitle v-if="!mobile" class="title">
+        {{ t('CV') }}
+      </AppTitle>
+      <p>{{ t('CV_TEXT') }}</p>
+      <v-item-group v-model="isBlackAndWhite" selected-class="active" class="color-selection">
+        <v-item v-slot="{ isSelected, selectedClass, toggle }" :value="false">
+          <AppCVIcon :active="isSelected" :class="[selectedClass]" :selected="isSelected" @click="toggle">
+            {{ t('COLOUR') }}
+          </AppCVIcon>
+        </v-item>
+        <v-item v-slot="{ isSelected, selectedClass, toggle }" :value="true">
+          <AppCVIcon
+            black-and-white :active="isSelected" :class="[selectedClass]" :selected="isSelected"
+            @click="toggle"
+          >
+            {{ t('BLACK_AND_WHITE') }}
+          </AppCVIcon>
+        </v-item>
+      </v-item-group>
+      <div class="actions">
+        <AppButton primary :loading="isGenerating && clicked === 'download'" @click="(clicked = 'download') && downloadPdf('cv-jakub-janisz.pdf')">
+          {{ t('DOWNLOAD') }}
+        </AppButton>
+        <AppButton :loading="isGenerating && clicked === 'print'" @click="(clicked = 'print') && printPdf()">
+          {{ t('PRINT') }}
+        </AppButton>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import swoopLogo from '~/assets/logos/swoop.svg'
-import uolLogo from '~/assets/logos/uol.svg'
-import type { CVData } from '~/components/CVRenderer.vue'
 import { useJsPdf } from '~/composables/useJsPdf'
+import data from '~/Data'
 
 // const props = defineProps({})
 
@@ -29,114 +46,22 @@ import { useJsPdf } from '~/composables/useJsPdf'
 
 const { t } = useI18n()
 
-const cvData: CVData = {
-  headline: {
-    name: 'Jakub Janisz',
-    subtitle: 'Full Stack Developer',
-    pronouns: 'he/him',
-  },
-  aboutMe: {
-    title: 'About me',
-    content: `I'm a fast-learning person constantly looking for opportunities to grow and improve existing patterns.I enjoy following latest tech news, participating in beta programs and developing with latest technologies. 
+const [rendererEl, { downloadPdf, printPdf, isGenerating }] = useJsPdf({
+  orientation: 'p',
+  unit: 'pt',
+  format: 'a4',
+})
 
-My experience allows me to also work with legacy technologies and integrating them with modern systems.
+const { cv } = data
 
-I take care of any piece of code I interact with, in line with Clean Code principles.I always make sure the end- user design is aesthetically pleasing.`,
-  },
-  contact: [
-    // {
-    //   name: 'phone',
-    //   icon: 'smartphone',
-    //   value: '+44 0000 000000',
-    // },
-    {
-      name: 'email',
-      icon: 'email',
-      value: 'jacob@jojko.tech',
-    },
-    {
-      name: 'linkedin',
-      icon: 'https://api.iconify.design/akar-icons/linkedin-fill.svg',
-      value: 'linkedin.com/in/jojko',
-    },
-    {
-      name: 'github',
-      icon: 'https://api.iconify.design/akar-icons/github-fill.svg',
-      value: 'github.com/JoJk0',
-    },
-    {
-      name: 'website',
-      icon: 'public',
-      value: 'jojko.tech',
-    },
-  ],
-  education: {
-    title: 'Education',
-    items: [
-      {
-        id: '1',
-        institutionName: 'University of Liverpool',
-        courseName: 'Computer Science (MEng)',
-        degree: '2:1 Masters\' of Engineering',
-        startDate: '2016-09-16T00:00:00',
-        endDate: '2019-07-16T00:00:00',
-        logoUrl: uolLogo,
-      },
-    ],
-  },
-  experience: {
-    title: 'Experience',
-    items: [
-      {
-        id: '1',
-        name: 'Swoop Datacom',
-        logoUrl: swoopLogo,
-        position: 'Full Stack Developer',
-        duties: [
-          'Creating a Vue.js 3 web applications with Vue Composition API and Ionic and Vuetify UI components. Functionality includes Keycloak authentication, i18n, push notifications, TOTP 2FA and CRUD on database entities with Apollo Client with caching and local state management.',
-          'Building a GraphQL API gateway on Node.js Apollo server that resolves database queries with a help of Prisma ORM connecting the server to the main MySQL database.',
-        ],
-        startDate: '2020-11-04T00:00:00',
-        endDate: '2022-10-01T00:00:00',
-      },
-    ],
-  },
-  footer: '',
-  languages: {
-    title: 'i18n',
-    items: ['English', 'Polish', 'Spanish'],
-  },
-  postScriptum: 'Additionally, I\'ve made many projects during school and university times, including the freelance ones.',
-  projectsReferenceInfo: {
-    label: 'For more projects visit my site',
-    url: 'https://jojko.tech',
-    urlLabel: 'jojko.tech',
-  },
-  skills: {
-    title: 'Top skills',
-    topSkills: [
-      {
-        name: 'Vue 3',
-        logoUrl: 'https://api.iconify.design/logos/vue.svg',
-      },
-      {
-        name: 'GraphQL',
-        logoUrl: 'https://api.iconify.design/logos/graphql.svg',
-      },
-      {
-        name: 'Node.js',
-        logoUrl: 'https://api.iconify.design/logos/nodejs.svg',
-      },
-    ],
-    otherSkills: [
-      'TypeScript', 'Apollo', 'AWS Amplify', 'Serverless', 'Ionic', 'Vuetify', 'Google Firebase', 'Prisma', 'MySQL', 'Docker', 'Adobe Xd', 'Photoshop', 'Illustrator', 'Substance 3D',
-    ],
-  },
-}
+// body.value = document.body
 
-const [rendererEl, { downloadPdf }] = useJsPdf()
+const { mobile } = useDisplay()
 
-const scale = computed(() => 0.8)
+const isBlackAndWhite = ref(false)
+const clicked = ref<'download' | 'print'>()
+
+const scale = computed(() => mobile.value ? 0.4 : 0.8)
 </script>
 
 <style lang="scss" scoped>
@@ -145,48 +70,103 @@ const scale = computed(() => 0.8)
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap-reverse;
   padding: 2rem;
   width: 100vw;
   height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+
+  &.mobile {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  }
+
   .cv-renderer {
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 0;
+    flex: 1;
+    max-width: 100%;
+
     .h {
       scale: v-bind(scale);
       transform-origin: center;
       border-radius: 3rem;
     }
   }
+
   .right-panel {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 2em;
     align-items: stretch;
     padding: 3em;
-    position: sticky;
-    top: 0;
+
+    &.mobile {
+      gap: 1em;
+      height: fit-content;
+      background: var(--md-sys-color-background);
+      border-top-left-radius: 2em;
+      border-top-right-radius: 2em;
+      padding: 1.5em;
+      width: 100vw;
+
+      .actions {
+        flex-direction: row-reverse;
+      }
+
+      .title {
+        font-size: 2em;
+      }
+    }
+
+    .color-selection {
+      display: flex;
+      gap: 1em;
+      justify-content: space-evenly;
+      padding: 0.5em 0;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1em;
+    }
   }
 }
 </style>
 
 <i18n locale="en">
 {
-  "HI": "Hello World"
+  "CV": "CV",
+  "CV_TEXT": "Grab a fresh copy of my CV:",
+  "COLOUR": "Colour",
+  "BLACK_AND_WHITE": "Black and white",
+  "DOWNLOAD": "Download",
+  "PRINT": "Print"
 }
 </i18n>
 
 <i18n locale="pl">
 {
-  "HI": "Witaj świecie"
+  "CV": "CV",
+  "CV_TEXT": "Zabierz ze sobą świeżą kopię mojego CV:",
+  "COLOUR": "W kolorze",
+  "BLACK_AND_WHITE": "Czarno-białe",
+  "DOWNLOAD": "Pobierz",
+  "PRINT": "Drukuj"
 }
 </i18n>
 
 <i18n locale="es">
 {
-  "HI": "Hola Mundo"
+  "CV": "CV",
+  "CV_TEXT": "Tomar copia nueva de mi CV:",
+  "COLOUR": "En color",
+  "BLACK_AND_WHITE": "En blanco y negro",
+  "DOWNLOAD": "Descargar",
+  "PRINT": "Imprimir"
 }
 </i18n>
 

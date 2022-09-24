@@ -1,18 +1,24 @@
 <template>
-    <div class="title">
-        <slot></slot>
-    </div>
+  <div class="title" :class="size">
+    <slot />
+  </div>
 </template>
 
 <script lang="ts" setup>
 // import { useI18n } from 'vue-i18n';
 
-// const props = defineProps({});
+import type { PropType } from 'vue'
+
+const props = defineProps({
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'large',
+  },
+})
 
 // const emit = defineEmits({});
 
 // const { t } = useI18n();
-
 </script>
 
 <style lang="scss" scoped>
@@ -23,6 +29,12 @@
     color: transparent;
     font-size: 5em;
     font-weight: bold;
+    &.medium {
+        font-size: 3em;
+    }
+    &.small {
+        font-size: 2em;
+    }
 }
 </style>
 

@@ -40,6 +40,9 @@ export const install: UserModule = ({ app }) => {
       defaultTheme: 'jjkTheme',
       themes: { jjkTheme },
     },
+    display: {
+      mobileBreakpoint: 'sm',
+    },
     icons: { defaultSet: 'md', sets: { md } },
   })
   app.use(vuetify)

@@ -3,19 +3,19 @@
     <app-title>{{ t('WHAT_I_DO') }}</app-title>
     <div class="icons">
       <div class="top-skill">
-        <app-icon3d :icon="VueIcon" width="20em" height="20em" class="icon3d" />
+        <!-- <app-icon3d :icon="VueIcon" width="20em" height="20em" class="icon3d" /> -->
         <app-chip size="x-large">
           Vue.js
         </app-chip>
       </div>
       <div class="top-skill">
-        <app-icon3d :icon="GraphQLIcon" width="20em" height="20em" class="icon3d" />
+        <!-- <app-icon3d :icon="GraphQLIcon" width="20em" height="20em" class="icon3d" /> -->
         <app-chip size="x-large">
           GraphQL
         </app-chip>
       </div>
       <div class="top-skill">
-        <app-icon3d :icon="NodeJSIcon" width="20em" height="20em" class="icon3d" />
+        <!-- <app-icon3d :icon="NodeJSIcon" width="20em" height="20em" class="icon3d" /> -->
         <app-chip size="x-large">
           Node.js
         </app-chip>

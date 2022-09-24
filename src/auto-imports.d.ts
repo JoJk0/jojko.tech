@@ -131,6 +131,7 @@ declare global {
   const useDeviceOrientation: typeof import('@vueuse/core')['useDeviceOrientation']
   const useDevicePixelRatio: typeof import('@vueuse/core')['useDevicePixelRatio']
   const useDevicesList: typeof import('@vueuse/core')['useDevicesList']
+  const useDisplay: typeof import('vuetify')['useDisplay']
   const useDisplayMedia: typeof import('@vueuse/core')['useDisplayMedia']
   const useDocumentVisibility: typeof import('@vueuse/core')['useDocumentVisibility']
   const useDraggable: typeof import('@vueuse/core')['useDraggable']

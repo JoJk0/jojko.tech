@@ -3,6 +3,7 @@
     "rules": "database.rules.json"
   },
   "hosting": {
+    "site": "jjk-portfolio-next",
     "public": "dist",
     "ignore": [
       "firebase.json",
@@ -29,20 +30,21 @@
     "predeploy": [
       "npm --prefix \"$RESOURCE_DIR\" run lint",
       "npm --prefix \"$RESOURCE_DIR\" run build"
-    ]
+    ],
+    "source": "functions"
   },
   "emulators": {
     "functions": {
-      "port": 5001
+      "port": 2139
     },
     "database": {
-      "port": 9000
+      "port": 2141
     },
     "hosting": {
-      "port": 5000
+      "port": 2138
     },
     "storage": {
-      "port": 9199
+      "port": 2140
     },
     "ui": {
       "enabled": true

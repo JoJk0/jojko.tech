@@ -1,6 +1,8 @@
 import type { I18NString } from './modules/i18n'
 import type { I18n } from './utils'
 import { defineData } from './utils'
+import swoopLogo from '~/assets/logos/swoop.svg'
+import uolLogo from '~/assets/logos/uol.svg'
 
 export interface JJKData {
   myNames: string[]
@@ -8,6 +10,8 @@ export interface JJKData {
   skillCategories: JJKSkillCategory[]
   skills: JJKSkill[]
   topics: JJKTopic[]
+  projects: JJKProject[]
+  cv: CVData
 }
 
 export interface JJKSocial {
@@ -41,6 +45,101 @@ export interface JJKTopic {
   name: I18NString
   draftText: I18NString
   sentText: I18NString
+}
+
+export interface JJKProject {
+  id: string
+  title: string
+  date: string
+  coAuthors: string[]
+  description: I18NString
+  typography: {
+    name: string
+    displayName: string
+  }[]
+  colourPalette: {
+    code: `#${string}`
+    name: string
+  }[]
+  colours: unknown
+  topKeywords: {
+    name: string
+    label: string
+    url: string
+    icon: string
+  }[]
+  keywords: string[]
+  urls: {
+    live: string
+    copy: string
+    dribbble: string
+    report: string
+    github: string
+  }
+}
+
+export interface CVData {
+  headline: {
+    name: string
+    pronouns: string
+    subtitle: string
+  }
+  contact: {
+    name: string
+    icon: string
+    value: string
+  }[]
+  aboutMe: {
+    title: string
+    content: string
+  }
+  experience: {
+    title: string
+    items: ExperienceWorkEntry[]
+  }
+  education: {
+    title: string
+    items: EducationEntry[]
+  }
+  skills: {
+    title: string
+    topSkills: {
+      logoUrl: string
+      name: string
+    }[]
+    otherSkills: string[]
+  }
+  languages: {
+    title: string
+    items: string[]
+  }
+  postScriptum: string
+  projectsReferenceInfo: {
+    label: string
+    url: string
+    urlLabel: string
+  }
+  footer: string
+}
+
+export interface ExperienceWorkEntry {
+  id: string
+  name: string
+  logoUrl: string
+  position: string
+  startDate: string
+  endDate: string
+  duties: string[]
+}
+
+export interface EducationEntry {
+  id: string
+  institutionName: string
+  courseName: string
+  degree: string
+  logoUrl: string
+  startDate: string
+  endDate: string
 }
 
 export type SkillNames =
@@ -623,6 +722,78 @@ export default defineData({
       relatedSkillNames: ['JavaScript', 'Vue.js', 'Jest'],
     },
   ],
+  projects: [
+    {
+      id: '1',
+      title: 'JJK Portfolio 6.1',
+      date: '1376784000000',
+      coAuthors: [],
+      description: {
+        en: 'Sixth version of my portfolio. Created as a single-page website.',
+        pl: '//TODO',
+        es: '//TODO',
+      },
+      typography: [
+        {
+          name: 'oswald',
+          displayName: 'Oswald',
+        },
+        {
+          name: 'roboto',
+          displayName: 'Roboto',
+        },
+      ],
+      colourPalette: [
+        {
+          code: '#03679f',
+          name: 'Prime Blue',
+        },
+        {
+          code: '#00a2ff',
+          name: 'Protoss Pylon',
+        },
+        {
+          code: '#FAFAFA',
+          name: 'Dr. White',
+        },
+        {
+          code: '#CCCCCC',
+          name: 'Cerebral Grey',
+        },
+      ],
+      colours: {
+        background: '#03679f',
+        panelBg: '#FAFAFA',
+        text: '#000000',
+        topTitleLeft: '#00a2ff',
+        topTitleRight: '#03679f',
+        buttons: '#00a2ff',
+      },
+      topKeywords: [
+        {
+          name: 'html5',
+          label: 'HTML5',
+          url: '',
+          icon: '',
+        },
+      ],
+      keywords: [
+        'HTML5',
+        'CSS3',
+        'JQuery',
+        'LESS',
+        'JavaScript',
+        'Photoshop',
+      ],
+      urls: {
+        live: '',
+        copy: 'http://uol-walking-tour-backend.000webhostapp.com/projects/jjk-v6.1/',
+        dribbble: '',
+        report: '',
+        github: 'https://github.com/JoJk0/jjk-portfolio-v6.1',
+      },
+    },
+  ],
   topics: [
     {
       id: 'COFFEE',
@@ -634,7 +805,7 @@ export default defineData({
       draftText: {
         en: 'Did you know Guatemala is my favourite coffee region?...',
         pl: 'Czy wiesz, że Guatemala jest moim ulubionym regionem kawy?...',
-        es: '¿Sabías que Guatemala es mi región favorita de café?...',
+        es: '¿Sabías que Guatemala es mi región favorita del café?...',
       },
       sentText: {
         en: 'You\'re a boss! Thanks for your interest about me. \nI would love to talk to you or meet for a coffee ❤️.',
@@ -733,4 +904,108 @@ export default defineData({
       },
     },
   ],
+  cv: {
+    headline: {
+      name: 'Jakub Janisz',
+      subtitle: 'Full Stack Developer',
+      pronouns: 'he/him',
+    },
+    aboutMe: {
+      title: 'About me',
+      content: `I'm a fast-learning person constantly looking for opportunities to grow and improve existing patterns.I enjoy following latest tech news, participating in beta programs and developing with latest technologies. 
+
+My experience allows me to also work with legacy technologies and integrating them with modern systems.
+
+I take care of any piece of code I interact with, in line with Clean Code principles.I always make sure the end- user design is aesthetically pleasing.`,
+    },
+    contact: [
+      // {
+      //   name: 'phone',
+      //   icon: 'smartphone',
+      //   value: '+44 0000 000000',
+      // },
+      {
+        name: 'email',
+        icon: 'email',
+        value: 'jacob@jojko.tech',
+      },
+      {
+        name: 'linkedin',
+        icon: 'https://api.iconify.design/akar-icons/linkedin-fill.svg',
+        value: 'linkedin.com/in/jojko',
+      },
+      {
+        name: 'github',
+        icon: 'https://api.iconify.design/akar-icons/github-fill.svg',
+        value: 'github.com/JoJk0',
+      },
+      {
+        name: 'website',
+        icon: 'public',
+        value: 'jojko.tech',
+      },
+    ],
+    education: {
+      title: 'Education',
+      items: [
+        {
+          id: '1',
+          institutionName: 'University of Liverpool',
+          courseName: 'Computer Science (MEng)',
+          degree: '2:1 Masters\' of Engineering',
+          startDate: '2016-09-16T00:00:00',
+          endDate: '2019-07-16T00:00:00',
+          logoUrl: uolLogo,
+        },
+      ],
+    },
+    experience: {
+      title: 'Experience',
+      items: [
+        {
+          id: '1',
+          name: 'Swoop Datacom',
+          logoUrl: swoopLogo,
+          position: 'Full Stack Developer',
+          duties: [
+            'Creating a Vue.js 3 web applications with Vue Composition API and Ionic and Vuetify UI components. Functionality includes Keycloak authentication, i18n, push notifications, TOTP 2FA and CRUD on database entities with Apollo Client with caching and local state management.',
+            'Building a GraphQL API gateway on Node.js Apollo server that resolves database queries with a help of Prisma ORM connecting the server to the main MySQL database.',
+          ],
+          startDate: '2020-11-04T00:00:00',
+          endDate: '2022-10-01T00:00:00',
+        },
+      ],
+    },
+    footer: '',
+    languages: {
+      title: 'i18n',
+      items: ['English', 'Polish', 'Spanish'],
+    },
+    postScriptum: 'Additionally, I\'ve made many projects during school and university times, including the freelance ones.',
+    projectsReferenceInfo: {
+      label: 'For more projects visit my site',
+      url: 'https://jojko.tech',
+      urlLabel: 'jojko.tech',
+    },
+    skills: {
+      title: 'Top skills',
+      topSkills: [
+        {
+          name: 'Vue 3',
+          logoUrl: 'https://api.iconify.design/logos/vue.svg',
+        },
+        {
+          name: 'GraphQL',
+          logoUrl: 'https://api.iconify.design/logos/graphql.svg',
+        },
+        {
+          name: 'Node.js',
+          logoUrl: 'https://api.iconify.design/logos/nodejs.svg',
+        },
+      ],
+      otherSkills: [
+        'TypeScript', 'Apollo', 'AWS Amplify', 'Serverless', 'Ionic', 'Vuetify', 'Google Firebase', 'Prisma', 'MySQL', 'Docker', 'Adobe Xd', 'Photoshop', 'Illustrator', 'Substance 3D',
+      ],
+    },
+  },
 } as const)

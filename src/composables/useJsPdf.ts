@@ -1,22 +1,61 @@
+import type { jsPDFOptions } from 'jspdf'
 import { jsPDF } from 'jspdf'
+import type { DefineComponent } from 'vue'
 
-export const useJsPdf = () => {
-  const htmlEl = ref<HTMLElement>()
+export const useJsPdf = (options: jsPDFOptions) => {
+  const htmlEl = ref<HTMLElement | InstanceType<DefineComponent>>()
+
+  const isGenerating = ref(false)
 
   // eslint-disable-next-line new-cap
-  const doc = new jsPDF({
-    orientation: 'l',
-    unit: 'pt',
-    format: 'a4',
-  })
+  const doc = new jsPDF(options)
 
   const generatePdf = async () => {
+    isGenerating.value = true
+    // Object.entries(fonts).forEach(([name, font]) => {
+    //   doc.addFileToVFS(font.filename, font.value)
+    //   doc.addFont(font.filename, name, 'normal')
+    //   doc.setFont(name)
+    // })
     if (!htmlEl.value) {
       console.error('[useJsPdf] htmlEl is not defined')
       return
     }
 
-    await doc.html(htmlEl.value)
+    const el = htmlEl.value instanceof HTMLElement ? htmlEl.value : htmlEl.value.$el ? htmlEl.value.$el as HTMLElement : undefined
+
+    if (!el) {
+      console.error('[useJsPdf]: element not found')
+      return
+    }
+
+    await doc.html(el, {
+      fontFaces: [
+        // {
+        //   family: 'Material Symbols Outlined',
+        //   style: 'normal',
+        //   weight: 'normal',
+        //   src: [
+        //     {
+        //       url: '/fonts/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf',
+        //       format: 'truetype',
+        //     },
+        //   ],
+        // },
+        {
+          family: 'Quicksand',
+          style: 'normal',
+          weight: 'normal',
+          src: [
+            {
+              url: '/fonts/quicksand-400.ttf',
+              format: 'truetype',
+            },
+          ],
+        },
+      ],
+    })
+    isGenerating.value = false
   }
 
   const downloadPdf = async (filename: string) => {
@@ -41,5 +80,5 @@ export const useJsPdf = () => {
       console.error('[useJsPdf] htmlEl is not defined')
   })
 
-  return [htmlEl, { getPdf, downloadPdf, printPdf }] as const
+  return [htmlEl, { getPdf, downloadPdf, printPdf, isGenerating }] as const
 }

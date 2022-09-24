@@ -1,6 +1,6 @@
 <template>
-  <div id="cv">
-    <div id="cv-header">
+  <div id="cv" :class="{ blackAndWhite }">
+    <div id="cv-header" :class="{ blackAndWhite }">
       <div class="headline">
         <div class="title">
           {{ data.headline.name }} <span class="pronouns">{{ data.headline.pronouns }}</span>
@@ -156,76 +156,16 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 import { DateTime } from 'luxon'
+import type { CVData } from '~/Data'
+// TODO: Fix PDF generation
 
-export interface CVData {
-  headline: {
-    name: string
-    pronouns: string
-    subtitle: string
-  }
-  contact: {
-    name: string
-    icon: string
-    value: string
-  }[]
-  aboutMe: {
-    title: string
-    content: string
-  }
-  experience: {
-    title: string
-    items: ExperienceWorkEntry[]
-  }
-  education: {
-    title: string
-    items: EducationEntry[]
-  }
-  skills: {
-    title: string
-    topSkills: {
-      logoUrl: string
-      name: string
-    }[]
-    otherSkills: string[]
-  }
-  languages: {
-    title: string
-    items: string[]
-  }
-  postScriptum: string
-  projectsReferenceInfo: {
-    label: string
-    url: string
-    urlLabel: string
-  }
-  footer: string
-}
-
-export interface ExperienceWorkEntry {
-  id: string
-  name: string
-  logoUrl: string
-  position: string
-  startDate: string
-  endDate: string
-  duties: string[]
-}
-
-export interface EducationEntry {
-  id: string
-  institutionName: string
-  courseName: string
-  degree: string
-  logoUrl: string
-  startDate: string
-  endDate: string
-}
 // eslint-disable-next-line vue/define-macros-order
 const props = defineProps({
   data: {
     type: Object as PropType<CVData>,
     required: true,
   },
+  blackAndWhite: Boolean,
 })
 
 // const emit = defineEmits({})
@@ -262,6 +202,22 @@ const getLength = (startDate: string, endDate: string) => {
   --cv-color-primary-rgb: 112, 245, 255;
   --cv-color-heading: #002022;
   --cv-color-heading-rgb: 0, 32, 34;
+  --cv-chip-color: rgba(73, 219, 218, 0.2);
+  * {
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  &.blackAndWhite {
+    --cv-color-primary: #B2B2B2;
+    --cv-color-primary-rgb: 0, 0, 0;
+    --cv-color-heading: #000;
+    --cv-color-heading-rgb: 0, 0, 0;
+    --cv-chip-color: rgba(0, 0, 0, 0.1);
+    img {
+      filter: grayscale(1);
+    }
+  }
+
   --cv-timeline-width: 4px;
 
   a {
@@ -285,6 +241,10 @@ const getLength = (startDate: string, endDate: string) => {
     color: var(--cv-color-heading);
     margin: 1rem;
     border-radius: 2.5rem;
+
+    &.blackAndWhite {
+      background: rgba(0, 0, 0, 0.1);
+    }
 
     .headline {
       .title {
@@ -336,6 +296,7 @@ const getLength = (startDate: string, endDate: string) => {
       display: flex;
       flex-direction: column;
       gap: 1em;
+
       .content {
         white-space: pre-wrap;
       }
@@ -455,8 +416,7 @@ const getLength = (startDate: string, endDate: string) => {
       flex-direction: column;
       gap: 1em;
 
-      .title {
-      }
+      .title {}
 
       .education-entry {
         display: flex;
@@ -473,12 +433,15 @@ const getLength = (startDate: string, endDate: string) => {
           gap: 0.2em;
           padding-top: 0.5em;
           padding-bottom: 1em;
+
           .institution {
             font-size: 1.2rem;
           }
+
           .course {
             font-size: 1.1em;
           }
+
           .degree {
             display: flex;
             gap: 0.5em;
@@ -493,7 +456,7 @@ const getLength = (startDate: string, endDate: string) => {
       gap: 0.5em;
       align-items: center;
       font-weight: 600;
-      background-color: rgba(var(--cv-color-primary-rgb), 0.3);
+      background-color: rgba(var(--cv-color-primary-rgb), 0.2);
       color: var(--cv-color-heading);
       padding: 1em;
       border-radius: 2em;
@@ -528,6 +491,7 @@ const getLength = (startDate: string, endDate: string) => {
   .start,
   .end {
     text-align: right;
+
     .month {
       font-size: 0.9em;
     }
@@ -559,7 +523,7 @@ const getLength = (startDate: string, endDate: string) => {
 }
 
 .primary-chip {
-    background-color: rgba(73, 219, 218, 0.2);
-    color: var(--cv-color-heading);
+  background-color: var(--cv-chip-color);
+  color: var(--cv-color-heading);
 }
 </style>

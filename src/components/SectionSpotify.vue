@@ -1,7 +1,7 @@
 <template>
   <section id="spotify">
     <div class="now-playing">
-      <img :src="cover" class="cover">
+      <img :src="cover" class="cover" :alt="`${author} - ${title}`">
       <div class="details">
         <div class="title">
           {{ title }}
@@ -44,6 +44,7 @@ const cover = computed(() => data.value?.item?.album?.images[0]?.url)
 
 <style lang="scss" scoped>
     #spotify {
+      background-color: green;
         .now-playing {
             padding: 1em;
             display: flex;

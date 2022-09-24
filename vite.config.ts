@@ -2,7 +2,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
-import generateSitemap from 'vite-ssg-sitemap'
+// import generateSitemap from 'vite-ssg-sitemap'
 import Layouts from 'vite-plugin-vue-layouts'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -51,11 +51,14 @@ export default defineConfig({
         'vue/macros',
         '@vueuse/head',
         '@vueuse/core',
+        {
+          vuetify: ['useDisplay'],
+        },
       ],
       dts: 'src/auto-imports.d.ts',
     }),
 
-    Vuetify({ autoImport: true, styles: 'sass' }),
+    Vuetify({ autoImport: true }),
 
     // https://github.com/antfu/unplugin-vue-components
     Components({
@@ -86,12 +89,12 @@ export default defineConfig({
     }),
   ],
 
-  // https://github.com/antfu/vite-ssg
-  ssgOptions: {
-    script: 'async',
-    formatting: 'minify',
-    onFinished() { generateSitemap() },
-  },
+  // // https://github.com/antfu/vite-ssg
+  // ssgOptions: {
+  //   script: 'async',
+  //   formatting: 'minify',
+  //   onFinished() { generateSitemap() },
+  // },
 
   // https://github.com/vitest-dev/vitest
   test: {
