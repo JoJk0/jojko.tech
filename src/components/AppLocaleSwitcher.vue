@@ -27,7 +27,6 @@ const toggleLocales = () => emit('localeChange', availableLocales[(availableLoca
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     opacity: 0.7;
-    margin: 1em;
     display: flex;
     align-items: center;
     &:hover {

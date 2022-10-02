@@ -103,7 +103,8 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .canvas {
-    width: 100%;
-    height: 100%;
+    width: 30rem;
+    height: 30rem;
+    max-width: calc(100vw - 1rem);
 }
 </style>

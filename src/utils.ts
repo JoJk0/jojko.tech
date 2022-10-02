@@ -1,7 +1,7 @@
 import { Color, Line3, Vector3 } from 'three'
 import type { DeepReadonly } from 'vue'
 import type { JJKData } from './Data'
-import type { AppLocale } from './modules/i18n'
+import type { AppLocale, I18NString } from './modules/i18n'
 import { availableLocales } from './modules/i18n'
 
 export type I18n<T extends string, TKey extends string = string> = {
@@ -77,3 +77,6 @@ export const guessLocale = () => {
 
   return userLangs.find(lang => (availableLocales as string[]).includes(lang)) as AppLocale || 'en'
 }
+
+export const addMessage = <T extends string>(data: I18NString, key: T) =>
+  Object.entries(data).map(([locale, message]) => [locale, { [key]: message }] as const).reduce<Record<keyof typeof data, Record<typeof key, string>>>((acc, [locale, message]) => ({ ...acc, [locale]: message }), {} as any)

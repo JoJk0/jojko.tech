@@ -29,6 +29,7 @@
     "luxon": "^3.0.3",
     "markdown-it": "^13.0.1",
     "nprogress": "^0.2.0",
+    "swiper": "^8.4.2",
     "three": "^0.140.2",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.33",

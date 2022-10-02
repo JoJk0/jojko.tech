@@ -1,6 +1,6 @@
 <template>
   <v-app class="material-theme">
-    <v-main>
+    <v-main class="main" :class="{ mobile }">
       <router-view />
     </v-main>
   </v-app>
@@ -28,6 +28,8 @@ useHead({
     },
   ],
 })
+
+const { mobile } = useDisplay()
 </script>
 
 <style lang="scss">
@@ -43,7 +45,19 @@ body,
   font-family: $body-font-family;
   color-scheme: dark;
 }
+.v-application__wrap {
+  align-items: center;
+  position: relative;
 
+}
+.main {
+  display: flex;
+  max-width: 2000px;
+  width: 100vw;
+  &.mobile {
+    overflow: hidden;
+  }
+}
 #nprogress {
   pointer-events: none;
 }
@@ -59,8 +73,9 @@ body,
   height: 2px;
 }
 section {
-    padding: 0 max(calc(calc(100vw - $container-max-width) / 2), $container-margin);
-    width: 100vw;
+    //padding: 0 max(calc(calc(100% - $container-max-width) / 2), $container-margin);
+    padding: 1em;
+    width: 100%;
     min-height: 100vh;
 }
 </style>

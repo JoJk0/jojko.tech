@@ -1,31 +1,33 @@
 <template>
-    <div class="tooltip-container" @mouseenter="set(true)" @mouseleave="set(false)">
-        <slot></slot>
-        <transition name="slide-right">
-            <div class="tooltip" :class="side" v-if="isOpen">{{ text }}</div>
-        </transition>
-    </div>
+  <div class="tooltip-container" @mouseenter="set(true)" @mouseleave="set(false)">
+    <slot />
+    <transition name="slide-right">
+      <div v-if="isOpen" class="tooltip" :class="side">
+        {{ text }}
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { useToggle } from '@vueuse/core';
-import { PropType, ref } from 'vue';
+import { useToggle } from '@vueuse/core'
+import type { PropType } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
-    text: {
-        type: String,
-        default: '',
-    },
-    side: {
-        type: String as PropType<"top" | "left" | "bottom" | "right">,
-        default: 'right'
-    },
-});
+  text: {
+    type: String,
+    default: '',
+  },
+  side: {
+    type: String as PropType<'top' | 'left' | 'bottom' | 'right'>,
+    default: 'right',
+  },
+})
 
 // const emit = defineEmits({});
 
-const [isOpen, set] = useToggle(false);
-
+const [isOpen, set] = useToggle(false)
 </script>
 
 <style lang="scss" scoped>
@@ -40,6 +42,7 @@ const [isOpen, set] = useToggle(false);
         padding: 0.5em 1em;
         position: absolute;
         z-index: 10;
+        width: fit-content;
         &.top {
             bottom: 100%;
             left: 50%;

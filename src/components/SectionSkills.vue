@@ -1,28 +1,23 @@
 <template>
-  <section id="skills">
+  <section id="skills" :class="{ mobile }">
     <app-title>{{ t('WHAT_I_DO') }}</app-title>
-    <div class="icons">
-      <div class="top-skill">
-        <!-- <app-icon3d :icon="VueIcon" width="20em" height="20em" class="icon3d" /> -->
-        <app-chip size="x-large">
-          Vue.js
-        </app-chip>
+    <div class="content">
+      <div class="left">
+        <div class="icons">
+          <div v-for="{ name, icon } of topSkills" :key="name" class="top-skill">
+            <AppIcon :api-icon="icon" class="top-skill-icon" />
+            <!-- <app-icon3d :icon="VueIcon" width="20em" height="20em" class="icon3d" /> -->
+            <app-chip :size="mobile ? 'small' : 'x-large'">
+              {{ name }}
+            </app-chip>
+          </div>
+        </div>
+        <app-skill-search />
       </div>
-      <div class="top-skill">
-        <!-- <app-icon3d :icon="GraphQLIcon" width="20em" height="20em" class="icon3d" /> -->
-        <app-chip size="x-large">
-          GraphQL
-        </app-chip>
-      </div>
-      <div class="top-skill">
-        <!-- <app-icon3d :icon="NodeJSIcon" width="20em" height="20em" class="icon3d" /> -->
-        <app-chip size="x-large">
-          Node.js
-        </app-chip>
+      <div class="right">
+        <logo />
       </div>
     </div>
-    <logo />
-    <app-skill-search />
   </section>
 </template>
 
@@ -33,24 +28,68 @@ import VueIcon from '~icons/logos/vue?raw'
 import GraphQLIcon from '~icons/vscode-icons/file-type-graphql?raw'
 import NodeJSIcon from '~icons/logos/nodejs-icon?raw'
 
+const { mobile } = useDisplay()
+
 // const props = defineProps({});
 
 // const emit = defineEmits({});
 
 const { t } = useI18n()
+
+const topSkills = [
+  {
+    name: 'Vue 3',
+    icon: 'logos/vue',
+  },
+  {
+    name: 'GraphQL',
+    icon: 'logos/graphql',
+  },
+  {
+    name: 'Node.js',
+    icon: 'logos/nodejs-icon',
+  },
+]
 </script>
 
 <style lang="scss" scoped>
 .icons{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: baseline;
     flex-wrap: wrap;
     margin: 1em;
-    gap: 2em;
 .icon3d {
 
 }
+}
+.content {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  .left, .right {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .left {
+    flex: 1;
+  }
+}
+.top-skill {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  align-items: center;
+  .top-skill-icon {
+    font-size: 8em;
+  }
+}
+#skills.mobile {
+  .top-skill-icon {
+    font-size: 4em;
+  }
 }
 </style>
 

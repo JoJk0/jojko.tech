@@ -2,8 +2,8 @@
   <section-hi @locale-change="toggleLocales($event)" />
   <section-skills />
   <section-projects />
-  <section-spotify />
-  <section-posts />
+  <!-- <section-spotify />
+  <section-posts /> -->
   <section-contact />
 </template>
 

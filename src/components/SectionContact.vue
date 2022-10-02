@@ -7,8 +7,16 @@
       {{ t('LET_S_DO_SOMETHING_AMAZING') }}
     </AppSubtitle>
     <v-select
-      v-model="topic.value.value" class="select" :placeholder="items[0].name" variant="outlined"
-      :label="t('LET_S_TALK_ABOUT')" :items="items" item-title="name" item-value="id"
+      v-model="topic.value.value"
+      class="select"
+      :placeholder="items[0].name"
+      variant="outlined"
+      menu-icon="expand_more"
+      :label="t('LET_S_TALK_ABOUT')"
+      :items="items"
+      item-title="name"
+      item-value="id"
+      hide-details
       @update:model-value="setOpen(true)"
     />
     <v-dialog v-model="isOpen" persistent>
@@ -181,18 +189,17 @@ const onSubmit = () => {
   gap: 2em;
   min-height: 35em;
 
-  .title {
-    line-height: 100%;
-  }
-
   .subtitle {
     line-height: 140%;
   }
 
   .select {
-    width: clamp(10rem, 25vw, 30rem);
+    width: clamp(10rem, 100vw, 30rem);
     transform: scale(1.2);
-    margin: 4rem;
+    max-width: calc(100vw - 6rem);
+    margin: 1.5rem 0;
+    height: fit-content;
+    display: block;
   }
 }
 

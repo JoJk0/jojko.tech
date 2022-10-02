@@ -1,5 +1,5 @@
 <template>
-  <v-chip :size="size" class="chip">
+  <v-chip class="chip" v-bind="props">
     <slot />
   </v-chip>
 </template>
@@ -16,7 +16,6 @@ const props = defineProps({
     default: 'large',
   },
 })
-
 </script>
 
 <style lang="scss" scoped>

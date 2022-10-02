@@ -1,5 +1,5 @@
 <template>
-  <div class="title" :class="size">
+  <div class="title" :class="[size, { mobile }]">
     <slot />
   </div>
 </template>
@@ -19,6 +19,8 @@ const props = defineProps({
 // const emit = defineEmits({});
 
 // const { t } = useI18n();
+
+const { mobile } = useDisplay()
 </script>
 
 <style lang="scss" scoped>
@@ -27,13 +29,24 @@ const props = defineProps({
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 5em;
+    font-size: 4.5rem;
     font-weight: bold;
+    background-position: center;
     &.medium {
-        font-size: 3em;
+        font-size: 3rem;
     }
     &.small {
-        font-size: 2em;
+        font-size: 2rem;
+    }
+    &.mobile {
+      font-size: 2.5rem;
+      line-height: 2.8rem;
+      &.medium {
+        font-size: 2rem;
+      }
+      &.small {
+        font-size: 1.5rem;
+      }
     }
 }
 </style>

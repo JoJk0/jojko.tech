@@ -1,5 +1,5 @@
 <template>
-  <img v-if="isSvg" :src="icon" :alt="icon" class="svg-icon">
+  <img v-if="isSvg || apiIcon" :src="renderedIcon" :alt="renderedIcon" class="svg-icon" :class="{ inverted }">
   <i v-else class="material-symbols-outlined">{{ icon }}
   </i>
 </template>
@@ -10,11 +10,23 @@ const props = defineProps({
     type: String,
     default: undefined,
   },
+  apiIcon: {
+    type: String,
+    default: undefined,
+  },
+  inverted: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 // const emit = defineEmits({})
 
 const isSvg = computed(() => props.icon?.endsWith('.svg'))
+
+const api = 'https://api.iconify.design'
+
+const renderedIcon = computed(() => props.apiIcon ? `${api}/${props.apiIcon}.svg` : props.icon)
 </script>
 
 <style lang="scss" scoped>
@@ -32,5 +44,8 @@ const isSvg = computed(() => props.icon?.endsWith('.svg'))
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
+  &.inverted {
+    filter: invert(1) hue-rotate(180deg);
+  }
 }
 </style>

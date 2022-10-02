@@ -61,7 +61,7 @@ export interface JJKProject {
     code: `#${string}`
     name: string
   }[]
-  colours: unknown
+  // colours: unknown
   topKeywords: {
     name: string
     label: string
@@ -724,73 +724,76 @@ export default defineData({
   ],
   projects: [
     {
-      id: '1',
-      title: 'JJK Portfolio 6.1',
-      date: '1376784000000',
+      id: '10',
+      title: 'Swoop Datacom',
+      date: '2022-02-28T00:00:00Z',
       coAuthors: [],
       description: {
-        en: 'Sixth version of my portfolio. Created as a single-page website.',
+        en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod bibendum leo in malesuada. Praesent interdum, turpis eu scelerisque dictum, enim ipsum mollis libero, id finibus felis risus laoreet felis.',
         pl: '//TODO',
         es: '//TODO',
       },
       typography: [
         {
-          name: 'oswald',
-          displayName: 'Oswald',
-        },
-        {
-          name: 'roboto',
-          displayName: 'Roboto',
+          name: 'work-sans',
+          displayName: 'Work Sans',
         },
       ],
       colourPalette: [
         {
-          code: '#03679f',
-          name: 'Prime Blue',
+          code: '#273140',
+          name: 'Blue-black',
         },
         {
-          code: '#00a2ff',
-          name: 'Protoss Pylon',
+          code: '#3BAEDF',
+          name: 'Highlighter Blue',
         },
         {
-          code: '#FAFAFA',
-          name: 'Dr. White',
+          code: '#FD968A',
+          name: 'Mona Lisa',
         },
         {
-          code: '#CCCCCC',
-          name: 'Cerebral Grey',
+          code: '#E9F9FF',
+          name: 'Clear Skies',
         },
       ],
-      colours: {
-        background: '#03679f',
-        panelBg: '#FAFAFA',
-        text: '#000000',
-        topTitleLeft: '#00a2ff',
-        topTitleRight: '#03679f',
-        buttons: '#00a2ff',
-      },
+      // colours: {
+      //   background: '#03679f',
+      //   panelBg: '#FAFAFA',
+      //   text: '#000000',
+      //   topTitleLeft: '#00a2ff',
+      //   topTitleRight: '#03679f',
+      //   buttons: '#00a2ff',
+      // },
       topKeywords: [
         {
-          name: 'html5',
-          label: 'HTML5',
-          url: '',
-          icon: '',
+          name: 'vue',
+          label: 'Vue 3',
+          url: 'https://vuejs.org',
+          icon: 'logos/vue',
+        },
+        {
+          name: 'amplify',
+          label: 'AWS Amplify',
+          url: 'https://amplify.aws.com',
+          icon: 'logos/aws-amplify',
+        },
+        {
+          name: 'vuetify',
+          label: 'Vuetify',
+          url: 'https://vuetifyjs.com',
+          icon: 'logos/vuetifyjs',
         },
       ],
       keywords: [
-        'HTML5',
-        'CSS3',
-        'JQuery',
-        'LESS',
-        'JavaScript',
-        'Photoshop',
+        'CI/CD', 'GSAP', 'Adobe Substance 3D Stager', 'three.js',
       ],
       urls: {
-        live: '',
-        copy: 'http://uol-walking-tour-backend.000webhostapp.com/projects/jjk-v6.1/',
+        live: 'https://swoopdata.com/',
+        copy: '',
         dribbble: '',
         report: '',
-        github: 'https://github.com/JoJk0/jjk-portfolio-v6.1',
+        github: 'https://github.com/JoJk0/swoop-datacom-landing',
       },
     },
   ],

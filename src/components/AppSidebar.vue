@@ -11,7 +11,7 @@
         <i-akar-icons-align-to-top v-else class="to-top" />
       </Transition>
     </div>
-    <app-socials id="sidebar-socials" class="socials" />
+    <app-socials v-if="!mobile" id="sidebar-socials" class="socials" />
   </div>
 </template>
 
@@ -22,6 +22,8 @@ import { useGSAP } from '~/modules/gsap'
 // const props = defineProps({});
 
 // const emit = defineEmits({});
+
+const { mobile } = useDisplay()
 
 const [isHovering, setIsHovering] = useToggle(false)
 
@@ -35,11 +37,11 @@ const scrollToTop = () =>
 
 onMounted(() => {
   const scrollTrigger: ScrollTrigger.Vars = {
-    trigger: '.sidebar',
+    trigger: '#app',
     start: 'top top',
-    end: 'top+=20% top',
+    end: 'top+=200px top',
     pin: '#sidebar-socials',
-    pinType: 'fixed',
+    // pinType: 'fixed',
     scrub: true,
     markers: false,
   }
@@ -47,7 +49,7 @@ onMounted(() => {
   gsap.to('#sidebar-socials', {
     scrollTrigger,
     duration: 1,
-    opacity: 0,
+    autoAlpha: 0,
     backgroundPositionY: '-=10%',
     ease: 'none',
   })
@@ -56,9 +58,8 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
+  position: sticky;
+  top: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;

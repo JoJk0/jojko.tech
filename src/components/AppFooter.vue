@@ -44,10 +44,16 @@ footer {
   align-items: center;
   gap: 2em;
   padding: 2em;
+  .version-status {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
   .top {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 0.5em;
     .version-info {
       font-weight: 500;
