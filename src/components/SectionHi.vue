@@ -42,6 +42,15 @@ const meMarginPercentages = {
 } as const
 
 const f = 2.8
+const { myNames } = data
+
+const { t } = useI18n()
+
+const gsap = useGSAP()
+
+const { mobile } = useDisplay()
+
+const { animate, currentName } = useAnimatedName(myNames)
 
 const meCoverPercentage = '75vmin'
 
@@ -52,20 +61,10 @@ const meHeight = computed(() => `calc(${meCoverPercentage} * ${f})`)
 
 const meMarginTop = computed(() => `${(meHeightPx.value || 0) * (meMarginPercentages.top / 100)}px`)
 const meMarginLeft = computed(() => `${(meWidthPx.value || 0) * (meMarginPercentages.left / 100)}px`)
-const meMarginRight = computed(() => `${(meWidthPx.value || 0) * (meMarginPercentages.right / 100)}px`)
+const meMarginRight = computed(() => `${(meWidthPx.value || 0) * (meMarginPercentages.right / 100) + (mobile.value ? 0 : 70)}px`)
 
 watch(() => meImg.value?.clientWidth, val => meWidthPx.value = val)
 watch(() => meImg.value?.clientHeight, val => meHeightPx.value = val)
-
-const { myNames } = data
-
-const { t } = useI18n()
-
-const gsap = useGSAP()
-
-const { mobile } = useDisplay()
-
-const { animate, currentName } = useAnimatedName(myNames)
 
 onMounted(() => {
   const scrollTrigger: ScrollTrigger.Vars = {
@@ -79,7 +78,7 @@ onMounted(() => {
   gsap.to('#me', {
     scrollTrigger,
     duration: 1,
-    opacity: 0,
+    autoAlpha: 0,
     yPercent: '+=10',
     ease: 'none',
   })
@@ -115,9 +114,8 @@ onMounted(() => {
     gap: 1em;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    margin: 1em;
-    margin-top: 2em;
+    width: calc(100vw - 10.5rem);
+    margin: 2em;
     .switcher {
         z-index: 3;
     }
@@ -133,6 +131,7 @@ onMounted(() => {
     align-items: flex-end;
     position: relative;
     flex-wrap: wrap;
+    padding: 0;
     .top {
         position: absolute;
         top: 0;
@@ -153,12 +152,15 @@ onMounted(() => {
         align-self: flex-end;
         max-width: unset;
         aspect-ratio: 15/8;
+        position: sticky;
+        top: 0;
     }
     &.mobile {
     align-content: space-between;
 
         .top {
             position: static;
+            width: 100%;
         }
         .content {
             font-size: 1em;

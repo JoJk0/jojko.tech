@@ -1,16 +1,15 @@
 <template>
-  <img v-if="isSvg || apiIcon" :src="renderedIcon" :alt="renderedIcon" class="svg-icon" :class="{ inverted }">
+  <img v-if="isUrl" :src="icon" :alt="icon" class="svg-icon" :class="{ inverted }">
+  <img v-else-if="isApi" :src="`${api}/${icon}.svg`" :alt="icon" class="svg-icon" :class="{ inverted }">
   <i v-else class="material-symbols-outlined">{{ icon }}
   </i>
 </template>
 
 <script lang="ts" setup>
+import { url } from '@vee-validate/rules'
+import { validateIconName } from '@iconify/utils'
 const props = defineProps({
   icon: {
-    type: String,
-    default: undefined,
-  },
-  apiIcon: {
     type: String,
     default: undefined,
   },
@@ -22,11 +21,17 @@ const props = defineProps({
 
 // const emit = defineEmits({})
 
-const isSvg = computed(() => props.icon?.endsWith('.svg'))
-
 const api = 'https://api.iconify.design'
 
-const renderedIcon = computed(() => props.apiIcon ? `${api}/${props.apiIcon}.svg` : props.icon)
+const isUrl = computed(() => url(props.icon, {}))
+
+const isApi = computed(() => props.icon
+  ? validateIconName({
+    provider: '',
+    prefix: props.icon.split('/')[0],
+    name: props.icon.split('/')[1] || '',
+  }, false)
+  : undefined)
 </script>
 
 <style lang="scss" scoped>

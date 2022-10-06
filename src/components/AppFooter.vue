@@ -86,7 +86,7 @@ footer {
 
 <i18n locale="es">
 {
-  "UNSTABLE": "Este sitio web está en fase de pruebas y puede no estar inestable",
+  "UNSTABLE": "Este sitio web está en fase de pruebas y puede estar inestable",
   "BUGS": "Si encuentras algún error, envíalo a Github o a través del formulario de contacto."
 }
 </i18n>

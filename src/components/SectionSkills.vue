@@ -5,9 +5,9 @@
       <div class="left">
         <div class="icons">
           <div v-for="{ name, icon } of topSkills" :key="name" class="top-skill">
-            <AppIcon :api-icon="icon" class="top-skill-icon" />
+            <AppIcon :icon="icon" class="top-skill-icon" />
             <!-- <app-icon3d :icon="VueIcon" width="20em" height="20em" class="icon3d" /> -->
-            <app-chip :size="mobile ? 'small' : 'x-large'">
+            <app-chip :size="mobile ? 'small' : 'x-large'" class="chip">
               {{ name }}
             </app-chip>
           </div>
@@ -23,10 +23,7 @@
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import AppIcon3d from './AppIcon3d.vue'
-import VueIcon from '~icons/logos/vue?raw'
-import GraphQLIcon from '~icons/vscode-icons/file-type-graphql?raw'
-import NodeJSIcon from '~icons/logos/nodejs-icon?raw'
+import data from '~/Data'
 
 const { mobile } = useDisplay()
 
@@ -36,20 +33,7 @@ const { mobile } = useDisplay()
 
 const { t } = useI18n()
 
-const topSkills = [
-  {
-    name: 'Vue 3',
-    icon: 'logos/vue',
-  },
-  {
-    name: 'GraphQL',
-    icon: 'logos/graphql',
-  },
-  {
-    name: 'Node.js',
-    icon: 'logos/nodejs-icon',
-  },
-]
+const { topSkills } = data
 </script>
 
 <style lang="scss" scoped>
@@ -57,11 +41,8 @@ const topSkills = [
     display: flex;
     justify-content: space-evenly;
     align-items: baseline;
-    flex-wrap: wrap;
     margin: 1em;
-.icon3d {
-
-}
+    gap: 2em;
 }
 .content {
   display: flex;
@@ -71,7 +52,8 @@ const topSkills = [
     width: fit-content;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 3em;
+    max-width: calc(100vw - 2rem);
   }
   .left {
     flex: 1;
@@ -82,13 +64,54 @@ const topSkills = [
   flex-direction: column;
   gap: 2em;
   align-items: center;
+    aspect-ratio: 1;
+  position: relative;
+  .chip {
+
+  }
   .top-skill-icon {
-    font-size: 8em;
+    font-size: 6em;
+    display: flex;
+    aspect-ratio: 1;
+      z-index: 1;
+  }
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    position: absolute;
+    scale: 1.7 1.2;
+    translate: 0 -2em;
+    aspect-ratio: 1;
+  }
+  &:nth-of-type(1):before{
+    border-radius: 46% 54% 42% 58% / 30% 51% 49% 70%;
+  }
+  &:nth-of-type(2):before{
+    border-radius: 66% 34% 42% 58% / 46% 51% 49% 54%;
+  }
+  &:nth-of-type(3):before{
+    border-radius: 49% 51% 60% 40% / 64% 51% 49% 36%;
   }
 }
+#skills {
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+}
 #skills.mobile {
+  gap: 2em;
+  .left, .right {
+    gap: 2em;
+  }
   .top-skill-icon {
     font-size: 4em;
+  }
+  .top-skill:before {
+    scale: 1.5 0.8;
   }
 }
 </style>

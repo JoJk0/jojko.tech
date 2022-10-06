@@ -106,5 +106,7 @@ onMounted(() => {
     width: 30rem;
     height: 30rem;
     max-width: calc(100vw - 1rem);
+    max-height: calc(100vw - 1rem);
+    aspect-ratio: 1;
 }
 </style>

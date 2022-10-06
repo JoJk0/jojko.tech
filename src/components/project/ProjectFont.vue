@@ -1,5 +1,5 @@
 <template>
-  <img :src="fontUrl" class="font" :alt="font.displayName">
+  <img :src="fontUrl" class="font" :alt="font.displayName" :class="{ mobile }">
 </template>
 
 <script lang="ts" setup>
@@ -19,6 +19,8 @@ const props = defineProps({
 const baseUrl = 'fonts'
 const extension = 'svg'
 
+const { mobile } = useDisplay()
+
 const firebase = useFirebase()
 
 const storage = getStorage(firebase)
@@ -37,5 +39,8 @@ const fontUrl = ref<string>();
         filter: invert(1);
         height: 1em;
         font-size: 1.5em;
+    }
+    .font.mobile {
+      font-size: 1em;
     }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="colour" :style="{ backgroundColor: colour.code, color: colour.code }">
+  <div class="colour" :class="{ mobile }" :style="{ backgroundColor: colour.code, color: colour.code }">
     <div class="text">
       {{ colour.name }}
     </div>
@@ -16,6 +16,8 @@ defineProps({
     required: true,
   },
 })
+
+const { mobile } = useDisplay()
 </script>
 
 <style lang="scss" scoped>
@@ -34,7 +36,7 @@ defineProps({
   transition: 0.2s;
   scale: 1;
   padding: 0.5em;
-  border: 1px solid rgba(var(--md-sys-color-background-rgb), 0.5);
+  border: 1px solid rgba($color-text, .2);
 
   &:hover {
     z-index: 1;
@@ -52,5 +54,9 @@ defineProps({
     transition: 0.2s;
     cursor: default;
   }
+}
+.colour.mobile {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 </style>

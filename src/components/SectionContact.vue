@@ -1,24 +1,25 @@
 <template>
-  <section id="contact">
+  <section id="contact" :class="{ mobile }">
     <AppTitle class="title">
       {{ t('SAY_HI') }}
     </AppTitle>
-    <AppSubtitle class="subtitle">
+    <AppSubtitle s class="subtitle">
       {{ t('LET_S_DO_SOMETHING_AMAZING') }}
     </AppSubtitle>
-    <v-select
-      v-model="topic.value.value"
-      class="select"
-      :placeholder="items[0].name"
-      variant="outlined"
-      menu-icon="expand_more"
-      :label="t('LET_S_TALK_ABOUT')"
-      :items="items"
-      item-title="name"
-      item-value="id"
-      hide-details
-      @update:model-value="setOpen(true)"
-    />
+    <div class="select-container">
+      <div class="emojis">
+        <AppIcon icon="emojione-monotone/yellow-heart" class="bg-icon" inverted />
+        <AppIcon icon="emojione-monotone/lady-beetle" class="bg-icon" inverted />
+        <AppIcon icon="emojione-monotone/necktie" class="bg-icon" inverted />
+        <AppIcon icon="emojione-monotone/handshake" class="bg-icon" inverted />
+        <AppIcon icon="emojione-monotone/bookmark-tabs" class="bg-icon" inverted />
+      </div>
+      <v-select
+        v-model="topic.value.value" class="select" :placeholder="items[0].name" variant="outlined"
+        menu-icon="expand_more" :label="t('LET_S_TALK_ABOUT')" :items="items" item-title="name" item-value="id"
+        hide-details @update:model-value="setOpen(true)"
+      />
+    </div>
     <v-dialog v-model="isOpen" persistent>
       <v-card class="content rounded-xl">
         <v-toolbar dark color="background">
@@ -32,32 +33,26 @@
         <v-window v-model="currentState" class="container">
           <v-window-item value="name">
             <contact-form-name
-              v-model="name.value.value"
-              class="window-state"
-              :error-message="name.errorMessage.value"
+              v-model="name.value.value" class="window-state" :error-message="name.errorMessage.value"
               @next="onNext(name, 'email')"
             />
           </v-window-item>
           <v-window-item value="email">
             <contact-form-email
-              v-model="email.value.value"
-              class="window-state" :name="name.value.value"
-              :error-message="email.errorMessage.value"
-              @next="onNext(email, 'message')"
+              v-model="email.value.value" class="window-state" :name="name.value.value"
+              :error-message="email.errorMessage.value" @next="onNext(email, 'message')"
             />
           </v-window-item>
           <v-window-item value="message">
             <contact-form-message
-              v-model="message.value.value"
-              class="window-state" :placeholder="currentItem.draftText"
-              :error-message="message.errorMessage.value"
+              v-model="message.value.value" class="window-state"
+              :placeholder="currentItem.draftText" :error-message="message.errorMessage.value"
             />
           </v-window-item>
           <v-window-item value="preview">
             <contact-form-preview
-              v-model="receipt.value.value"
-              class="window-state" :data="formData" :current-topic-name="currentItem.name"
-              @send="onSubmit"
+              v-model="receipt.value.value" class="window-state" :data="formData"
+              :current-topic-name="currentItem.name" @send="onSubmit"
             />
           </v-window-item>
           <v-window-item value="result">
@@ -66,7 +61,10 @@
         </v-window>
         <v-card-actions class="actions">
           <template v-if="currentState === 'preview'">
-            <app-button class="action-button" primary :disabled="loading" :loading="loading" :error-message="error" @click="onSubmit">
+            <app-button
+              class="action-button" primary :disabled="loading" :loading="loading" :error-message="error"
+              @click="onSubmit"
+            >
               {{ t('SEND') }}
               <i-feather-send />
             </app-button>
@@ -76,7 +74,10 @@
             </app-button>
           </template>
           <template v-else-if="currentState === 'message'">
-            <app-button class="action-button" primary :disabled="!!message.errorMessage.value" @click="onNext(message, 'preview')">
+            <app-button
+              class="action-button" primary :disabled="!!message.errorMessage.value"
+              @click="onNext(message, 'preview')"
+            >
               {{ t('REVIEW') }}
               <i-feather-arrow-right />
             </app-button>
@@ -86,7 +87,10 @@
             </app-button>
           </template>
           <template v-else-if="currentState === 'email'">
-            <app-button class="action-button" primary :disabled="!!email.errorMessage.value" @click="onNext(email, 'message')">
+            <app-button
+              class="action-button" primary :disabled="!!email.errorMessage.value"
+              @click="onNext(email, 'message')"
+            >
               {{ t('NEXT') }}
               <i-feather-arrow-right />
             </app-button>
@@ -96,7 +100,10 @@
             </app-button>
           </template>
           <template v-else>
-            <app-button class="action-button" l primary :disabled="!!name.errorMessage.value" @click="onNext(name, 'email')">
+            <app-button
+              class="action-button" l primary :disabled="!!name.errorMessage.value"
+              @click="onNext(name, 'email')"
+            >
               {{ t('NEXT') }}
               <i-feather-arrow-right />
             </app-button>
@@ -125,6 +132,8 @@ export interface ContactFormData {
 }
 
 const { topics } = data
+
+const { mobile } = useDisplay()
 
 const currentState = ref<ContactFormState>('name')
 
@@ -193,11 +202,47 @@ const onSubmit = () => {
     line-height: 140%;
   }
 
+  .select-container {
+    position: relative;
+    .emojis {
+      position: absolute;
+      display: flex;
+      gap: 2em;
+      place-content: space-evenly;
+      place-items: center;
+      flex-wrap: wrap;
+      opacity: 0.05;
+        .bg-icon {
+            font-size: 7em;
+          }
+      :nth-child(1){
+        rotate: -20deg;
+      }
+      :nth-child(2){
+        rotate: 0deg;
+      }
+      :nth-child(3){
+        rotate: 20deg;
+      }
+      :nth-child(4){
+        rotate: 10deg;
+      }
+      :nth-child(5){
+        rotate: -10deg;
+      }
+    }
+  }
+  .select-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   .select {
     width: clamp(10rem, 100vw, 30rem);
-    transform: scale(1.2);
+    scale: 1.2;
     max-width: calc(100vw - 6rem);
-    margin: 1.5rem 0;
+    margin: 3rem 0;
     height: fit-content;
     display: block;
   }
@@ -206,12 +251,14 @@ const onSubmit = () => {
 .content {
   border-top: 1px solid rgba($color-text, 0.075);
   border-left: 1px solid rgba($color-text, 0.075);
+
   .window-state {
     gap: 3em;
     display: flex;
     flex-direction: column;
     padding: 3vw;
   }
+
   .actions {
     display: flex;
     flex-direction: row-reverse;
@@ -219,7 +266,8 @@ const onSubmit = () => {
     align-items: flex-end;
     gap: 1em;
     margin: 0.5rem;
-    > * {
+
+    >* {
       margin: 0 !important;
     }
   }
@@ -231,6 +279,17 @@ const onSubmit = () => {
 
 .modal-title {
   font-weight: 500;
+}
+
+#contact.mobile {
+  min-height: fit-content;
+  .bg-icon {
+    font-size: 4em;
+  }
+  .select {
+    scale: 1;
+    margin: 4em 0;
+  }
 }
 </style>
 
@@ -250,7 +309,7 @@ const onSubmit = () => {
 <i18n locale="pl">
 {
     "SAY_HI": "Odezwij się! 👋🏻",
-    "LET_S_DO_SOMETHING_AMAZING": "Zróbmy coś wspaniałego.",
+    "LET_S_DO_SOMETHING_AMAZING": "Zróbmy coś fajnego.",
     "LET_S_TALK_ABOUT": "Pogadajmy o...",
     "GET_IN_TOUCH": "Skontaktuj się 👋",
     "BACK": "Wstecz",

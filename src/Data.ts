@@ -1,5 +1,4 @@
 import type { I18NString } from './modules/i18n'
-import type { I18n } from './utils'
 import { defineData } from './utils'
 import swoopLogo from '~/assets/logos/swoop.svg'
 import uolLogo from '~/assets/logos/uol.svg'
@@ -7,7 +6,7 @@ import uolLogo from '~/assets/logos/uol.svg'
 export interface JJKData {
   myNames: string[]
   socials: JJKSocial[]
-  skillCategories: JJKSkillCategory[]
+  topSkills: [JJKSkill, JJKSkill, JJKSkill]
   skills: JJKSkill[]
   topics: JJKTopic[]
   projects: JJKProject[]
@@ -21,23 +20,9 @@ export interface JJKSocial {
 }
 
 export interface JJKSkill {
-  name: SkillNames
-  website: string
-  categoryNames: SkillCategoryKeys[]
-  relatedSkillNames?: SkillNames[]
-  subskillNames?: SkillNames[]
-  topSkillLogo?: string
-  childOf?: SkillNames
-}
-
-export type JJKTopSkill = JJKSkill & {
-  logoUrl: string
-}
-
-export interface JJKSkillCategory {
-  name: I18n<string, SkillCategoryKeys>
-  skillNames?: SkillNames[]
-  relatedCategoryNames?: SkillCategoryKeys[]
+  name: string
+  icon: string
+  inverted?: boolean
 }
 
 export interface JJKTopic {
@@ -142,74 +127,6 @@ export interface EducationEntry {
   endDate: string
 }
 
-export type SkillNames =
-  | 'TypeScript'
-  | 'JavaScript'
-  | 'Vuex'
-  | 'AJAX'
-  | 'Angular'
-  | 'Protractor'
-  | 'HTML Canvas'
-  | 'CSS3'
-  | 'HTML5'
-  | 'pixi.js'
-  | 'Three.js'
-  | 'SASS'
-  | 'Git'
-  | 'GitHub'
-  | 'Vue.js'
-  | 'Vue i18n'
-  | 'Vue Router'
-  | 'Vue Composition API'
-  | 'GSAP'
-  | 'ScrollTrigger'
-  | 'Node.js'
-  | 'PHP'
-  | 'MySQL'
-  | 'REST API'
-  | 'Serverless'
-  | 'AWS Amplify'
-  | 'Vite'
-  | 'Firebase'
-  | 'Apollo Server'
-  | 'GraphQL'
-  | 'GraphQL Playground'
-  | 'Express.js'
-  | 'Jest'
-  | 'JUnit'
-  | 'Jasmine'
-  | 'Illustrator'
-  | 'Photoshop'
-  | 'Adobe XD'
-  | 'Substance 3D Stager'
-  | 'Vectary'
-  | 'JSON'
-  | 'AWS S3'
-  | 'PHPMyAdmin'
-  | 'XML'
-  | 'Prisma2 ORM'
-  | 'Apollo Client'
-  | 'Assembly'
-  | 'C/C++'
-  | 'Eclipse'
-  | 'Java'
-  | 'Python'
-  | 'macOS'
-  | 'Windows'
-  | 'Ubuntu'
-
-export type SkillCategoryKeys =
-  | 'FRONTEND_DEVELOPMENT'
-  | 'BACKEND_DEVELOPMENT'
-  | 'DESIGN'
-  | 'DEVELOPMENT_TOOLS'
-  | 'SOFTWARE_TESTING'
-  | 'DATABASES'
-  | 'MULTI-PURPOSE_PROGRAMMING'
-  | 'LANGUAGES'
-  | 'IDE'
-  | 'OPERATING_SYSTEMS_PROFICIENCY'
-
 export default defineData({
   myNames: ['Jacob.', 'Jakub.', 'Kuba.', 'jojko.'],
   socials: [
@@ -234,495 +151,376 @@ export default defineData({
       urlName: 'jojk0',
     },
   ],
-  skillCategories: [
-    {
-      name: {
-        key: 'FRONTEND_DEVELOPMENT',
-        en: 'Frontend development',
-        pl: 'Frontend development',
-        es: 'Frontend development',
-      },
-      relatedCategoryNames: ['BACKEND_DEVELOPMENT', 'DESIGN'],
-    },
-    {
-      name: {
-        key: 'BACKEND_DEVELOPMENT',
-        en: 'Backend development',
-        pl: 'Backend development',
-        es: 'Backend development',
-      },
-      relatedCategoryNames: [
-        'DATABASES',
-        'MULTI-PURPOSE_PROGRAMMING',
-        'OPERATING_SYSTEMS_PROFICIENCY',
-        'SOFTWARE_TESTING',
-        'FRONTEND_DEVELOPMENT',
-      ],
-    },
-    {
-      name: {
-        key: 'DESIGN',
-        en: 'Design',
-        pl: 'Design',
-        es: 'Diseño',
-      },
-      relatedCategoryNames: ['FRONTEND_DEVELOPMENT', 'IDE'],
-    },
-    {
-      name: {
-        key: 'IDE',
-        en: 'IDE',
-        pl: 'IDE',
-        es: 'IDE',
-      },
-      relatedCategoryNames: [
-        'DESIGN',
-        'DATABASES',
-        'MULTI-PURPOSE_PROGRAMMING',
-        'DEVELOPMENT_TOOLS',
-      ],
-    },
-    {
-      name: {
-        key: 'DEVELOPMENT_TOOLS',
-        en: 'Development tools',
-        pl: 'Narzędzia do programowania',
-        es: 'Herramientas de desarrollo',
-      },
-      relatedCategoryNames: [
-        'IDE',
-        'FRONTEND_DEVELOPMENT',
-        'BACKEND_DEVELOPMENT',
-        'MULTI-PURPOSE_PROGRAMMING',
-      ],
-    },
-    {
-      name: {
-        key: 'SOFTWARE_TESTING',
-        en: 'Software testing',
-        pl: 'Testowanie oprogramowania',
-        es: 'Pruebas de software',
-      },
-      relatedCategoryNames: [
-        'DEVELOPMENT_TOOLS',
-        'BACKEND_DEVELOPMENT',
-        'MULTI-PURPOSE_PROGRAMMING',
-      ],
-    },
-    {
-      name: {
-        key: 'DATABASES',
-        en: 'Databases',
-        pl: 'Bazy danych',
-        es: 'Bases de datos',
-      },
-      relatedCategoryNames: [
-        'BACKEND_DEVELOPMENT',
-        'MULTI-PURPOSE_PROGRAMMING',
-        'SOFTWARE_TESTING',
-      ],
-    },
-    {
-      name: {
-        key: 'MULTI-PURPOSE_PROGRAMMING',
-        en: 'Multi-purpose programming',
-        pl: 'Programowanie ogólne',
-        es: 'Programación multífuncional',
-      },
-      relatedCategoryNames: [
-        'BACKEND_DEVELOPMENT',
-        'SOFTWARE_TESTING',
-        'DATABASES',
-      ],
-    },
-
-    {
-      name: {
-        key: 'LANGUAGES',
-        en: 'Languages',
-        pl: 'Języki',
-        es: 'Lenguajes',
-      },
-      relatedCategoryNames: [
-        'FRONTEND_DEVELOPMENT',
-        'BACKEND_DEVELOPMENT',
-        'MULTI-PURPOSE_PROGRAMMING',
-      ],
-    },
-    {
-      name: {
-        key: 'OPERATING_SYSTEMS_PROFICIENCY',
-        en: 'Operating systems proficiency',
-        pl: 'Systemy operacyjne',
-        es: 'Sistemas operativos',
-      },
-      relatedCategoryNames: [
-        'BACKEND_DEVELOPMENT',
-        'MULTI-PURPOSE_PROGRAMMING',
-      ],
-    },
-  ],
   skills: [
     {
-      name: 'Vue.js',
-      website: 'https://www.vuejs.org',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: ['Angular', 'JavaScript', 'Jest', 'Vite'],
-      subskillNames: ['Vuex', 'Vue Composition API', 'Vue Router', 'Vue i18n'],
-      topSkillLogo: './src/assets/logos/vuejs.svg',
-    },
-    {
-      name: 'GraphQL',
-      website: 'https://graphql.org',
-      categoryNames: [
-        'FRONTEND_DEVELOPMENT',
-        'BACKEND_DEVELOPMENT',
-        'DATABASES',
-        'LANGUAGES',
-      ],
-      relatedSkillNames: [
-        'AWS Amplify',
-        'Apollo Server',
-        'Apollo Client',
-        'Firebase',
-        'Prisma2 ORM',
-      ],
-      subskillNames: ['GraphQL Playground'],
-      topSkillLogo: './src/assets/logos/graphql.svg',
-    },
-    {
-      name: 'Node.js',
-      website: 'https://nodejs.org',
-      categoryNames: ['BACKEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: [
-        'JavaScript',
-        'TypeScript',
-        'AWS Amplify',
-        'Firebase',
-        'Prisma2 ORM',
-        'Apollo Server',
-        'Express.js',
-        'Serverless',
-        'GraphQL',
-      ],
-      subskillNames: [],
-      topSkillLogo: './src/assets/logos/nodejs.svg',
-    },
-    {
       name: 'TypeScript',
-      website: 'https://www.typescriptlang.org',
-      categoryNames: [
-        'FRONTEND_DEVELOPMENT',
-        'DEVELOPMENT_TOOLS',
-        'LANGUAGES',
-        'BACKEND_DEVELOPMENT',
-      ],
-      relatedSkillNames: [
-        'JavaScript',
-        'Node.js',
-        'Vite',
-        'Vue.js',
-        'Vuex',
-        'Vue Composition API',
-        'Vue Router',
-        'Vue i18n',
-      ],
+      icon: 'logos/typescript-icon',
     },
     {
-      name: 'JavaScript',
-      website: 'https://www.javascript.com',
-      categoryNames: ['FRONTEND_DEVELOPMENT'],
-      relatedSkillNames: [
-        'TypeScript',
-        'Node.js',
-        'Vite',
-        'Vue.js',
-        'Vuex',
-        'Vue Composition API',
-        'Vue Router',
-        'Vue i18n',
-      ],
+      name: 'Google Firebase',
+      icon: 'logos/firebase',
     },
     {
-      name: 'Jest',
-      website: 'https://jestjs.io',
-      categoryNames: ['SOFTWARE_TESTING'],
-      relatedSkillNames: ['JavaScript', 'Node.js', 'Vue.js'],
+      name: 'Ionic',
+      icon: 'logos/ionic-icon',
     },
     {
-      name: 'Vite',
-      website: 'https://vite.io',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: ['JavaScript', 'Node.js', 'Vue.js', 'TypeScript'],
-    },
-    {
-      name: 'Vuex',
-      website: 'https://vuex.vuejs.org',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS', 'DATABASES'],
-      relatedSkillNames: [
-        'JavaScript',
-        'TypeScript',
-        'Vue Composition API',
-        'Vue Router',
-        'Vue i18n',
-      ],
-      childOf: 'Vue.js',
-    },
-    {
-      name: 'Vue Composition API',
-      website: 'https://v3.vuejs.org/guide/composition-api-introduction.html',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: [
-        'JavaScript',
-        'TypeScript',
-        'Vue Router',
-        'Vue i18n',
-        'Vuex',
-      ],
-      childOf: 'Vue.js',
-    },
-    {
-      name: 'Vue Router',
-      website: 'https://router.vuejs.org/',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: [
-        'JavaScript',
-        'TypeScript',
-        'Vue Composition API',
-        'Vue i18n',
-        'Vuex',
-      ],
-      childOf: 'Vue.js',
-    },
-    {
-      name: 'Vue i18n',
-      website: 'https://vue-i18n.intlify.dev/',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: [
-        'JavaScript',
-        'TypeScript',
-        'Vue Composition API',
-        'Vue Router',
-        'Vuex',
-      ],
-      childOf: 'Vue.js',
-    },
-    {
-      name: 'Apollo Server',
-      website: 'https://www.apollographql.com/docs/apollo-server/',
-      categoryNames: ['BACKEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: [
-        'JavaScript',
-        'Node.js',
-        'TypeScript',
-        'GraphQL',
-        'Prisma2 ORM',
-        'Apollo Client',
-      ],
-    },
-    {
-      name: 'Apollo Client',
-      website: 'https://www.apollographql.com/docs/react/',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: [
-        'JavaScript',
-        'TypeScript',
-        'GraphQL',
-        'Apollo Server',
-      ],
+      name: 'Vuetify',
+      icon: 'logos/vuetifyjs',
     },
     {
       name: 'AWS Amplify',
-      website: 'https://aws.amazon.com/amplify/',
-      categoryNames: ['BACKEND_DEVELOPMENT'],
-      relatedSkillNames: [
-        'JavaScript',
-        'Node.js',
-        'TypeScript',
-        'GraphQL',
-        'Prisma2 ORM',
-        'AWS S3',
-      ],
+      icon: 'logos/aws-amplify',
     },
     {
-      name: 'Firebase',
-      website: 'https://firebase.google.com/',
-      categoryNames: ['BACKEND_DEVELOPMENT'],
-      relatedSkillNames: [
-        'JavaScript',
-        'Node.js',
-        'TypeScript',
-        'GraphQL',
-        'Prisma2 ORM',
-        'AWS Amplify',
-      ],
+      name: 'Prisma',
+      icon: 'logos/prisma',
+      inverted: true,
     },
     {
-      name: 'Prisma2 ORM',
-      website: 'https://www.prisma.io/',
-      categoryNames: ['BACKEND_DEVELOPMENT', 'DATABASES', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: ['JavaScript', 'Node.js', 'TypeScript', 'GraphQL'],
+      name: 'Apollo',
+      icon: 'logos/apollostack',
+      inverted: true,
     },
     {
-      name: 'Serverless',
-      website: 'https://serverless.com/',
-      categoryNames: ['BACKEND_DEVELOPMENT'],
-      relatedSkillNames: [
-        'JavaScript',
-        'Node.js',
-        'TypeScript',
-        'GraphQL',
-        'AWS Amplify',
-        'Firebase',
-      ],
+      name: 'Docker',
+      icon: 'logos/docker-icon',
     },
     {
-      name: 'GraphQL Playground',
-      website: 'https://graphql.org/playground/',
-      categoryNames: ['BACKEND_DEVELOPMENT'],
-      relatedSkillNames: ['JavaScript', 'Node.js', 'TypeScript', 'GraphQL'],
-      childOf: 'GraphQL',
+      name: 'Keycloak',
+      icon: 'https://www.keycloak.org/resources/images/keycloak_icon_512px.svg',
     },
     {
-      name: 'HTML Canvas',
-
-      website: 'https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API',
-      categoryNames: ['FRONTEND_DEVELOPMENT'],
-      relatedSkillNames: [
-        'JavaScript',
-        'Vue.js',
-        'CSS3',
-        'pixi.js',
-        'Three.js',
-      ],
-      childOf: 'HTML5',
+      name: 'Vite',
+      icon: 'logos/vitejs',
     },
     {
-      name: 'HTML5',
-      website: 'https://developer.mozilla.org/en-US/docs/Web//HTML',
-      categoryNames: ['FRONTEND_DEVELOPMENT'],
-      relatedSkillNames: ['JavaScript', 'Vue.js', 'CSS3', 'SASS'],
-      subskillNames: ['HTML Canvas'],
+      name: 'MySQL',
+      icon: 'logos/mysql-icon',
+      inverted: true,
     },
     {
-      name: 'CSS3',
-      website: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
-      categoryNames: ['FRONTEND_DEVELOPMENT'],
-      relatedSkillNames: ['JavaScript', 'Vue.js', 'HTML5', 'SASS'],
+      name: 'Adobe Xd',
+      icon: 'logos/adobe-xd',
     },
     {
-      name: 'SASS',
-      website: 'https://sass-lang.com/',
-      categoryNames: ['FRONTEND_DEVELOPMENT'],
-      relatedSkillNames: ['JavaScript', 'Vue.js', 'CSS3', 'HTML5'],
+      name: 'Adobe Photoshop',
+      icon: 'logos/adobe-photoshop',
     },
     {
-      name: 'pixi.js',
-      website: 'https://pixijs.com/',
-      categoryNames: ['FRONTEND_DEVELOPMENT'],
-      relatedSkillNames: [
-        'JavaScript',
-        'Vue.js',
-        'HTML Canvas',
-        'Three.js',
-        'Substance 3D Stager',
-      ],
+      name: 'Adobe Illustrator',
+      icon: 'logos/adobe-illustrator',
     },
     {
-      name: 'Three.js',
-      website: 'https://threejs.org/',
-      categoryNames: ['FRONTEND_DEVELOPMENT'],
-      relatedSkillNames: [
-        'JavaScript',
-        'Vue.js',
-        'HTML Canvas',
-        'pixi.js',
-        'Substance 3D Stager',
-      ],
+      name: 'Adobe Substance 3D Stager',
+      icon: 'https://www.adobe.com/content/dam/cc/icons/sg_appicon_256.svg',
     },
     {
-      name: 'Substance 3D Stager',
-      website: 'https://www.substance3d.com/',
-      categoryNames: ['DESIGN', 'IDE'],
-      relatedSkillNames: [
-        'Photoshop',
-        'Illustrator',
-        'pixi.js',
-        'Three.js',
-        'Adobe XD',
-      ],
-    },
-    {
-      name: 'Adobe XD',
-      website: 'https://www.adobe.com/products/xd.html',
-      categoryNames: ['DESIGN', 'IDE'],
-      relatedSkillNames: [
-        'Photoshop',
-        'Illustrator',
-        'pixi.js',
-        'Substance 3D Stager',
-        'CSS3',
-      ],
-    },
-    {
-      name: 'Photoshop',
-      website: 'https://www.adobe.com/products/photoshop.html',
-      categoryNames: ['DESIGN', 'IDE'],
-      relatedSkillNames: [
-        'Adobe XD',
-        'Illustrator',
-        'pixi.js',
-        'Substance 3D Stager',
-      ],
-    },
-    {
-      name: 'Illustrator',
-      website: 'https://www.adobe.com/products/illustrator.html',
-      categoryNames: ['DESIGN', 'IDE'],
-      relatedSkillNames: [
-        'Adobe XD',
-        'Photoshop',
-        'pixi.js',
-        'Substance 3D Stager',
-      ],
+      name: 'AWS',
+      icon: 'logos/aws',
+      inverted: true,
     },
     {
       name: 'Angular',
-      website: 'https://angular.io/',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'DEVELOPMENT_TOOLS'],
-      relatedSkillNames: [
-        'JavaScript',
-        'Vue.js',
-        'HTML Canvas',
-        'pixi.js',
-        'Three.js',
-        'Substance 3D Stager',
-        'CSS3',
-        'SASS',
-      ],
-      subskillNames: ['Protractor'],
+      icon: 'logos/angular-icon',
     },
     {
-      name: 'Protractor',
-      website: 'https://www.protractortest.org/',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'SOFTWARE_TESTING'],
-      relatedSkillNames: ['JavaScript', 'Vue.js', 'Jest', 'Jasmine'],
-      childOf: 'Angular',
+      name: 'Google Cloud',
+      icon: 'logos/google-cloud',
+    },
+    {
+      name: 'JetBrains YouTrack',
+      icon: 'logos/youtrack',
+    },
+    {
+      name: 'Three.js',
+      icon: 'logos/threejs',
+      inverted: true,
+    },
+    {
+      name: 'JavaScript',
+      icon: 'logos/javascript',
+    },
+    {
+      name: 'VueUse',
+      icon: 'logos/vueuse',
+    },
+    {
+      name: 'Pinia / VueX',
+      icon: 'https://pinia.vuejs.org/logo.svg',
+    },
+    {
+      name: 'Vue 3',
+      icon: 'logos/vue',
+    },
+    {
+      name: 'Node.js',
+      icon: 'logos/nodejs-icon',
+    },
+    {
+      name: 'GraphQL',
+      icon: 'logos/graphql',
+    },
+    {
+      name: 'HTML5',
+      icon: 'vscode-icons/file-type-html',
+    },
+    {
+      name: 'CSS3',
+      icon: 'vscode-icons/file-type-css',
+    },
+    {
+      name: 'PixiJS',
+      icon: 'logos/pixijs',
+    },
+    {
+      name: 'SASS',
+      icon: 'logos/sass',
+    },
+    {
+      name: 'Git',
+      icon: 'logos/git-icon',
+    },
+    {
+      name: 'Vue i18n',
+      icon: 'https://vue-i18n.intlify.dev/vue-i18n-logo.svg',
+    },
+    {
+      name: 'GSAP',
+      icon: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/logo-man.svg',
+    },
+    {
+      name: 'PHP',
+      icon: 'logos/php',
+    },
+    {
+      name: 'Serverless',
+      icon: 'logos/serverless',
+    },
+    {
+      name: 'Vitest',
+      icon: 'logos/vitest',
     },
     {
       name: 'Jest',
-      website: 'https://jestjs.io/',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'SOFTWARE_TESTING'],
-      relatedSkillNames: ['JavaScript', 'Vue.js', 'Jasmine'],
+      icon: 'logos/jest',
     },
     {
-      name: 'Jasmine',
-      website: 'https://jasmine.github.io/',
-      categoryNames: ['FRONTEND_DEVELOPMENT', 'SOFTWARE_TESTING'],
-      relatedSkillNames: ['JavaScript', 'Vue.js', 'Jest'],
+      name: 'Vectary',
+      icon: 'https://www.vectary.com/images/Logo_1.dc7000.svg',
+    },
+    {
+      name: 'Material 3 (MD3)',
+      icon: 'cib/material-design',
+      inverted: true,
+    },
+    {
+      name: 'Puppeteer',
+      icon: 'logos/puppeteer',
+    },
+    {
+      name: 'AWS S3',
+      icon: 'logos/aws-s3',
+    },
+    {
+      name: 'AWS Cognito',
+      icon: 'logos/aws-cognito',
+    },
+    {
+      name: 'AWS Lambda',
+      icon: 'logos/aws-lambda',
+    },
+    {
+      name: 'AWS API Gateway',
+      icon: 'logos/aws-api-gateway',
+    },
+    {
+      name: 'Webpack',
+      icon: 'logos/webpack',
+    },
+    {
+      name: 'ESLint',
+      icon: 'logos/eslint',
+    },
+    {
+      name: 'GitHub',
+      icon: 'logos/github-icon',
+      inverted: true,
+    },
+    {
+      name: 'GitHub Actions',
+      icon: 'logos/github-actions',
+      inverted: true,
+    },
+    {
+      name: 'AWS SES',
+      icon: 'logos/aws-ses',
+    },
+    {
+      name: 'macOS',
+      icon: 'logos/apple',
+      inverted: true,
+    },
+    {
+      name: 'Ubuntu',
+      icon: 'logos/ubuntu',
+      inverted: true,
+    },
+    {
+      name: 'Windows',
+      icon: 'logos/microsoft-windows',
+    },
+    {
+      name: 'PNPM',
+      icon: 'vscode-icons/file-type-pnpm',
+    },
+    {
+      name: 'Python',
+      icon: 'logos/python',
+    },
+    {
+      name: 'Eclipse',
+      icon: 'logos/eclipse-icon',
+    },
+    {
+      name: 'Java',
+      icon: 'logos/java',
+    },
+    {
+      name: 'C / C++',
+      icon: 'vscode-icons/file-type-cpp',
+      inverted: true,
+    },
+  ],
+  wishList: [
+    {
+      name: 'React',
+      icon: 'logos/react',
+    },
+    {
+      name: 'Next.js',
+      icon: 'logos/nextjs-icon',
+      inverted: true,
+    },
+    {
+      name: 'Svelte / SvelteKit',
+      icon: 'logos/svelte-icon',
+    },
+    {
+      name: 'Deno',
+      icon: 'logos/deno',
+      inverted: true,
+    },
+    {
+      name: 'Rust',
+      icon: 'vscode-icons/file-type-rust',
+      inverted: true,
+    },
+    {
+      name: 'RabbitMQ',
+      icon: 'logos/rabbitmq-icon',
+    },
+    {
+      name: 'Jira',
+      icon: 'logos/jira',
+    },
+    {
+      name: 'Kubernetes',
+      icon: 'logos/kubernetes',
+    },
+    {
+      name: 'Relay Modern',
+      icon: 'logos/relay',
+    },
+    {
+      name: 'MongoDB / DynamoDB',
+      icon: 'logos/mongodb-icon',
+    },
+  ],
+  topSkills: [
+    {
+      name: 'Vue 3',
+      icon: 'logos/vue',
+    },
+    {
+      name: 'GraphQL',
+      icon: 'logos/graphql',
+    },
+    {
+      name: 'Node.js',
+      icon: 'logos/nodejs-icon',
     },
   ],
   projects: [
+    {
+      id: '11',
+      title: 'jojko.tech',
+      date: '2022-10-08T12:00:00.000Z',
+      coAuthors: [],
+      description: {
+        en: 'This is the latest version of my personal site. It\s an update of the previous version. Rewritten from scratch with the latest tech stack. It has been significantly simplified and has SPA experience with linear flow.',
+        pl: 'Najnowsza wersja mojego portfolio. Subtelna aktualizacja stylu poprzedniej wersji, napisana od nowa z użyciem najnowszych technologii. Strona została uproszczona i UX jest linearne.',
+        es: 'La versión mas nueva de mi portfolio. Una actualización sutil del estilo de la versión anterior. Escrito del nuevo con las tecnologías más nuevas',
+      },
+      typography: [
+        {
+          name: 'quicksand',
+          displayName: 'Quicksand',
+        },
+      ],
+      colourPalette: [
+        {
+          code: '#001427',
+          name: 'Kuretake black manga',
+        },
+        {
+          code: '#797ef7',
+          name: 'Orchid',
+        },
+        {
+          code: '#00ffce',
+          name: 'Bright teal',
+        },
+        {
+          code: '#c4fffe',
+          name: 'Vic 20 blue',
+        },
+      ],
+      topKeywords: [
+        {
+          name: 'vue',
+          label: 'Vue 3',
+          url: 'https://vuejs.org',
+          icon: 'logos/vue',
+        },
+        {
+          name: 'firebase',
+          label: 'Google Firebase',
+          url: 'https://firebase.com',
+          icon: 'logos/firebase',
+        },
+        {
+          name: 'vite',
+          label: 'Vite',
+          url: 'https://vitejs.dev',
+          icon: 'logos/vitejs',
+        },
+      ],
+      keywords: [
+        'TypeScript',
+        'GSAP',
+        'Three.js',
+        'Vuetify',
+        'SASS',
+      ],
+      urls: {
+        live: '',
+        copy: '',
+        report: '',
+        github: 'https://github.com/JoJk0/jojko.tech',
+        dribbble: '',
+      },
+    },
     {
       id: '10',
       title: 'Swoop Datacom',
@@ -786,14 +584,83 @@ export default defineData({
         },
       ],
       keywords: [
-        'CI/CD', 'GSAP', 'Adobe Substance 3D Stager', 'three.js',
+        'Github Actions', 'GSAP', 'Adobe Substance 3D Stager', 'three.js', 'Vite',
       ],
       urls: {
         live: 'https://swoopdata.com/',
         copy: '',
         dribbble: '',
         report: '',
-        github: 'https://github.com/JoJk0/swoop-datacom-landing',
+        github: '',
+      },
+    },
+    {
+      id: '0',
+      title: 'jojko.tech 8.0',
+      date: '2020-08-17T18:27:52.000Z',
+      coAuthors: [],
+      description: {
+        en: 'This is my previous version of my site. I gained loads of new skills while working on this project (like Angular, TypeScript, Node.js). I spent months during the COVID-19 lockdown learning new tools, designing, implementing and deploying the website.',
+        pl: 'Poprzednia wersja mojej strony. Zdobyłem wiele nowych umiejętności podczas pracy nad tym projektem. Spędziłem covidowy lockdown nad nim, ucząc się nowych narzędzi, projektowania, implementacji i wdrażania projektu.',
+        es: 'Versión anterior de mi sitio web. Adquirí muchas habilidades nuevas durante el trabajo en este proyecto. Pasé meses durante el bloqueo de COVID-19 trabajando en ello y aprendí nuevas herramientas.',
+      },
+      typography: [
+        {
+          name: 'quicksand',
+          displayName: 'Quicksand',
+        },
+      ],
+      colourPalette: [
+        {
+          code: '#001427',
+          name: 'Kuretake black manga',
+        },
+        {
+          code: '#797ef7',
+          name: 'Orchid',
+        },
+        {
+          code: '#00ffce',
+          name: 'Bright teal',
+        },
+        {
+          code: '#c4fffe',
+          name: 'Vic 20 blue',
+        },
+      ],
+      topKeywords: [
+        {
+          name: 'angular',
+          label: 'Angular',
+          url: 'https://angular.io',
+          icon: 'logos/angular-icon',
+        },
+        {
+          name: 'firebase',
+          label: 'Google Firebase',
+          url: 'https://firebase.com',
+          icon: 'logos/firebase',
+        },
+        {
+          name: 'nodejs',
+          label: 'Node.js',
+          url: 'https://nodejs.org',
+          icon: 'logos/nodejs-icon',
+        },
+      ],
+      keywords: [
+        'Angular',
+        'Node.js',
+        'GSAP',
+        'Google Firebase',
+        'TypeScript',
+      ],
+      urls: {
+        live: '',
+        copy: '',
+        report: '',
+        github: 'https://github.com/JoJk0/jjk-portfolio',
+        dribbble: '',
       },
     },
   ],

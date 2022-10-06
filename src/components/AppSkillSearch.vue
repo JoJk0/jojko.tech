@@ -1,32 +1,31 @@
 <template>
   <div class="skill-search" :class="{ mobile }">
     <v-text-field v-model="search" variant="outlined" :placeholder="t('INPUT_PLACEHOLDER')" />
-    <div class="items">
-      <!-- <swiper slides-per-view="auto" :space-between="30" :mousewheel="true" :modules="modules" class="mySwiper"
-            :scrollbar="{ draggable: true }">
-            <swiper-slide v-for="{ filename, url } of files" :key="filename" class="slide">
-              <GalleryImage :src="url" :alt="filename" />
-            </swiper-slide>
-          </swiper> -->
-      <div v-if="!result.length" class="no-results">
-        <div class="emoji">
-          🤷‍♂️
+    <app-scroller class="scroller">
+      <div class="items">
+        <div class="tech-stack">
+          <AppSkillCard v-for="{ name, icon, inverted } of result" :key="name" :name="name" :icon="icon" :inverted="inverted" />
         </div>
-        {{ t('NO_RESULTS') }}
+        <AppTitle v-if="wishListResult.length" size="small" class="title">
+          {{ t('WISH_LIST') }}
+        </AppTitle>
+        <div v-if="wishListResult.length" class="wishlist">
+          <AppSkillCard v-for="{ name, icon, inverted } of wishListResult" :key="name" :name="name" :icon="icon" :inverted="inverted" wishlisted />
+        </div>
+        <div v-if="!result.length && !wishListResult.length" class="no-results">
+          <div class="emoji">
+            🤷‍♂️
+          </div>
+          {{ t('NO_RESULTS') }}
+        </div>
       </div>
-      <div v-for="{ name, icon, inverted } of result" :key="name" class="item">
-        <app-chip size="small" class="chip" variant="tonal">
-          {{ name }}
-        </app-chip>
-        <AppIcon :api-icon="icon" class="icon" :inverted="inverted" />
-      </div>
-    </div>
+    </app-scroller>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { Swiper, SwiperSlide } from 'swiper/vue'
+import data from '~/Data'
 
 // const props = defineProps({});
 
@@ -36,139 +35,85 @@ const { t } = useI18n()
 
 const { mobile } = useDisplay()
 
-const skills = [
-  {
-    name: 'TypeScript',
-    icon: 'logos/typescript-icon',
-  },
-  {
-    name: 'Google Firebase',
-    icon: 'logos/firebase',
-  },
-  {
-    name: 'Ionic',
-    icon: 'logos/ionic-icon',
-  },
-  {
-    name: 'Vuetify',
-    icon: 'logos/vuetifyjs',
-  },
-  {
-    name: 'AWS Amplify',
-    icon: 'logos/aws-amplify',
-  },
-  {
-    name: 'GraphQL',
-    icon: 'logos/graphql',
-  },
-  {
-    name: 'Prisma',
-    icon: 'logos/prisma',
-    inverted: true,
-  },
-  {
-    name: 'MySQL',
-    icon: 'logos/mysql-icon',
-    inverted: true,
-  },
-  {
-    name: 'Docker',
-    icon: 'logos/docker-icon',
-  },
-  {
-    name: 'Adobe Xd',
-    icon: 'logos/adobe-xd',
-  },
-  {
-    name: 'Adobe Photoshop',
-    icon: 'logos/adobe-photoshop',
-  },
-  {
-    name: 'Adobe Illustrator',
-    icon: 'logos/adobe-illustrator',
-  },
-  {
-    name: 'Adobe Substance 3D',
-    icon: 'file-icons/adobe',
-    inverted: true,
-  },
-  {
-    name: 'Apollo',
-    icon: 'logos/apollostack',
-    inverted: true,
-  },
-]
+const { skills, wishList } = data
 
 const search = ref('')
 
-const result = computed(() => skills.filter(({ name }) => name.toLowerCase().includes(search.value.toLowerCase())).slice(0, 10))
+const result = computed(() => skills.filter(({ name }) => name.toLowerCase().includes(search.value.toLowerCase())))
+const wishListResult = computed(() => wishList.filter(({ name }) => name.toLowerCase().includes(search.value.toLowerCase())))
 </script>
 
 <style lang="scss" scoped>
 .items {
+  height: 22em;
+  overflow-y: auto;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+  .tech-stack, .wishlist {
+      display: flex;
+        gap: 1.5em;
+        flex-wrap: wrap;
+        align-items: stretch;
+        align-content: flex-start;
+  }
+
+  .no-results {
     display: flex;
-    gap: 1.5em;
-    flex-wrap: wrap;
-    align-items: stretch;
-    .no-results {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      width: 100%;
-      gap: 1em;
-      .emoji {
-        font-size: 7em;
-      }
-    }
-    .item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.05);
-      padding: 0.5em;
-      border-radius: 1.5em;
-      aspect-ratio: 1;
-      flex-basis: 8em;
-      .icon {
-        font-size: 4em;
-      aspect-ratio: 1;
-      margin: 0.2em;
-    }
-    .chip {
-        background-color: transparent;
-        color: $color-text;
-        align-self: flex-start;
-      }
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    gap: 1em;
+
+    .emoji {
+      font-size: 7em;
     }
   }
-  .skill-search.mobile {
-    .items {
-      gap: 0.5em;
-      flex-wrap: nowrap;
+}
+
+.skill-search.mobile {
+  .items {
+    .title {
+      position: sticky;
+      left: 0;
     }
+    .tech-stack,
+      .wishlist{
+        gap: 0.5em;
+        flex-wrap: nowrap;
+        height: fit-content;
+        width: fit-content;
+      }
   }
+}
 </style>
 
 <i18n locale="en">
 {
     "INPUT_PLACEHOLDER": "Type to search my tech stack...",
-    "NO_RESULTS": "It seems that I don't do that, maybe try widening the term?"
+    "NO_RESULTS": "It seems that I don't do that, maybe try widening the term?",
+    "WISH_LIST": "Wishlist"
 }
 </i18n>
 
 <i18n locale="pl">
 {
     "INPUT_PLACEHOLDER": "Wpisz umiejętności, aby wyszukać...",
-    "NO_RESULTS": "Hmm wygląda na to, że nie robię tego, spróbuj poszerzyć wyrażenie"
+    "NO_RESULTS": "Hmm wygląda na to, że nie robię tego, spróbuj poszerzyć wyrażenie",
+    "WISH_LIST": "Lista życzeń"
 }
 </i18n>
 
 <i18n locale="es">
 {
     "INPUT_PLACEHOLDER": "Escribe habilidades para buscar...",
-    "NO_RESULTS": "Parece que no lo hago, tal vez prueba ampliar la búsqueda?"
+    "NO_RESULTS": "Parece que no lo hago, tal vez prueba ampliar la búsqueda?",
+    "WISH_LIST": "Lista de deseos"
 }
 </i18n>

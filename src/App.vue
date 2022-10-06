@@ -44,6 +44,8 @@ body,
   color: $color-text;
   font-family: $body-font-family;
   color-scheme: dark;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 .v-application__wrap {
   align-items: center;
@@ -52,7 +54,7 @@ body,
 }
 .main {
   display: flex;
-  max-width: 2000px;
+  max-width: $page-max-width;
   width: 100vw;
   &.mobile {
     overflow: hidden;

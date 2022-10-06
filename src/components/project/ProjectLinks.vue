@@ -1,9 +1,9 @@
 <template>
-  <div class="links">
+  <div class="links" :class="{ mobile }">
     <div v-if="links?.github" class="link github">
       <img src="https://api.iconify.design/akar-icons/github.svg" class="icon">
       <div class="right">
-        <div class="info">
+        <div v-if="!mobile" class="info">
           <div class="top">
             <span class="name">{{ githubUsername }}</span>
             <span class="slash">/</span>
@@ -12,7 +12,7 @@
             {{ githubRepoName }}
           </div>
         </div>
-        <v-btn rounded="pill" color="black" :href="links.github" target="_blank" class="btn-classic">
+        <v-btn rounded="pill" color="black" :href="links.github" target="_blank" class="btn-classic" :variant="mobile ? 'text' : undefined">
           {{ t('VIEW_ON_GITHUB') }}
         </v-btn>
       </div>
@@ -35,6 +35,8 @@ const props = defineProps({
 
 const { t } = useI18n()
 
+const { mobile } = useDisplay()
+
 const githubRegex = /https:\/\/github.com\/(.*)\/(.*)/g
 
 const githubMatches = computed(() => props.links ? githubRegex.exec(props.links.github) : undefined)
@@ -43,7 +45,7 @@ const githubRepoName = computed(() => githubMatches.value ? githubMatches.value[
 </script>
 
 <style lang="scss" scoped>
-    .btn-classic {
+.btn-classic {
         text-transform: unset;
         letter-spacing: inherit;
         font-weight: 600;
@@ -101,6 +103,19 @@ const githubRepoName = computed(() => githubMatches.value ? githubMatches.value[
                 }
             }
         }
+    }
+    .links.mobile {
+      .link {
+        padding: 0;
+            align-items: center;
+              gap: 0;
+        .icon {
+          scale: 0.8;
+        }
+        .btn-classic {
+          padding-left: 0.5em;
+        }
+      }
     }
 </style>
 

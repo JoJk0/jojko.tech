@@ -13,7 +13,9 @@ declare module '@vue/runtime-core' {
     AppIcon: typeof import('./components/AppIcon.vue')['default']
     AppIcon3d: typeof import('./components/AppIcon3d.vue')['default']
     AppLocaleSwitcher: typeof import('./components/AppLocaleSwitcher.vue')['default']
+    AppScroller: typeof import('./components/AppScroller.vue')['default']
     AppSidebar: typeof import('./components/AppSidebar.vue')['default']
+    AppSkillCard: typeof import('./components/AppSkillCard.vue')['default']
     AppSkillSearch: typeof import('./components/AppSkillSearch.vue')['default']
     AppSocials: typeof import('./components/AppSocials.vue')['default']
     AppSubtitle: typeof import('./components/AppSubtitle.vue')['default']
@@ -26,6 +28,7 @@ declare module '@vue/runtime-core' {
     ContactFormResult: typeof import('./components/ContactFormResult.vue')['default']
     CVRenderer: typeof import('./components/CVRenderer.vue')['default']
     GalleryImage: typeof import('./components/GalleryImage.vue')['default']
+    GalleryImages: typeof import('./components/GalleryImages.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     IAkarIconsAlignToTop: typeof import('~icons/akar-icons/align-to-top')['default']
     IBiMarkdown: typeof import('~icons/bi/markdown')['default']
@@ -56,6 +59,8 @@ declare module '@vue/runtime-core' {
     SectionProjects: typeof import('./components/SectionProjects.vue')['default']
     SectionSkills: typeof import('./components/SectionSkills.vue')['default']
     SectionSpotify: typeof import('./components/SectionSpotify.vue')['default']
+    StoriesSlider: typeof import('./components/StoriesSlider.vue')['default']
+    StoriesSliderHead: typeof import('./components/StoriesSliderHead.vue')['default']
   }
 }
 
