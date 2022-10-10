@@ -8,11 +8,15 @@
           forceToAxis: true,
           releaseOnEdges: true,
         }" :navigation="{ nextEl: '#project-next', prevEl: '#project-prev' }"
-        :modules="[Navigation, Mousewheel, Scrollbar]" class="swiper" :scrollbar="{ draggable: true }"
+        :pagination="{ dynamicBullets: true, dynamicMainBullets: 5, clickable: true }"
+        :modules="[Navigation, Mousewheel, Scrollbar, Pagination]" class="swiper" :scrollbar="{ draggable: true }"
         @swiper="instance => swiperInstance = instance"
       >
         <swiper-slide v-for="project of projects" :key="project.id" class="slide">
-          <ProjectCard :project="project" class="card" @slide:next:set="swiperInstance?.slideNext()" @slide:prev:set="swiperInstance?.slidePrev()" />
+          <ProjectCard
+            :project="project" class="card" @slide:next:set="swiperInstance?.slideNext()"
+            @slide:prev:set="swiperInstance?.slidePrev()"
+          />
         </swiper-slide>
       </swiper>
     </div>
@@ -23,11 +27,12 @@
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import type { Swiper as SwiperInstance } from 'swiper'
-import { Mousewheel, Navigation, Scrollbar } from 'swiper'
+import { Mousewheel, Navigation, Pagination, Scrollbar } from 'swiper'
 import data from '~/Data'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 // const props = defineProps({})
 
 // const emit = defineEmits({})
@@ -41,13 +46,31 @@ const swiperInstance = ref<SwiperInstance>()
 const { projects } = data
 </script>
 
+<style lang="scss">
+.swiper-pagination {
+  display: none;
+  top: 0;
+  .swiper-pagination-bullet {
+    background: rgba($color-text, 0.6);
+  }
+  .swiper-pagination-bullet-active {
+    background: $color-text;
+  }
+}
+
+#projects.mobile {
+  .swiper-pagination {
+    display: block;
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 #projects {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  .projects-container {
-  }
+
   .swiper {
     width: 100vw;
     max-width: 100vw;
@@ -57,24 +80,28 @@ const { projects } = data
 }
 
 .slide {
-    width: fit-content;
+  width: fit-content;
 
-    .card {
-//      margin-left: 7rem;
-    }
+  .card {
+    //      margin-left: 7rem;
+  }
+
   &:last-of-type {
     width: 100%;
   }
 }
 
 #projects.mobile {
-.swiper {
-  padding-left: 0;
-  margin-left: -$container-margin;
-  padding-left: $container-margin;
-}
-.slide {
-}
+    .swiper {
+        padding-top: 1.5em;
+      }
+  .swiper {
+    padding-left: 0;
+    margin-left: -$container-margin;
+    padding-left: $container-margin;
+  }
+
+  .slide {}
 }
 </style>
 

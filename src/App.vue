@@ -1,5 +1,6 @@
 <template>
   <v-app class="material-theme">
+    <app-top-info v-if="topInfo" :info="topInfo" />
     <v-main class="main" :class="{ mobile }">
       <router-view />
     </v-main>
@@ -10,6 +11,7 @@
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
+import Data from '~/Data'
 
 useHead({
   title: 'jojko.tech | Jacob Janisz | Full-stack developer',
@@ -30,6 +32,8 @@ useHead({
 })
 
 const { mobile } = useDisplay()
+
+const { topInfo } = Data
 </script>
 
 <style lang="scss">

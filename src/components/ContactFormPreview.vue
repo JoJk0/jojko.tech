@@ -32,7 +32,7 @@
 import { useI18n } from 'vue-i18n'
 import type { PropType } from 'vue'
 import markdown from 'markdown-it'
-import type { ContactFormData } from './SectionContact.vue'
+import type { ContactFormData } from './ContactForm.vue'
 defineProps({
   data: {
     type: Object as PropType<ContactFormData>,

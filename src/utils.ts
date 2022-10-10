@@ -1,5 +1,6 @@
 import { Color, Line3, Vector3 } from 'three'
 import type { DeepReadonly } from 'vue'
+import deepMerge from 'deepmerge'
 import type { JJKData } from './Data'
 import type { AppLocale, I18NString } from './modules/i18n'
 import { availableLocales } from './modules/i18n'
@@ -80,3 +81,6 @@ export const guessLocale = () => {
 
 export const addMessage = <T extends string>(data: I18NString, key: T) =>
   Object.entries(data).map(([locale, message]) => [locale, { [key]: message }] as const).reduce<Record<keyof typeof data, Record<typeof key, string>>>((acc, [locale, message]) => ({ ...acc, [locale]: message }), {} as any)
+
+export const addMessages = <T extends string>(data: Record<T, I18NString>) =>
+  Object.entries<I18NString>(data)

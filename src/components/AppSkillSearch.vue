@@ -44,6 +44,9 @@ const wishListResult = computed(() => wishList.filter(({ name }) => name.toLower
 </script>
 
 <style lang="scss" scoped>
+  .skill-search {
+
+  }
 .items {
   height: 22em;
   overflow-y: auto;

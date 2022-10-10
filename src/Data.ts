@@ -4,6 +4,7 @@ import swoopLogo from '~/assets/logos/swoop.svg'
 import uolLogo from '~/assets/logos/uol.svg'
 
 export interface JJKData {
+  topInfo: string | null
   myNames: string[]
   socials: JJKSocial[]
   topSkills: [JJKSkill, JJKSkill, JJKSkill]
@@ -129,6 +130,7 @@ export interface EducationEntry {
 
 export default defineData({
   myNames: ['Jacob.', 'Jakub.', 'Kuba.', 'jojko.'],
+  topInfo: null,
   socials: [
     {
       name: 'GitHub',

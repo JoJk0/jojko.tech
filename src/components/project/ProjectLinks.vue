@@ -17,6 +17,12 @@
         </v-btn>
       </div>
     </div>
+    <AppButton v-if="links?.live" primary prepend-icon="public" :href="links.live" target="_blank">
+      {{ t('VISIT_WEBSITE') }} <app-icon icon="open_in_new" />
+    </AppButton>
+    <AppButton v-if="links?.copy" primary prepend-icon="play_arrow" :href="links.copy" target="_blank">
+      {{ t('VIEW_COPY') }} <app-icon icon="open_in_new" />
+    </AppButton>
   </div>
 </template>
 
@@ -121,18 +127,24 @@ const githubRepoName = computed(() => githubMatches.value ? githubMatches.value[
 
 <i18n locale="en">
 {
-  "VIEW_ON_GITHUB": "View on GitHub"
+  "VIEW_ON_GITHUB": "View on GitHub",
+  "VISIT_WEBSITE": "Visit website",
+  "VIEW_COPY": "View copy"
 }
 </i18n>
 
 <i18n locale="pl">
 {
-  "VIEW_ON_GITHUB": "Zobacz na GitHub'ie"
+  "VIEW_ON_GITHUB": "Zobacz na GitHub'ie",
+  "VISIT_WEBSITE": "Odwiedź stronę",
+  "VIEW_COPY": "Zobacz kopię"
 }
 </i18n>
 
 <i18n locale="es">
 {
-  "VIEW_ON_GITHUB": "Ver en GitHub"
+  "VIEW_ON_GITHUB": "Ver en GitHub",
+  "VISIT_WEBSITE": "Visitar sitio",
+  "VIEW_COPY": "Ver copia"
 }
 </i18n>

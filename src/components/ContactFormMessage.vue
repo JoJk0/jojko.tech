@@ -1,6 +1,12 @@
 <template>
   <div class="contact-form-message">
     <AppSubtitle>{{ t('WHAT_S_ON_YOUR_MIND') }}</AppSubtitle>
+    <div v-if="isHiring">
+      Maybe you might want to grab a fresh copy of my CV?
+      <AppButton href="cv" target="_blank">
+        Get it here!
+      </AppButton>
+    </div>
     <div class="message-container">
       <v-textarea
         counter
@@ -29,6 +35,10 @@ defineProps({
   errorMessage: {
     type: String,
     default: undefined,
+  },
+  isHiring: {
+    type: Boolean,
+    default: false,
   },
 })
 

@@ -127,7 +127,7 @@ onMounted(() => {
 #hi {
     min-height: 100vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-end;
     position: relative;
     flex-wrap: wrap;
@@ -157,6 +157,7 @@ onMounted(() => {
     }
     &.mobile {
     align-content: space-between;
+    justify-content: flex-start;
 
         .top {
             position: static;
