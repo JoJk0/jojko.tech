@@ -21,11 +21,9 @@
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { versionInfo } from '~/utils'
+import { useVersion } from '~/composables/useVersion'
 
-const { channel, number } = versionInfo
-
-const isUnstable = ['alpha', 'beta', 'dev'].includes(channel)
+const { number, isUnstable, channel } = useVersion()
 
 // const props = defineProps({});
 

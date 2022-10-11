@@ -37,6 +37,7 @@
     "vue": "^3.2.33",
     "vue-demi": "^0.12.5",
     "vue-i18n": "9.2.0-beta.36",
+    "vue-recaptcha-v3": "^2.0.1",
     "vue-router": "^4.0.15",
     "vuetify": "3.0.0-beta.11",
     "webfontloader": "^1.6.28"

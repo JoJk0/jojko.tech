@@ -32,7 +32,7 @@
         <v-window-item value="preview">
           <contact-form-preview
             v-model="receipt.value.value" class="window-state" :data="formData"
-            :current-topic-name="topic.name" @send="onSubmit"
+            :current-topic-name="topic.name"
           />
         </v-window-item>
         <v-window-item value="result">
@@ -42,8 +42,8 @@
       <v-card-actions class="actions">
         <template v-if="currentState === 'preview'">
           <app-button
-            class="action-button" primary :disabled="loading" :loading="loading"
-            :error-message="error" @click="onSubmit"
+            class="action-button" primary :disabled="isSending" :loading="isSending"
+            :error-message="error" @click="sendMail(formData)"
           >
             {{ t('SEND') }}
             <i-feather-send />
@@ -96,10 +96,10 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import type { FieldContext } from 'vee-validate'
-import { useFetch } from '@vueuse/core'
 import { useField } from 'vee-validate'
 import type { PropType } from 'vue'
 import type Data from '../Data'
+import { useEmailSender } from '~/composables/useEmailSender'
 
 export type ContactFormState = 'name' | 'email' | 'message' | 'result' | 'preview'
 
@@ -108,6 +108,7 @@ export interface ContactFormData {
   email: string
   message: string
   topic: typeof Data['topics'][number]['id']
+  receipt: boolean
 }
 
 // eslint-disable-next-line vue/define-macros-order
@@ -148,10 +149,7 @@ const formData = computed<ContactFormData>(() => ({
   receipt: receipt.value.value,
 }))
 
-const { isFetching: loading, data: result, error, post } = useFetch<{ sent: boolean }>('/api/contact', {
-  data: formData.value,
-  immediate: false,
-})
+const { isSending, error, sendMail, onSuccess } = useEmailSender()
 
 const isHiring = computed(() => props.topic.id === 'HIRING_ME')
 
@@ -165,9 +163,9 @@ const onBack = (to: ContactFormState) => {
   currentState.value = to
 }
 
-const onSubmit = () => {
-  post()
-}
+onSuccess(() => {
+  currentState.value = 'result'
+})
 </script>
 
 <style lang="scss" scoped>

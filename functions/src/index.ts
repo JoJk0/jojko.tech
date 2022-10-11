@@ -17,6 +17,7 @@ import {
 } from "./utils";
 import validator from "validator";
 import {cvStoragePath, cvWebUrl, region} from "./config";
+import axios from "axios";
 
 // JJK Functions
 // https://jojko.tech
@@ -100,26 +101,27 @@ export const sendMail = functions.region(region).https
         topic,
         name,
         message,
-        emailCopy,
+        receipt,
         email,
         gRecaptchaToken,
       } = sanitize(data);
 
       // RECAPTCHA VERIFICATION
 
-      const {json} = await fetch(
+      const {data: response} = await axios.get<GRecaptchaResponse>(
           `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.GRECAPTCHA_SECRET}&response=${gRecaptchaToken}`
-      );
-      const {score, success} = (await json()) as GRecaptchaResponse;
+          , {responseType: "json"});
+
+      const {score} = response;
 
       console.log(score);
 
-      if (!success) {
+      if (score < 0.5) {
         functions.logger.error("Unsuccessful verification");
         return;
       }
 
-      const {sendMail} = createTransport({
+      const transporter = createTransport({
         host: "smtppro.zoho.eu",
         port: 465,
         secure: true,
@@ -129,10 +131,21 @@ export const sendMail = functions.region(region).https
         },
       });
 
+      transporter.verify(function(err, success) {
+        if (err) {
+          console.error(`SMTP Error: ${err}`);
+        }
+        if (success) {
+          console.log("SMTP ready...");
+        } else {
+          console.error("SMTP not ready!");
+        }
+      });
+
       const date = new Date().toISOString();
 
-      const {messageId} = await sendMail({
-        from: `${name} <${email}>`,
+      const {messageId} = await transporter.sendMail({
+        from: `${name} <jacob@jojko.tech>`,
         to: "jacob@jojko.tech",
         subject: `${name} sent you a message about ${topic}`,
         html: emailHTML({name, email, topic, message, date}),
@@ -140,9 +153,9 @@ export const sendMail = functions.region(region).https
 
       console.log("Message sent: %s", messageId);
 
-      if (!emailCopy) return;
+      if (!receipt) return;
 
-      const {messageId: copyMessageId} = await sendMail({
+      const {messageId: copyMessageId} = await transporter.sendMail({
         from: "jojko.tech <jacob@jojko.tech>",
         to: email,
         subject: `Thanks ${name} for contacting me about ${topic}`,

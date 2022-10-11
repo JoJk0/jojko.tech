@@ -14,8 +14,8 @@
     </app-card>
     <div class="checkbox-container">
       <div class="glyph">
-        <i-ic-round-check-box v-if="modelValue" color="#797ef7" />
-        <i-ic-round-check-box-outline-blank v-else color="#797ef7" />
+        <AppIcon v-if="modelValue" icon="check_box" color="#797ef7" />
+        <AppIcon v-else icon="check_box_outline_blank" color="#797ef7" />
       </div>
       <v-checkbox
         hide-details class="receipt-checkbox" :model-value="modelValue" :label="t('EMAIL_RECEIPT')"
@@ -33,6 +33,7 @@ import { useI18n } from 'vue-i18n'
 import type { PropType } from 'vue'
 import markdown from 'markdown-it'
 import type { ContactFormData } from './ContactForm.vue'
+
 defineProps({
   data: {
     type: Object as PropType<ContactFormData>,

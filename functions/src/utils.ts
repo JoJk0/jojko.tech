@@ -15,7 +15,7 @@ export type SendMailCallData = {
     name: string
     email: string
     message: string
-    emailCopy: string
+    receipt: string
     gRecaptchaToken: string
 }
 

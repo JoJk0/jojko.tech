@@ -42,8 +42,6 @@ declare module '@vue/runtime-core' {
     IFeatherLinkedin: typeof import('~icons/feather/linkedin')['default']
     IFeatherSend: typeof import('~icons/feather/send')['default']
     IFeatherTwitter: typeof import('~icons/feather/twitter')['default']
-    IIcRoundCheckBox: typeof import('~icons/ic/round-check-box')['default']
-    IIcRoundCheckBoxOutlineBlank: typeof import('~icons/ic/round-check-box-outline-blank')['default']
     ITwemojiFlagPoland: typeof import('~icons/twemoji/flag-poland')['default']
     ITwemojiFlagSpain: typeof import('~icons/twemoji/flag-spain')['default']
     ITwemojiFlagUnitedKingdom: typeof import('~icons/twemoji/flag-united-kingdom')['default']
