@@ -5,11 +5,14 @@
 <script lang="ts" setup>
 import data from '~/Data'
 
-const props = defineProps({
-  blackAndWhite: Boolean,
-})
+// const props = defineProps({
+// })
 
 // const emit = defineEmits({})
+
+const { query } = useRoute()
+
+const blackAndWhite = computed(() => query.blackAndWhite === null || query.blackAndWhite === 'true')
 
 const { cv } = data
 </script>
@@ -17,7 +20,8 @@ const { cv } = data
 <style lang="scss" scoped></style>
 
 <route lang="yaml">
+name: RAW_CV_PDF
 meta:
-  name: RAW_CV_PDF
   layout: window
+props: true
 </route>

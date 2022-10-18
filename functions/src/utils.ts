@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import validator from "validator";
+import Data from "../../src/Data";
 
 export type GRecaptchaResponse = {
     success: boolean
@@ -11,7 +12,7 @@ export type GRecaptchaResponse = {
 }
 
 export type SendMailCallData = {
-    topic: string
+    topic: typeof Data["topics"][number]["id"]
     name: string
     email: string
     message: string

@@ -16,7 +16,7 @@ import {
   validate,
 } from "./utils";
 import validator from "validator";
-import {cvStoragePath, cvWebUrl, region} from "./config";
+import {cvStoragePath, cvBwStoragePath, cvWebUrl, region} from "./config";
 import axios from "axios";
 
 // JJK Functions
@@ -34,32 +34,46 @@ export const savePdf = functions.region(region).runWith({
   memory: "1GB",
 }).database.ref("/cv")
     .onWrite(async (snapshot) => {
-      // puppeteer
+    // puppeteer
       const browser = await launch({waitForInitialPage: false});
-      try {
+
+      const app = initializeApp({
+        credential: cert(serviceAccount as ServiceAccount),
+        storageBucket: "jjk-portfolio.appspot.com",
+      });
+
+      const storage = getStorage(app);
+
+      const saveFile = async (bw?: true) => {
         const page = await browser.newPage();
-        await page.goto(cvWebUrl, {
+
+        const url = bw ? `${cvWebUrl}?blackAndWhite` : cvWebUrl;
+
+        await page.goto(url, {
           waitUntil: "networkidle2",
         });
-        const pdf = await page.pdf({
+
+        const pdfOptions = {
           format: "a4",
           printBackground: true,
           pageRanges: "1",
-        });
+        } as const;
 
-        const app = initializeApp({
-          credential: cert(serviceAccount as ServiceAccount),
-          storageBucket: "jjk-portfolio.appspot.com",
-        });
+        const pdf = await page.pdf(pdfOptions);
 
-        const storage = getStorage(app);
+        const path = bw ? cvBwStoragePath : cvStoragePath;
 
-        const file = storage.bucket().file(cvStoragePath);
+        const file = storage.bucket().file(path);
 
         await file.save(pdf, {public: true})
             .catch((e) => functions.logger.error(e));
+      };
 
-        functions.logger.log("Save PDF Triggered!");
+      try {
+        await Promise.all([
+          saveFile(),
+          saveFile(true),
+        ]);
       } catch (e) {
         functions.logger.error(e);
       }
@@ -144,10 +158,19 @@ export const sendMail = functions.region(region).https
 
       const date = new Date().toISOString();
 
+      const topicNames: Record<SendMailCallData["topic"], string> = {
+        "HIRING_ME": "hiring me",
+        "BUGS": "bugs",
+        "COFFEE": "coffee",
+        "COOPERATION": "cooperation",
+        "FREELANCE_PROJECTS": "freelance projects",
+        "SOCIAL_MEDIA": "social medias",
+      };
+
       const {messageId} = await transporter.sendMail({
         from: `${name} <jacob@jojko.tech>`,
         to: "jacob@jojko.tech",
-        subject: `${name} sent you a message about ${topic}`,
+        subject: `${name} sent you a message about ${topicNames[topic]}`,
         html: emailHTML({name, email, topic, message, date}),
       });
 
@@ -158,7 +181,7 @@ export const sendMail = functions.region(region).https
       const {messageId: copyMessageId} = await transporter.sendMail({
         from: "jojko.tech <jacob@jojko.tech>",
         to: email,
-        subject: `Thanks ${name} for contacting me about ${topic}`,
+        subject: `Thanks ${name} for contacting me about ${topicNames[topic]}`,
         html: emailCopyHTML({name, topic, message, date}),
       });
 
