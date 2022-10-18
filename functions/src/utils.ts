@@ -1,27 +1,26 @@
 /* eslint-disable max-len */
 import validator from "validator";
-import Data from "../../src/Data";
 
 export type GRecaptchaResponse = {
-    success: boolean
-    score: number
-    action: string
-    challenge_ts: string
-    hostname: string
-    "error-codes"?: string[]
+  success: boolean
+  score: number
+  action: string
+  challenge_ts: string
+  hostname: string
+  "error-codes"?: string[]
 }
 
 export type SendMailCallData = {
-    topic: typeof Data["topics"][number]["id"]
-    name: string
-    email: string
-    message: string
-    receipt: string
-    gRecaptchaToken: string
+  topic: "COFFEE" | "HIRING_ME" | "COOPERATION" | "FREELANCE_PROJECTS" | "BUGS" | "SOCIAL_MEDIA"
+  name: string
+  email: string
+  message: string
+  receipt: string
+  gRecaptchaToken: string
 }
 
 export type SchemaDefinition<T extends Record<string, string>> = {
-    [key in keyof T]?: (value: T[key]) => boolean[]
+  [key in keyof T]?: (value: T[key]) => boolean[]
 }
 
 export const validate = <T extends Record<string, string>>(data: T, schema: SchemaDefinition<T>) =>
@@ -35,7 +34,7 @@ export const sanitize = <T extends Record<string, string>>(data: T) => {
       .reduce((acc, [key, value]) => ({...acc, [key]: value}), {} as T);
 };
 
-export const emailHTML = ({name, email, topic, message, date}: Pick<SendMailCallData, "name"|"email"|"topic"|"message"> & { date: string }) => `
+export const emailHTML = ({name, email, topic, message, date}: Pick<SendMailCallData, "name" | "email" | "topic" | "message"> & { date: string }) => `
       <!DOCTYPE html>
       <html>
         <head>
@@ -52,7 +51,7 @@ export const emailHTML = ({name, email, topic, message, date}: Pick<SendMailCall
         </body>
       </html>`;
 
-export const emailCopyHTML = ({name, topic, message, date}: Pick<SendMailCallData, "name" | "topic" | "message"> & {date: string}) => `
+export const emailCopyHTML = ({name, topic, message, date}: Pick<SendMailCallData, "name" | "topic" | "message"> & { date: string }) => `
               <!DOCTYPE html>
               <html>
               <head>

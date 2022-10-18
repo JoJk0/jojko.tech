@@ -24,12 +24,12 @@
         </v-item>
       </v-item-group>
       <div class="actions">
-        <AppButton primary :loading="isGenerating && clicked === 'download'" @click="(clicked = 'download') && downloadPdf('cv-jakub-janisz.pdf')">
+        <AppButton primary :loading="isGenerating" :href="isBlackAndWhite ? bwUrl : colorUrl" target="_blank">
           {{ t('DOWNLOAD') }}
         </AppButton>
-        <AppButton :loading="isGenerating && clicked === 'print'" @click="(clicked = 'print') && printPdf()">
+        <!-- <AppButton :loading="isGenerating && clicked === 'print'" @click="(clicked = 'print') && printPdf()">
           {{ t('PRINT') }}
-        </AppButton>
+        </AppButton> -->
       </div>
     </div>
   </div>
@@ -37,7 +37,8 @@
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { useJsPdf } from '~/composables/useJsPdf'
+import { cvBwStoragePath, cvStoragePath } from '../../functions/src/config'
+import { useStorageFile } from '~/composables/useStorageFile'
 import data from '~/Data'
 
 // const props = defineProps({})
@@ -46,20 +47,26 @@ import data from '~/Data'
 
 const { t } = useI18n()
 
-const [rendererEl, { downloadPdf, printPdf, isGenerating }] = useJsPdf({
-  orientation: 'p',
-  unit: 'pt',
-  format: 'a4',
-})
+// const [rendererEl, { downloadPdf, printPdf, isGenerating }] = useJsPdf({
+//   orientation: 'p',
+//   unit: 'pt',
+//   format: 'a4',
+// })
 
 const { cv } = data
 
 // body.value = document.body
 
+const colorUrl = useStorageFile(cvStoragePath)
+
+const bwUrl = useStorageFile(cvBwStoragePath)
+
+const isGenerating = computed(() => !colorUrl.value || !bwUrl.value)
+
 const { mobile } = useDisplay()
 
 const isBlackAndWhite = ref(false)
-const clicked = ref<'download' | 'print'>()
+// const clicked = ref<'download' | 'print'>()
 
 const scale = computed(() => mobile.value ? 0.4 : 0.8)
 </script>
