@@ -39,6 +39,11 @@ const { topInfo } = Data
 <style lang="scss">
 @import "./src/styles/theme";
 
+.grecaptcha-badge {
+  visibility: hidden;
+  opacity: 0;
+}
+
 html,
 body,
 #app {

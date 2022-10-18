@@ -59,20 +59,6 @@ export const defineData = <T extends DeepReadonly<JJKData>>(data: T) => {
   return data
 }
 
-export interface VersionInfo {
-  number: `${number}.${number}.${number}`
-  date: `${number}-${number}-${number}`
-  channel: 'stable' | 'beta' | 'alpha' | 'dev'
-}
-
-export const defineVersion = <T extends DeepReadonly<VersionInfo>>(options: T) => options
-
-export const versionInfo = defineVersion({
-  number: '8.1.0',
-  date: '2022-06-13',
-  channel: 'dev',
-})
-
 export const guessLocale = () => {
   const userLangs = navigator.languages ? navigator.languages.map(lang => lang.split('-')[0]) : ['en']
 

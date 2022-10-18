@@ -1,5 +1,5 @@
 <template>
-  <p>You're a star!</p>
+  <p>You're a star! I've got it. I will contact you shortly.</p>
 </template>
 
 <script lang="ts" setup>

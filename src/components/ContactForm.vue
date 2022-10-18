@@ -43,7 +43,8 @@
         <template v-if="currentState === 'preview'">
           <app-button
             class="action-button" primary :disabled="isSending" :loading="isSending"
-            :error-message="error" @click="sendMail(formData)"
+            :error-message="error" data-badge="inline"
+            @click="sendMail(formData)"
           >
             {{ t('SEND') }}
             <i-feather-send />

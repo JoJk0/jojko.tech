@@ -1,5 +1,5 @@
 <p align='center'>
-  <img src='https://jojko.tech/assets/logo.svg' alt='jojko.tech' width='256'/>
+  <img src='https://next.jojko.tech/assets/logo.41b08876.svg' alt='jojko.tech' width='128'/>
 </p>
 
 <p align='center' style="font-size: 2em">
