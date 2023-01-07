@@ -1,8 +1,8 @@
 <template>
   <footer>
-    <div class="version-status">
-      <div v-if="isUnstable" class="top">
-        <v-chip>{{ channel.toUpperCase() }}</v-chip>
+    <div v-if="isUnstable" class="version-status">
+      <div class="top">
+        <v-chip>{{ channel === 'dev' ? channel.toUpperCase() : milestone.toUpperCase() }}</v-chip>
         <div class="version-info">
           {{ t('UNSTABLE') }}
         </div>
@@ -23,7 +23,7 @@
 import { useI18n } from 'vue-i18n'
 import { useVersion } from '~/composables/useVersion'
 
-const { number, isUnstable, channel } = useVersion()
+const { number, isUnstable, channel, milestone } = useVersion()
 
 // const props = defineProps({});
 

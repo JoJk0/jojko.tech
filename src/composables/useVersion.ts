@@ -26,6 +26,7 @@ export const useVersion = () => {
   return {
     channel,
     number,
+    milestone,
     isUnstable,
     isDev,
   }
