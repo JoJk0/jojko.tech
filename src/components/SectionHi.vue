@@ -50,7 +50,7 @@ const gsap = useGSAP()
 
 const { mobile } = useDisplay()
 
-const { animate, currentName } = useAnimatedName(myNames)
+const { animate, currentName } = useAnimatedName([...myNames])
 
 const meCoverPercentage = '75vmin'
 
