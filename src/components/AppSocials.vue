@@ -3,10 +3,10 @@
     <div v-for="{ name, url, urlName } of socials" :key="name" class="social">
       <a :href="url" target="_blank">
         <app-tooltip :text="urlName">
-          <i-feather-twitter v-if="name === 'Twitter'" :title="name" />
-          <i-feather-github v-else-if="name === 'GitHub'" :title="name" />
-          <i-feather-instagram v-else-if="name === 'Instagram'" :title="name" />
-          <i-feather-linkedin v-else-if="name === 'LinkedIn'" :title="name" />
+          <i-feather-twitter v-if="name === 'Twitter'" :title="name" class="svg-icon" />
+          <i-feather-github v-else-if="name === 'GitHub'" :title="name" class="svg-icon" />
+          <i-feather-instagram v-else-if="name === 'Instagram'" :title="name" class="svg-icon" />
+          <i-feather-linkedin v-else-if="name === 'LinkedIn'" :title="name" class="svg-icon" />
         </app-tooltip>
       </a>
     </div>
@@ -35,10 +35,14 @@ const { socials } = data
 .socials {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 0.8em;
     .social {
       a {
         color: inherit;
+        .svg-icon {
+          font-size: 0.8em;
+
+        }
       }
     }
     &.inline {

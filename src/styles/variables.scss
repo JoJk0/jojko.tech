@@ -1,12 +1,7 @@
 
 
 // @import '~vuetify/styles/main.sass';
-
-// Colours
-$color-primary: #00ffce;
-$color-secondary: #797ef7;
-$color-text: #c5fffe;
-$color-background: #001427;
+@import 'colors';
 
 :export {
     colorPrimary: $color-primary;

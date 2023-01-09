@@ -58,7 +58,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .sidebar {
-  position: sticky;
+  position: absolute;
   top: 0;
     height: 100vh;
     display: flex;

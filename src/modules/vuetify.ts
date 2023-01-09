@@ -3,16 +3,20 @@ import 'vuetify/styles'
 
 // Vuetify
 import type { IconProps, IconSet, ThemeDefinition } from 'vuetify'
+import { md3 } from 'vuetify/blueprints'
 
 import { createVuetify } from 'vuetify'
 import { VLigatureIcon } from 'vuetify/components'
+// import * as variables from '../styles/colors.scss'
 import type { UserModule } from '~/types'
+
+// console.log(variables)
 
 const jjkTheme: ThemeDefinition = {
   dark: true,
   colors: {
-    'background': '#001427',
-    'surface': '#001427',
+    'background': '#0a121e',
+    'surface': '#0a121e',
     'primary': '#00ffce',
     'primary-darken-1': '#00ffc0',
     'secondary': '#797ef7',
@@ -44,6 +48,16 @@ export const install: UserModule = ({ app }) => {
       mobileBreakpoint: 'sm',
     },
     icons: { defaultSet: 'md', sets: { md } },
+    blueprint: md3,
+    defaults: {
+      VChip: {
+        pill: true,
+        rounded: 'xl',
+      },
+      VCard: {
+        rounded: 'm',
+      },
+    },
   })
   app.use(vuetify)
 }
