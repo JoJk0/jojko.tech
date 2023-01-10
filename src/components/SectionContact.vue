@@ -9,7 +9,7 @@
     <div class="select-container">
       <ContactEmojis />
       <v-select
-        v-model="topic.value.value" class="select" :placeholder="items[0].name" variant="outlined"
+        v-model="topic.value.value" class="select"
         menu-icon="expand_more" :label="t('LET_S_TALK_ABOUT')" :items="items" item-title="name" item-value="id"
         hide-details @update:model-value="setOpen(true)"
       />

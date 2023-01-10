@@ -35,12 +35,12 @@ const { socials } = data
 .socials {
     display: flex;
     flex-direction: column;
-    gap: 0.8em;
+    gap: 1em;
     .social {
       a {
         color: inherit;
         .svg-icon {
-          font-size: 0.8em;
+          font-size: 1em;
 
         }
       }
