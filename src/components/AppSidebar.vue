@@ -67,6 +67,9 @@ onMounted(() => {
     padding: 1em;
     font-size: 2em;
     z-index: 1101;
+    .socials {
+      font-size: 0.8em;
+    }
     .logo-cnt {
         cursor: pointer;
         height: 10em;
