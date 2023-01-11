@@ -103,5 +103,8 @@ export default defineConfig({
     deps: {
       inline: ['@vue', '@vueuse', 'vue-demi'],
     },
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+    },
   },
 })
