@@ -63,7 +63,6 @@ body,
 }
 .main {
   display: flex;
-  max-width: $page-max-width;
   width: 100vw;
   &.mobile {
     overflow: hidden;
@@ -87,6 +86,8 @@ section {
     //padding: 0 max(calc(calc(100% - $container-max-width) / 2), $container-margin);
     padding: 1em;
     width: 100%;
-    min-height: 100vh;
+    min-height: 50em;
+    margin-top: 5em;
+    margin-bottom: 5em;
 }
 </style>

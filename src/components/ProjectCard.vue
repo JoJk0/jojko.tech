@@ -35,22 +35,19 @@
           </div>
         </div>
         <div class="right">
-          <ProjectLinks :links="project.urls" />
-          <div class="typography titled">
-            <div class="section-title">
-              {{ t('TYPOGRAPHY') }}
-            </div>
-            <div class="cnt">
-              <ProjectFont v-for="font of project.typography" :key="font.name" :font="font" />
+          <div class="top">
+            <ProjectLinks :links="project.urls" />
+            <div v-if="!mobile" class="typography titled">
+              <div class="section-title">
+                {{ t('TYPOGRAPHY') }}
+              </div>
+              <div class="cnt">
+                <ProjectFont v-for="font of project.typography" :key="font.name" :font="font" />
+              </div>
             </div>
           </div>
-          <div class="colour-palette titled">
-            <div class="section-title">
-              {{ t('COLOUR_PALETTE') }}
-            </div>
-            <div class="cnt">
-              <ProjectColour v-for="colour of project.colourPalette" :key="colour.code" :colour="colour" />
-            </div>
+          <div class="colour-palette">
+            <ProjectColour v-for="colour of project.colourPalette" :key="colour.code" :colour="colour" />
           </div>
         </div>
       </div>
@@ -103,9 +100,11 @@ const date = computed(() => DateTime.fromISO(props.project.date).toLocaleString(
   opacity: 0.4;
   scale: 0.9;
   transition: 0.4s;
+
   &.active {
     opacity: 1;
     scale: 1;
+
     .card-content {
       pointer-events: unset;
     }
@@ -118,6 +117,7 @@ const date = computed(() => DateTime.fromISO(props.project.date).toLocaleString(
     align-items: stretch;
     flex-direction: column;
     pointer-events: none;
+    max-width: 50em;
 
     .details {
       width: fit-content;
@@ -141,9 +141,9 @@ const date = computed(() => DateTime.fromISO(props.project.date).toLocaleString(
         }
 
         .mid {
-          display: inherit;
-          gap: inherit;
-          flex-direction: inherit;
+          display: flex;
+          gap: 2em;
+          align-items: center;
         }
 
         .bot {
@@ -157,6 +157,13 @@ const date = computed(() => DateTime.fromISO(props.project.date).toLocaleString(
         display: flex;
         flex-direction: column;
         gap: 1em;
+        justify-content: space-between;
+
+        .top {
+          display: flex;
+          flex-direction: column;
+          gap: 1em;
+        }
       }
 
       .description {
@@ -187,10 +194,9 @@ const date = computed(() => DateTime.fromISO(props.project.date).toLocaleString(
       }
 
       .colour-palette {
-        .cnt {
-          display: flex;
-          flex-direction: row;
-        }
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
       }
     }
 
@@ -205,25 +211,30 @@ const date = computed(() => DateTime.fromISO(props.project.date).toLocaleString(
 .project-card.mobile {
   .details {
     font-size: 0.8em;
+
     .left {
       gap: 1em;
+
       .title {
         line-height: 1em;
       }
-      .top {
 
-      }
+      .top {}
+
       .mid {
-
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1em;
       }
-      .bot {
 
-      }
+      .bot {}
     }
 
     .right {
       flex-direction: row;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: 100%;
     }
   }
 }

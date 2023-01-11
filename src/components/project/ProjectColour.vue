@@ -22,8 +22,8 @@ const { mobile } = useDisplay()
 
 <style lang="scss" scoped>
 .colour {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   aspect-ratio: 1;
   border-radius: 100%;
   font-weight: 600;
@@ -31,7 +31,7 @@ const { mobile } = useDisplay()
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-right: -1rem;
+  margin-left: -1rem;
   font-size: 0.5em;
   transition: 0.2s;
   scale: 1;
@@ -40,7 +40,7 @@ const { mobile } = useDisplay()
 
   &:hover {
     z-index: 1;
-    scale: 1.5;
+    scale: 1.4;
 
     .text {
       opacity: 1;
@@ -49,14 +49,14 @@ const { mobile } = useDisplay()
 
   .text {
     color: inherit;
-    filter: invert(1) hue-rotate(180deg);
+    filter: invert(1) hue-rotate(180deg) contrast(1000) saturate(50%);
     opacity: 0;
     transition: 0.2s;
     cursor: default;
   }
 }
 .colour.mobile {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
 }
 </style>

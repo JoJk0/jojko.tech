@@ -1,9 +1,11 @@
 <template>
   <section id="projects" :class="{ mobile }">
-    <app-title>{{ t('PROJECTS') }}</app-title>
+    <app-title class="title">
+      {{ t('PROJECTS') }}
+    </app-title>
     <div class="projects-container">
       <swiper
-        ref="swiperEl" slides-per-view="auto" :space-between="30" follow-finger :free-mode="true" preload-images
+        ref="swiperEl" slides-per-view="auto" :space-between="mobile ? 0 : 30" follow-finger :free-mode="true" preload-images
         :mousewheel="{
           forceToAxis: true,
           releaseOnEdges: true,
@@ -50,9 +52,11 @@ const { projects } = data
 .swiper-pagination {
   display: none;
   top: 0;
+
   .swiper-pagination-bullet {
     background: rgba($color-text, 0.6);
   }
+
   .swiper-pagination-bullet-active {
     background: $color-text;
   }
@@ -70,12 +74,21 @@ const { projects } = data
   display: flex;
   flex-direction: column;
   gap: 1em;
+  padding-left: 0;
+  padding-right: 0;
+
+  .title {
+    padding-left: max($page-margin, (100vw - $page-max-width) / 2);
+  }
+
+  .projects-container {
+    width: 100vw;
+  }
 
   .swiper {
     width: 100vw;
     max-width: 100vw;
-    margin-left: min((100vw - $page-max-width) / -2, $container-margin * -7);
-    padding-left: 7rem;
+    padding-left: max($page-margin, (100vw - $page-max-width) / 2);
   }
 }
 
@@ -83,7 +96,7 @@ const { projects } = data
   width: fit-content;
 
   .card {
-    //      margin-left: 7rem;
+    max-width: calc(100vw - $container-margin * 4);
   }
 
   &:last-of-type {
@@ -92,12 +105,16 @@ const { projects } = data
 }
 
 #projects.mobile {
-    .swiper {
-        padding-top: 1.5em;
-      }
   .swiper {
+    padding-top: 1.5em;
+  }
+
+  .title {
     padding-left: 0;
-    margin-left: -$container-margin;
+    text-align: center;
+  }
+
+  .swiper {
     padding-left: $container-margin;
   }
 
