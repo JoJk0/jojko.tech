@@ -3,6 +3,7 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite --port 2137",
+    "coverage": "vitest run --coverage",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview-https": "serve dist",
@@ -55,6 +56,7 @@
     "@types/three": "^0.140.0",
     "@types/webfontloader": "^1.6.35",
     "@vitejs/plugin-vue": "^2.3.4",
+    "@vitest/coverage-c8": "^0.27.0",
     "@vue/compiler-sfc": "^3.2.45",
     "@vue/test-utils": "^2.2.7",
     "critters": "^0.0.16",
