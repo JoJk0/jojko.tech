@@ -36,6 +36,7 @@ const getLogoUrl = (icon: string) => `${iconApiUrl}/${icon}.svg`
         gap: 1em;
         .top-keyword {
             font-size: 3em;
+            height: 1em;
             img {
                 width: 1em;
                 height: 1em;

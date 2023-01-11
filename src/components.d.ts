@@ -52,6 +52,7 @@ declare module '@vue/runtime-core' {
     ProjectGallery: typeof import('./components/project/ProjectGallery.vue')['default']
     ProjectLinks: typeof import('./components/project/ProjectLinks.vue')['default']
     ProjectTopKeywords: typeof import('./components/project/ProjectTopKeywords.vue')['default']
+    ProjectTypography: typeof import('./components/project/ProjectTypography.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SectionContact: typeof import('./components/SectionContact.vue')['default']

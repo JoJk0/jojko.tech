@@ -15,6 +15,9 @@ const props = defineProps({
     type: String as PropType<VProps['size']>,
     default: 'large',
   },
+  variant: {
+    type: String,
+  },
 })
 </script>
 

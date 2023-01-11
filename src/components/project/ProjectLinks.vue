@@ -115,8 +115,10 @@ const githubRepoName = computed(() => githubMatches.value ? githubMatches.value[
         padding: 0;
             align-items: center;
               gap: 0;
+                border-radius: calc($border-radius-root / 1.3) $border-radius-root calc($border-radius-root / 1.3) $border-radius-root;
         .icon {
           scale: 0.8;
+          margin-left: 0.2em;
         }
         .btn-classic {
           padding-left: 0.5em;
