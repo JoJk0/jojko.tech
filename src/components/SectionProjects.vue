@@ -65,6 +65,7 @@ const { projects } = data
 #projects.mobile {
   .swiper-pagination {
     display: block;
+    z-index: -1;
   }
 }
 </style>
