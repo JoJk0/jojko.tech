@@ -2,7 +2,7 @@ export interface UseTimerOptions {
   immediate: boolean
 }
 
-const PRECISION_MS = 10
+const PRECISION_MS = 100
 
 export const useTimer = (ms: number, options?: UseTimerOptions) => {
   const onFinishedEvent = new CustomEvent('ticker:finished')
