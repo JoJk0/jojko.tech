@@ -15,6 +15,8 @@ const routes = setupLayouts(generatedRoutes)
 
 const ssg = false
 
+export const THUMB_FILENAME = '_200x200'
+
 export const createApp = ssg
   ? ViteSSG(
     App,

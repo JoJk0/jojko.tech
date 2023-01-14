@@ -4,14 +4,7 @@
       <slot v-bind="props" name="activator" />
     </template>
     <v-card class="content">
-      <StoriesSlider :name="name" :urls="urls" @slider:close="setOpen(false)" />
-      <!-- <v-img :src="src" class="photo-full" :alt="alt" @click="setOpen(false)">
-        <template #placeholder>
-          <div class="d-flex align-center justify-center fill-height">
-            <v-progress-circular indeterminate color="grey-lighten-4" />
-          </div>
-        </template>
-      </v-img> -->
+      <StoriesSlider :name="name" :images="images" @slider:close="setOpen(false)" />
     </v-card>
   </v-dialog>
 </template>
@@ -20,10 +13,11 @@
 import type { PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
 import 'swiper/css'
+import type { AppImage } from '~/types'
 
 const props = defineProps({
-  urls: {
-    type: Array as PropType<string[]>,
+  images: {
+    type: Array as PropType<AppImage[]>,
     default: () => [],
   },
   name: {

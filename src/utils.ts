@@ -4,6 +4,7 @@ import deepMerge from 'deepmerge'
 import type { JJKData } from './Data'
 import type { AppLocale, I18NString } from './modules/i18n'
 import { availableLocales } from './modules/i18n'
+import { THUMB_FILENAME } from './main'
 
 export type I18n<T extends string, TKey extends string = string> = {
   [key in AppLocale]: T;
@@ -70,3 +71,12 @@ export const addMessage = <T extends string>(data: I18NString, key: T) =>
 
 export const addMessages = <T extends string>(data: Record<T, I18NString>) =>
   Object.entries<I18NString>(data)
+
+export const getThumbFilename = (filename: string) => {
+  const filenameArr = filename.split('.')
+  const extension = filenameArr.pop()
+
+  filenameArr.push(THUMB_FILENAME)
+
+  return extension ? [filenameArr.join(''), extension].join('.') : undefined
+}
