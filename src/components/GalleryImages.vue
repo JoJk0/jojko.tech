@@ -1,10 +1,10 @@
 <template>
-  <v-dialog v-model="isOpen" class="gallery-images">
+  <v-dialog v-model="isOpen" class="gallery-images" :close-on-back="false" fullscreen location="top">
     <template #activator="{ props }">
       <slot v-bind="props" name="activator" />
     </template>
     <v-card class="content">
-      <StoriesSlider :name="name" :images="images" @slider:close="setOpen(false)" />
+      <StoriesSlider :name="name" :images="images" @slider:close="router.back()" />
     </v-card>
   </v-dialog>
 </template>
@@ -13,7 +13,9 @@
 import type { PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
 import 'swiper/css'
+import { onBeforeRouteUpdate } from 'vue-router'
 import type { AppImage } from '~/types'
+import { STORY_HASH } from '~/main'
 
 const props = defineProps({
   images: {
@@ -31,6 +33,14 @@ const props = defineProps({
 const { t } = useI18n()
 
 const [isOpen, setOpen] = useToggle(false)
+
+const router = useRouter()
+
+onBeforeRouteUpdate((to, from, next) => {
+  if (from.hash === STORY_HASH)
+    setOpen(false)
+  next()
+})
 </script>
 
 <style lang="scss" scoped>

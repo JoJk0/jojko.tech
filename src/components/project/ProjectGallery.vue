@@ -12,7 +12,7 @@
     </swiper>
     <GalleryImages v-else :images="images" :name="name">
       <template #activator="props">
-        <v-img v-bind="props" :src="images ? images[0].url : undefined" :lazy-src="images ? images[0].thumbnail : undefined" class="stories-button" :aspect-ratio="16 / 9" cover>
+        <v-img v-bind="props" :src="images ? images[0].url : undefined" :lazy-src="images ? images[0].thumbnail : undefined" class="stories-button" :aspect-ratio="16 / 9" cover @click="setHash">
           <div v-if="mobile" class="image-counter">
             <AppIcon icon="image" class="icon" />
             <span>{{ images?.length || 0 }}</span>
@@ -33,6 +33,8 @@ import 'swiper/css/navigation'
 import 'swiper/css/scrollbar'
 import type { AppImage } from '~/types'
 import { getThumbFilename } from '~/utils'
+import { STORY_HASH } from '~/main'
+
 const props = defineProps({
   id: {
     type: String,
@@ -50,6 +52,8 @@ const { t } = useI18n()
 
 const { mobile } = useDisplay()
 
+const router = useRouter()
+
 const files = useStorageFiles(`projects/${props.id}`)
 
 const thumbs = useStorageFiles(`projects/${props.id}/thumbnails`)
@@ -61,6 +65,8 @@ const images = computed<AppImage[] | undefined>(() => files.value?.map(file => (
 })))
 
 const modules = [Navigation, Scrollbar, A11y, Mousewheel]
+
+const setHash = () => router.push({ hash: STORY_HASH })
 </script>
 
 <style lang="scss" scoped>
