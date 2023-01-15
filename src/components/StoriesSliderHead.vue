@@ -12,7 +12,7 @@
       <div class="title">
         {{ name }}
       </div>
-      <v-btn variant="text" icon="close" @click="emit('close-btn:click') " />
+      <v-btn variant="text" icon="close" color="white" @click="emit('close-btn:click') " />
     </div>
   </div>
 </template>
@@ -74,6 +74,7 @@ const fragmentWidthCss = computed(() => `${props.progress}%`)
                 width: v-bind(fragmentWidthCss);
                 background-color: white;
                 height: 100%;
+                transition: width 0.1s linear;
             }
         }
     }

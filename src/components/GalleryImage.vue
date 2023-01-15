@@ -6,7 +6,7 @@
       </div>
     </template>
     <v-card class="content rounded-xl">
-      <v-img :src="src" class="photo-full" :alt="alt" @click="setOpen(false)">
+      <v-img :src="src" class="photo-full" :lazy-src="lazySrc" :alt="alt" @click="setOpen(false)">
         <template #placeholder>
           <div class="d-flex align-center justify-center fill-height">
             <v-progress-circular indeterminate color="grey-lighten-4" />
@@ -24,6 +24,9 @@ const props = defineProps({
   src: {
     type: String,
     required: true,
+  },
+  lazySrc: {
+    type: String,
   },
   alt: {
     type: String,
