@@ -1,6 +1,6 @@
 <template>
   <div class="skill-search" :class="{ mobile }">
-    <v-text-field v-model="search" variant="outlined" :placeholder="t('INPUT_PLACEHOLDER')" />
+    <v-text-field v-model="search" class="searchbar" variant="filled" rounded="xl" :placeholder="t('INPUT_PLACEHOLDER')" prepend-inner-icon="search" />
     <app-scroller class="scroller">
       <div class="items">
         <div class="tech-stack">
@@ -81,10 +81,14 @@ const wishListResult = computed(() => wishList.filter(({ name }) => name.toLower
 }
 
 .skill-search.mobile {
+  .searchbar {
+    margin: 0 calc($page-margin / 2);
+  }
   .items {
+    height: unset;
     .title {
       position: sticky;
-      left: 0;
+      left: calc($page-margin / 2);
     }
     .tech-stack,
       .wishlist{
@@ -92,6 +96,7 @@ const wishListResult = computed(() => wishList.filter(({ name }) => name.toLower
         flex-wrap: nowrap;
         height: fit-content;
         width: fit-content;
+        padding: 0 calc($page-margin / 2)
       }
   }
 }

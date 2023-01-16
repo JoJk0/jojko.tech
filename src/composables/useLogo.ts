@@ -23,7 +23,7 @@ import {
   Vector3,
 } from 'three'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
-import { cssVarToHex, getAngle, variables } from '../utils'
+import { clamp01, variables } from '../utils'
 
 export interface MainJPoints {
   top: Vector3
@@ -54,16 +54,14 @@ export const drawCurvedPill = (
 ) => {
   const pathPoints = path.getSpacedPoints(divisions)
 
-  let currentPath = path
+  let currentPath: CurvePath<Vector3> | undefined = path
 
   const sphereGeo = new SphereGeometry(
     radius,
     32,
     32,
-    0,
+    Math.PI,
     Math.PI * 2,
-    0,
-    Math.PI / 2,
   )
 
   const sphere = new Mesh(sphereGeo, material)
@@ -90,13 +88,16 @@ export const drawCurvedPill = (
 
   const onAnimationLoop = () => {
     tube.geometry.dispose()
-    tube.geometry = new TubeGeometry(
-      currentPath,
-      tubularSegments,
-      radius,
-      radialSegments,
-      false,
-    )
+
+    if (currentPath) {
+      tube.geometry = new TubeGeometry(
+        currentPath,
+        tubularSegments,
+        radius,
+        radialSegments,
+        false,
+      )
+    }
   }
 
   const setProgress = (e: InputEvent | number) => {
@@ -115,8 +116,18 @@ export const drawCurvedPill = (
     const slicedPoints = pathPoints.slice(start, currentPointsProgress)
     const curve = new CatmullRomCurve3(slicedPoints)
 
-    currentPath = new CurvePath()
-    currentPath.add(curve)
+    currentPath = progress ? new CurvePath() : undefined
+    currentPath?.add(curve)
+
+    if (!progress) {
+      sphere.scale.set(0, 0, 0)
+      sphere2.scale.set(0, 0, 0)
+      return
+    }
+    else {
+      sphere.scale.set(1, 1, 1)
+      sphere2.scale.set(1, 1, 1)
+    }
 
     const firstPoint = slicedPoints[0]
     const secondPoint = slicedPoints[1]
@@ -125,13 +136,22 @@ export const drawCurvedPill = (
     const secondLastPoint = slicedPoints[slicedPoints.length - 2]
 
     sphere.position.set(firstPoint.x, firstPoint.y, firstPoint.z)
-    sphere.rotation.set(0, 0, getAngle(firstPoint, secondPoint, -Math.PI / 2))
-    sphere2.position.set(lastPoint.x, lastPoint.y, lastPoint.z)
-    sphere2.rotation.set(
-      0,
-      0,
-      getAngle(secondLastPoint, lastPoint, Math.PI / 2),
+
+    sphere.lookAt(
+      secondPoint,
     )
+
+    // sphere.rotation.set(0, 0, getAngle(firstPoint, secondPoint, -Math.PI / 2))
+    sphere2.position.set(lastPoint.x, lastPoint.y, lastPoint.z)
+
+    sphere2.lookAt(
+      secondLastPoint,
+    )
+    // sphere2.rotation.set(
+    //   0,
+    //   0,
+    //   getAngle(secondLastPoint, lastPoint, Math.PI / 2),
+    // )
   }
 
   return {
@@ -266,7 +286,7 @@ export const getGroundMaterial = () => {
   })
 }
 export const getClayMaterial = (colorProp?: ColorRepresentation) => {
-  const color = colorProp || variables.colorPrimary
+  const color = colorProp || variables.colorText
   const materialSide = DoubleSide
   const textureLoader = new TextureLoader()
   const normalMapTexture = textureLoader.load(
@@ -441,10 +461,17 @@ export const drawLogo = () => {
     secondaryRect.onAnimationLoop()
   }
 
-  const setProgress = (progress: number) => {
-    mainJ.setProgress(progress)
-    secondaryCircle.setProgress(progress)
-    secondaryRect.setProgress(progress)
+  const setProgress = (e: InputEvent | number) => {
+    const progress
+      = typeof e === 'number'
+        ? e
+        : parseFloat((e?.target as HTMLInputElement)?.value)
+
+    mainJ.setProgress(clamp01(progress / 0.6))
+    mainDot.setProgress(clamp01(progress / 0.3 - 2))
+    secondaryDot.setProgress(clamp01(progress / 0.3 - 2.5))
+    secondaryCircle.setProgress(clamp01(progress / 0.5 - 1.2))
+    secondaryRect.setProgress(clamp01(progress / 0.5 - 1.3))
   }
 
   return {

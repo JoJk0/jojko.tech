@@ -1,23 +1,18 @@
 <template>
   <canvas ref="canvasEl" class="canvas" />
   <input
-    id="myRange"
-    type="range"
-    min="0.05"
-    max="1"
-    step="0.01"
-    value="0.5"
-    class="slider"
-    @input="logo.mainJ.setProgress($event)"
+    id="myRange" type="range" min="0.05" max="1" step="0.01" value="0.5" class="slider"
+    @input="logo.setProgress($event)"
   >
 </template>
 
 <script lang="ts" setup>
-import { AmbientLight, HemisphereLight, PerspectiveCamera, PointLight, ReinhardToneMapping, Scene, SpotLight, WebGLRenderer } from 'three'
+import { ACESFilmicToneMapping, AmbientLight, HemisphereLight, Mesh, PMREMGenerator, PerspectiveCamera, PlaneGeometry, PointLight, ReinhardToneMapping, Scene, SpotLight, WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 
 import { onMounted, ref } from 'vue'
-import { drawLogo } from '../composables/useLogo'
+import { addHelpers, addShadow, drawLogo, getGroundMaterial } from '../composables/useLogo'
 // const props = defineProps({});
 
 // const emit = defineEmits({});
@@ -25,6 +20,8 @@ import { drawLogo } from '../composables/useLogo'
 const canvasEl = ref<HTMLCanvasElement>()
 
 const scene = new Scene()
+
+// addHelpers(scene)
 
 const logo = drawLogo()
 
@@ -43,7 +40,7 @@ onMounted(() => {
   renderer.setClearColor(0x000000, 0)
 
   renderer.setPixelRatio(window.devicePixelRatio)
-  renderer.toneMapping = ReinhardToneMapping
+  renderer.toneMapping = ACESFilmicToneMapping
   renderer.shadowMap.enabled = true
 
   camera.position.set(-10, 0, 90)
@@ -51,12 +48,17 @@ onMounted(() => {
 
   // addHelpers(scene)
 
-  scene.add(new AmbientLight(0x404040))
+  // Env
+  const environment = new RoomEnvironment()
+  const pmremGenerator = new PMREMGenerator(renderer)
+  scene.environment = pmremGenerator.fromScene(environment).texture
 
-  const hemiLight = new HemisphereLight(0xFFEEB1, 0x080820, 4)
+  scene.add(new AmbientLight(0x404040, 1))
+
+  const hemiLight = new HemisphereLight(0xFFEEB1, 0x080820, 3)
   scene.add(hemiLight)
 
-  const light = new SpotLight(0xFFA95C, 10)
+  const light = new SpotLight(0xC5FFFE, 1)
   light.position.set(-50, 300, 50)
   light.castShadow = true
   light.shadow.bias = -0.0001
@@ -78,9 +80,9 @@ onMounted(() => {
   scene.add(pointLight2)
   scene.add(pointLight3)
 
-  // const planeGeo = new PlaneGeometry(1000, 1000);
-  // const plane = new Mesh(planeGeo, getGroundMaterial());
-  // plane.rotation.x = -Math.PI / 2;
+  // const planeGeo = new PlaneGeometry(1000, 1000)
+  // const plane = new Mesh(planeGeo, getGroundMaterial())
+  // plane.rotation.x = -Math.PI / 2
   // addShadow(plane)
   // scene.add(plane)
 
@@ -91,7 +93,7 @@ onMounted(() => {
   controls.maxDistance = 200
   // controls.maxPolarAngle = Math.PI / 2;
 
-  logo.mainJ.setProgress(1)
+  logo.setProgress(1)
 
   renderer.setAnimationLoop((_) => {
     logo.onAnimationLoop()
@@ -103,10 +105,14 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .canvas {
-    width: 30rem;
-    height: 30rem;
-    max-width: calc(100vw - 1rem);
-    max-height: calc(100vw - 1rem);
-    aspect-ratio: 1;
+  width: 30rem;
+  height: 30rem;
+  max-width: calc(100vw - 1rem);
+  max-height: calc(100vw - 1rem);
+  aspect-ratio: 1;
+  z-index: 1;
+}
+.slider {
+  z-index: 1;
 }
 </style>
