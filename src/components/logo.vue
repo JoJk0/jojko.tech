@@ -1,18 +1,19 @@
 <template>
   <canvas ref="canvasEl" class="canvas" />
-  <input
+  <!-- <input
     id="myRange" type="range" min="0.05" max="1" step="0.01" value="0.5" class="slider"
     @input="logo.setProgress($event)"
-  >
+  > -->
 </template>
 
 <script lang="ts" setup>
-import { ACESFilmicToneMapping, AmbientLight, HemisphereLight, Mesh, PMREMGenerator, PerspectiveCamera, PlaneGeometry, PointLight, ReinhardToneMapping, Scene, SpotLight, WebGLRenderer } from 'three'
+import { ACESFilmicToneMapping, AmbientLight, HemisphereLight, PMREMGenerator, PerspectiveCamera, PointLight, Scene, SpotLight, WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 
 import { onMounted, ref } from 'vue'
-import { addHelpers, addShadow, drawLogo, getGroundMaterial } from '../composables/useLogo'
+import { drawLogo } from '../composables/useLogo'
+import { useGSAP } from '~/modules/gsap'
 // const props = defineProps({});
 
 // const emit = defineEmits({});
@@ -24,6 +25,34 @@ const scene = new Scene()
 // addHelpers(scene)
 
 const logo = drawLogo()
+
+const gsap = useGSAP()
+
+const animate = () => {
+  const progress = {
+    mainJ: 0,
+    mainDot: 0,
+    secondaryDot: 0,
+    secondaryCircle: 0,
+    secondaryRect: 0,
+  }
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#skills',
+      start: 'top center',
+      end: 'center center',
+      scrub: 0.5,
+    },
+  })
+
+  timeline
+    .fromTo(progress, { mainJ: 0 }, { mainJ: 1, duration: 0.6, onUpdate: () => logo.mainJ.setProgress(progress.mainJ) })
+    .fromTo('#glow-logo', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, '>-0.4')
+    .fromTo(progress, { mainDot: 0 }, { mainDot: 1, duration: 0.3, onUpdate: () => logo.mainDot.setProgress(progress.mainDot) }, '>-0.1')
+    .fromTo(progress, { secondaryDot: 0 }, { secondaryDot: 1, duration: 0.3, onUpdate: () => logo.secondaryDot.setProgress(progress.secondaryDot) }, '<+0.05')
+    .fromTo(progress, { secondaryCircle: 0 }, { secondaryCircle: 0.65, duration: 0.3, onUpdate: () => logo.secondaryCircle.setProgress(progress.secondaryCircle) }, '>-0.3')
+    .fromTo(progress, { secondaryRect: 0 }, { secondaryRect: 0.65, duration: 0.3, onUpdate: () => logo.secondaryRect.setProgress(progress.secondaryRect) }, '<')
+}
 
 onMounted(() => {
   if (!canvasEl.value)
@@ -89,11 +118,13 @@ onMounted(() => {
   logo.addToScene(scene)
 
   const controls = new OrbitControls(camera, canvasEl.value)
-  controls.minDistance = 20
-  controls.maxDistance = 200
-  // controls.maxPolarAngle = Math.PI / 2;
+  controls.minDistance = 100
+  controls.maxDistance = 150
+  controls.maxPolarAngle = Math.PI / 2
 
   logo.setProgress(1)
+
+  animate()
 
   renderer.setAnimationLoop((_) => {
     logo.onAnimationLoop()

@@ -16,7 +16,7 @@
         </div>
         <app-skill-search />
       </div>
-      <div class="right">
+      <div id="glow-logo" class="right">
         <logo />
       </div>
     </div>

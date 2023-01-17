@@ -116,24 +116,26 @@ export const drawCurvedPill = (
     const slicedPoints = pathPoints.slice(start, currentPointsProgress)
     const curve = new CatmullRomCurve3(slicedPoints)
 
-    currentPath = progress ? new CurvePath() : undefined
+    currentPath = progress && slicedPoints.length > 1 ? new CurvePath() : undefined
     currentPath?.add(curve)
 
-    if (!progress) {
+    if (!progress || slicedPoints.length <= 1) {
+      tube.scale.set(0, 0, 0)
       sphere.scale.set(0, 0, 0)
       sphere2.scale.set(0, 0, 0)
       return
     }
     else {
+      tube.scale.set(1, 1, 1)
       sphere.scale.set(1, 1, 1)
       sphere2.scale.set(1, 1, 1)
     }
 
     const firstPoint = slicedPoints[0]
-    const secondPoint = slicedPoints[1]
+    const secondPoint = slicedPoints[1] || slicedPoints[0]
 
     const lastPoint = slicedPoints[slicedPoints.length - 1]
-    const secondLastPoint = slicedPoints[slicedPoints.length - 2]
+    const secondLastPoint = slicedPoints[slicedPoints.length - 2] || slicedPoints[0]
 
     sphere.position.set(firstPoint.x, firstPoint.y, firstPoint.z)
 
@@ -141,17 +143,11 @@ export const drawCurvedPill = (
       secondPoint,
     )
 
-    // sphere.rotation.set(0, 0, getAngle(firstPoint, secondPoint, -Math.PI / 2))
     sphere2.position.set(lastPoint.x, lastPoint.y, lastPoint.z)
 
     sphere2.lookAt(
       secondLastPoint,
     )
-    // sphere2.rotation.set(
-    //   0,
-    //   0,
-    //   getAngle(secondLastPoint, lastPoint, Math.PI / 2),
-    // )
   }
 
   return {
@@ -431,7 +427,7 @@ export const drawLogo = () => {
 
   const secondaryCircle = drawCircle(
     points.secondaryCircle,
-    divisions,
+    divisions / 2,
     radius / 3,
     secondaryMaterial,
     tubularSegments,
@@ -440,7 +436,7 @@ export const drawLogo = () => {
 
   const secondaryRect = drawRect(
     points.secondaryRect,
-    divisions,
+    divisions / 2,
     radius / 3,
     secondaryMaterial,
     tubularSegments,
