@@ -57,10 +57,11 @@ const animate = () => {
 onMounted(() => {
   if (!canvasEl.value)
     return
-  const camera = new PerspectiveCamera(75, canvasEl.value.clientWidth / canvasEl.value.clientHeight, 1, 10000)
 
   const width = canvasEl.value.clientWidth
   const height = canvasEl.value.clientHeight
+
+  const camera = new PerspectiveCamera(75, width / height, 1, 10000)
 
   const renderer = new WebGLRenderer({ canvas: canvasEl.value, antialias: false, powerPreference: 'high-performance', alpha: true })
   renderer.setSize(width, height, false)
@@ -118,9 +119,16 @@ onMounted(() => {
   logo.addToScene(scene)
 
   const controls = new OrbitControls(camera, canvasEl.value)
+
   controls.minDistance = 100
   controls.maxDistance = 150
-  controls.maxPolarAngle = Math.PI / 2
+  controls.minPolarAngle = -Math.PI * 2 / 3
+  controls.maxPolarAngle = Math.PI * 2 / 3
+  controls.minAzimuthAngle = -Math.PI / 2
+  controls.maxAzimuthAngle = Math.PI / 2
+  controls.autoRotate = true
+  controls.autoRotateSpeed = 1
+  controls.enableDamping = true
 
   logo.setProgress(1)
 
@@ -128,6 +136,7 @@ onMounted(() => {
 
   renderer.setAnimationLoop((_) => {
     logo.onAnimationLoop()
+    controls.update()
 
     renderer.render(scene, camera)
   })
