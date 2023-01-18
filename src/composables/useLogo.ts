@@ -25,6 +25,9 @@ import {
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import { clamp01, variables } from '../utils'
 
+import glassNormal from '../assets/materials/glass/normal.jpeg?url'
+import warehouseHdr from '../assets/materials/glass/warehouse.hdr?url'
+
 export interface MainJPoints {
   top: Vector3
   start: Vector3
@@ -260,7 +263,7 @@ export const getGroundMaterial = () => {
   const textureLoader = new TextureLoader()
 
   const normalMapTexture = textureLoader.load(
-    './src/assets/materials/glass/normal.jpeg',
+    glassNormal,
   )
   normalMapTexture.wrapS = RepeatWrapping
   normalMapTexture.wrapT = RepeatWrapping
@@ -285,9 +288,7 @@ export const getClayMaterial = (colorProp?: ColorRepresentation) => {
   const color = colorProp || variables.colorText
   const materialSide = DoubleSide
   const textureLoader = new TextureLoader()
-  const normalMapTexture = textureLoader.load(
-    './src/assets/materials/glass/normal.jpeg',
-  )
+  const normalMapTexture = textureLoader.load(glassNormal)
   normalMapTexture.wrapS = RepeatWrapping
   normalMapTexture.wrapT = RepeatWrapping
   normalMapTexture.repeat.set(3, 3)
@@ -334,16 +335,14 @@ export const getGlassMaterial = () => {
   }
 
   const hdrEquirect = new RGBELoader().load(
-    './src/assets/materials/glass/warehouse.hdr',
+    warehouseHdr,
     () => {
       hdrEquirect.mapping = EquirectangularReflectionMapping
     },
   )
   const textureLoader = new TextureLoader()
 
-  const normalMapTexture = textureLoader.load(
-    './src/assets/materials/glass/normal.jpeg',
-  )
+  const normalMapTexture = textureLoader.load(glassNormal)
   normalMapTexture.wrapS = RepeatWrapping
   normalMapTexture.wrapT = RepeatWrapping
   normalMapTexture.repeat.set(options.normalRepeat, options.normalRepeat)
