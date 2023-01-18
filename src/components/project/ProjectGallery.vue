@@ -3,8 +3,7 @@
     <swiper
       v-if="!mobile" nested slides-per-view="auto" :space-between="30" :mousewheel="{
         forceToAxis: true,
-      }" :modules="modules"
-      class="mySwiper" navigation :scrollbar="{ draggable: true }"
+      }" :modules="modules" class="mySwiper" navigation :scrollbar="{ draggable: true }"
     >
       <swiper-slide v-for="image of images" :key="image.url" class="slide">
         <GalleryImage :src="image.url" :alt="image.alt" :lazy-src="image.thumbnail" />
@@ -12,7 +11,11 @@
     </swiper>
     <GalleryImages v-else :images="images" :name="name">
       <template #activator="props">
-        <v-img v-bind="props" :src="images ? images[0].url : undefined" :lazy-src="images ? images[0].thumbnail : undefined" class="stories-button" :aspect-ratio="16 / 9" cover @click="setHash">
+        <v-img
+          v-bind="props" :src="images ? images[0].url : undefined"
+          :lazy-src="images ? images[0].thumbnail : undefined" class="stories-button" :aspect-ratio="16 / 9" cover
+          @click="setHash"
+        >
           <div v-if="mobile" class="image-counter">
             <AppIcon icon="image" class="icon" />
             <span>{{ images?.length || 0 }}</span>
@@ -102,23 +105,26 @@ const setHash = () => router.push({ hash: STORY_HASH })
     border-radius: 2em;
   }
 }
+
 .photos.mobile {
   padding: 3px;
   background: $button-gradient;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+
   .stories-button {
     border-radius: 1.8em;
     overflow: hidden;
     border: 6px solid $color-background;
     position: relative;
     background-color: $color-background;
+
     .image-counter {
       position: absolute;
       bottom: 0;
       right: 0;
-      background-color: rgba(0,0,0,0.7);
+      background-color: rgba(0, 0, 0, 0.7);
       padding: 0.7em 1em;
       margin: 0.5em;
       display: flex;
@@ -128,6 +134,25 @@ const setHash = () => router.push({ hash: STORY_HASH })
       align-items: center;
       justify-content: center;
     }
+  }
+}
+</style>
+
+<style lang="scss">
+.swiper-button-next,
+.swiper-button-prev {
+  &:after {
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    aspect-ratio: 1;
+    font-size: 1.2rem;
   }
 }
 </style>

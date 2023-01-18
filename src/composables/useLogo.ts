@@ -23,7 +23,10 @@ import {
   Vector3,
 } from 'three'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
-import { cssVarToHex, getAngle, variables } from '../utils'
+import { clamp01, variables } from '../utils'
+
+import glassNormal from '../assets/materials/glass/normal.jpeg?url'
+import warehouseHdr from '../assets/materials/glass/warehouse.hdr?url'
 
 export interface MainJPoints {
   top: Vector3
@@ -54,16 +57,14 @@ export const drawCurvedPill = (
 ) => {
   const pathPoints = path.getSpacedPoints(divisions)
 
-  let currentPath = path
+  let currentPath: CurvePath<Vector3> | undefined = path
 
   const sphereGeo = new SphereGeometry(
     radius,
     32,
     32,
-    0,
+    Math.PI,
     Math.PI * 2,
-    0,
-    Math.PI / 2,
   )
 
   const sphere = new Mesh(sphereGeo, material)
@@ -90,13 +91,16 @@ export const drawCurvedPill = (
 
   const onAnimationLoop = () => {
     tube.geometry.dispose()
-    tube.geometry = new TubeGeometry(
-      currentPath,
-      tubularSegments,
-      radius,
-      radialSegments,
-      false,
-    )
+
+    if (currentPath) {
+      tube.geometry = new TubeGeometry(
+        currentPath,
+        tubularSegments,
+        radius,
+        radialSegments,
+        false,
+      )
+    }
   }
 
   const setProgress = (e: InputEvent | number) => {
@@ -115,22 +119,37 @@ export const drawCurvedPill = (
     const slicedPoints = pathPoints.slice(start, currentPointsProgress)
     const curve = new CatmullRomCurve3(slicedPoints)
 
-    currentPath = new CurvePath()
-    currentPath.add(curve)
+    currentPath = progress && slicedPoints.length > 1 ? new CurvePath() : undefined
+    currentPath?.add(curve)
+
+    if (!progress || slicedPoints.length <= 1) {
+      tube.scale.set(0, 0, 0)
+      sphere.scale.set(0, 0, 0)
+      sphere2.scale.set(0, 0, 0)
+      return
+    }
+    else {
+      tube.scale.set(1, 1, 1)
+      sphere.scale.set(1, 1, 1)
+      sphere2.scale.set(1, 1, 1)
+    }
 
     const firstPoint = slicedPoints[0]
-    const secondPoint = slicedPoints[1]
+    const secondPoint = slicedPoints[1] || slicedPoints[0]
 
     const lastPoint = slicedPoints[slicedPoints.length - 1]
-    const secondLastPoint = slicedPoints[slicedPoints.length - 2]
+    const secondLastPoint = slicedPoints[slicedPoints.length - 2] || slicedPoints[0]
 
     sphere.position.set(firstPoint.x, firstPoint.y, firstPoint.z)
-    sphere.rotation.set(0, 0, getAngle(firstPoint, secondPoint, -Math.PI / 2))
+
+    sphere.lookAt(
+      secondPoint,
+    )
+
     sphere2.position.set(lastPoint.x, lastPoint.y, lastPoint.z)
-    sphere2.rotation.set(
-      0,
-      0,
-      getAngle(secondLastPoint, lastPoint, Math.PI / 2),
+
+    sphere2.lookAt(
+      secondLastPoint,
     )
   }
 
@@ -244,7 +263,7 @@ export const getGroundMaterial = () => {
   const textureLoader = new TextureLoader()
 
   const normalMapTexture = textureLoader.load(
-    './src/assets/materials/glass/normal.jpeg',
+    glassNormal,
   )
   normalMapTexture.wrapS = RepeatWrapping
   normalMapTexture.wrapT = RepeatWrapping
@@ -266,12 +285,10 @@ export const getGroundMaterial = () => {
   })
 }
 export const getClayMaterial = (colorProp?: ColorRepresentation) => {
-  const color = colorProp || variables.colorPrimary
+  const color = colorProp || variables.colorText
   const materialSide = DoubleSide
   const textureLoader = new TextureLoader()
-  const normalMapTexture = textureLoader.load(
-    './src/assets/materials/glass/normal.jpeg',
-  )
+  const normalMapTexture = textureLoader.load(glassNormal)
   normalMapTexture.wrapS = RepeatWrapping
   normalMapTexture.wrapT = RepeatWrapping
   normalMapTexture.repeat.set(3, 3)
@@ -318,16 +335,14 @@ export const getGlassMaterial = () => {
   }
 
   const hdrEquirect = new RGBELoader().load(
-    './src/assets/materials/glass/warehouse.hdr',
+    warehouseHdr,
     () => {
       hdrEquirect.mapping = EquirectangularReflectionMapping
     },
   )
   const textureLoader = new TextureLoader()
 
-  const normalMapTexture = textureLoader.load(
-    './src/assets/materials/glass/normal.jpeg',
-  )
+  const normalMapTexture = textureLoader.load(glassNormal)
   normalMapTexture.wrapS = RepeatWrapping
   normalMapTexture.wrapT = RepeatWrapping
   normalMapTexture.repeat.set(options.normalRepeat, options.normalRepeat)
@@ -411,7 +426,7 @@ export const drawLogo = () => {
 
   const secondaryCircle = drawCircle(
     points.secondaryCircle,
-    divisions,
+    divisions / 2,
     radius / 3,
     secondaryMaterial,
     tubularSegments,
@@ -420,7 +435,7 @@ export const drawLogo = () => {
 
   const secondaryRect = drawRect(
     points.secondaryRect,
-    divisions,
+    divisions / 2,
     radius / 3,
     secondaryMaterial,
     tubularSegments,
@@ -441,10 +456,17 @@ export const drawLogo = () => {
     secondaryRect.onAnimationLoop()
   }
 
-  const setProgress = (progress: number) => {
-    mainJ.setProgress(progress)
-    secondaryCircle.setProgress(progress)
-    secondaryRect.setProgress(progress)
+  const setProgress = (e: InputEvent | number) => {
+    const progress
+      = typeof e === 'number'
+        ? e
+        : parseFloat((e?.target as HTMLInputElement)?.value)
+
+    mainJ.setProgress(clamp01(progress / 0.6))
+    mainDot.setProgress(clamp01(progress / 0.3 - 2))
+    secondaryDot.setProgress(clamp01(progress / 0.3 - 2.5))
+    secondaryCircle.setProgress(clamp01(progress / 0.5 - 1.2))
+    secondaryRect.setProgress(clamp01(progress / 0.5 - 1.3))
   }
 
   return {

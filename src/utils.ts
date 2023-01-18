@@ -40,7 +40,10 @@ export const getAngle = (
   const isPositive = point2.y - point1.y > 0
   const angleRaw = Math.atan(helperLine1.distance() / helperLine2.distance())
 
+  console.log(angleRaw)
+
   return isPositive ? 2 * Math.PI - angleRaw + offset : angleRaw + offset
+  // return point1.angleTo(point2)
 }
 
 const isNode = () => {
@@ -79,4 +82,8 @@ export const getThumbFilename = (filename: string) => {
   filenameArr.push(THUMB_FILENAME)
 
   return extension ? [filenameArr.join(''), extension].join('.') : undefined
+}
+
+export const clamp01 = (a: number) => {
+  return a < 0 ? 0 : a > 1 ? 1 : a
 }

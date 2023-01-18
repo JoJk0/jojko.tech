@@ -1,6 +1,8 @@
 <template>
   <section id="skills" :class="{ mobile }">
-    <app-title>{{ t('WHAT_I_DO') }}</app-title>
+    <app-title class="title">
+      {{ t('WHAT_I_DO') }}
+    </app-title>
     <div class="content">
       <div class="left">
         <div class="icons">
@@ -14,7 +16,7 @@
         </div>
         <app-skill-search />
       </div>
-      <div class="right">
+      <div id="glow-logo" class="right">
         <logo />
       </div>
     </div>
@@ -48,15 +50,33 @@ const { topSkills } = data
   display: flex;
   gap: 1em;
   flex-wrap: wrap;
+  padding: 0 max($page-margin, (100vw - $page-max-width) / 2);
   .left, .right {
     width: fit-content;
     display: flex;
     flex-direction: column;
     gap: 3em;
     max-width: calc(100vw - 2rem);
+    flex: 1;
   }
   .left {
-    flex: 1;
+    max-width: min(100%, 56em);
+    z-index: 2;
+  }
+  .right {
+    justify-content: center;
+    align-items: center;
+        &:before {
+            content: "";
+            display: block;
+            background: $main-gradient;
+            opacity: 0.7;
+            filter: blur(10em);
+            border-radius: 100%;
+            width: 30rem;
+            height: 30rem;
+            position: absolute;
+          }
   }
 }
 .top-skill {
@@ -101,11 +121,24 @@ const { topSkills } = data
   display: flex;
   flex-direction: column;
   gap: 4em;
+  padding-left: 0;
+  padding-right: 0;
+  .title {
+    padding-left: max($page-margin, (100vw - $page-max-width) / 2);
+  }
 }
 #skills.mobile {
   gap: 2em;
+  .content {
+    padding: 0;
+  }
   .left, .right {
     gap: 2em;
+  }
+  .right:before{
+    width: 20rem;
+    height: 20rem;
+    filter: blur(7em);
   }
   .top-skill-icon {
     font-size: 4em;
