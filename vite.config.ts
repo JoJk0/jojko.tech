@@ -12,6 +12,8 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Vuetify from 'vite-plugin-vuetify'
 
+const __TIMESTAMP__ = JSON.stringify(new Date().getTime())
+
 export default defineConfig({
   resolve: {
     alias: {
@@ -27,7 +29,9 @@ export default defineConfig({
       },
     },
   },
-
+  define: {
+    __TIMESTAMP__,
+  },
   plugins: [
     Vue({
       include: [/\.vue$/, /\.md$/],

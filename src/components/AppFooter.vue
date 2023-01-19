@@ -14,7 +14,8 @@
       © 2011 - {{ thisYear }} jojko.tech
     </div>
     <div class="version">
-      v{{ number }}
+      v{{ number }}<br>
+      Last updated: {{ date }}
     </div>
   </footer>
 </template>
@@ -32,6 +33,8 @@ const { number, isUnstable, channel, milestone } = useVersion()
 const { t } = useI18n()
 
 const thisYear = new Date().getFullYear()
+
+const date = computed(() => new Date(parseInt(__TIMESTAMP__)).toLocaleString())
 </script>
 
 <style lang="scss" scoped>
