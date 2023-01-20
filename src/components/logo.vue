@@ -61,7 +61,7 @@ onMounted(() => {
   const width = canvasEl.value.clientWidth
   const height = canvasEl.value.clientHeight
 
-  const camera = new PerspectiveCamera(75, width / height, 1, 10000)
+  const camera = new PerspectiveCamera(62, width / height, 1, 10000)
 
   const renderer = new WebGLRenderer({ canvas: canvasEl.value, antialias: false, powerPreference: 'high-performance', alpha: true })
   renderer.setSize(width, height, false)
