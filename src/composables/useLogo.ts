@@ -384,14 +384,14 @@ export const drawLogo = () => {
 
   const points = {
     mainJ: {
-      top: new Vector3(0 + translationX, 340 + translationY, 0),
+      top: new Vector3(0 + translationX, 300 + translationY, 0),
       start: new Vector3(0 + translationX, 20 + translationY, 0),
       middle: new Vector3(-3 + translationX, 0 + translationY, 0),
       middle2: new Vector3(-20 + translationX, 0 + translationY, 0),
       middle3: new Vector3(-37 + translationX, 0 + translationY, 0),
       end: new Vector3(-40 + translationX, 20 + translationY, 0),
     },
-    mainDot: new Vector3(0 + translationX, 85 + translationY, 0),
+    mainDot: new Vector3(0 + translationX, 75 + translationY, 0),
     secondaryDot: new Vector3(-20 + translationX, 21.25 + translationY, 0),
     secondaryCircle: {
       top: new Vector3(-40 + translationX, 17.5 + translationY, 0),
@@ -402,8 +402,8 @@ export const drawLogo = () => {
       end: new Vector3(0 + translationX, 17.5 + translationY, 0),
     },
     secondaryRect: {
-      start: new Vector3(0 + translationX, 50 + translationY, 0),
-      end: new Vector3(0 + translationX, 90 + translationY, 0),
+      start: new Vector3(0 + translationX, 40 + translationY, 0),
+      end: new Vector3(0 + translationX, 80 + translationY, 0),
     },
   }
 
@@ -416,7 +416,7 @@ export const drawLogo = () => {
     radialSegments,
   )
 
-  const mainDot = drawPoint(points.mainDot, radius, mainMaterial)
+  const mainDot = drawPoint(points.mainDot, radius * 1.2, mainMaterial)
 
   const secondaryDot = drawPoint(
     points.secondaryDot,

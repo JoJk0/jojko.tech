@@ -1,16 +1,25 @@
 <template>
   <div class="skill-search" :class="{ mobile }">
-    <v-text-field v-model="search" class="searchbar" variant="filled" rounded="xl" :placeholder="t('INPUT_PLACEHOLDER')" prepend-inner-icon="search" />
+    <v-text-field
+      v-model="search" class="searchbar" variant="filled" rounded="xl" :placeholder="t('INPUT_PLACEHOLDER')"
+      prepend-inner-icon="search"
+    />
     <app-scroller class="scroller">
       <div class="items">
         <div class="tech-stack">
-          <AppSkillCard v-for="{ name, icon, inverted } of result" :key="name" :name="name" :icon="icon" :inverted="inverted" />
+          <AppSkillCard
+            v-for="{ name, icon, inverted } of result" :key="name" :name="name" :icon="icon"
+            :inverted="inverted"
+          />
         </div>
         <AppTitle v-if="wishListResult.length" size="small" class="title">
           {{ t('WISH_LIST') }}
         </AppTitle>
         <div v-if="wishListResult.length" class="wishlist">
-          <AppSkillCard v-for="{ name, icon, inverted } of wishListResult" :key="name" :name="name" :icon="icon" :inverted="inverted" wishlisted />
+          <AppSkillCard
+            v-for="{ name, icon, inverted } of wishListResult" :key="name" :name="name" :icon="icon"
+            :inverted="inverted" wishlisted
+          />
         </div>
         <div v-if="!result.length && !wishListResult.length" class="no-results">
           <div class="emoji">
@@ -43,25 +52,40 @@ const result = computed(() => skills.filter(({ name }) => name.toLowerCase().inc
 const wishListResult = computed(() => wishList.filter(({ name }) => name.toLowerCase().includes(search.value.toLowerCase())))
 </script>
 
-<style lang="scss" scoped>
-  .skill-search {
+<style lang="scss">
+.searchbar > .v-input__control {
+  backdrop-filter: blur(12px);
+}
+</style>
 
+<style lang="scss" scoped>
+.skill-search {
+  .searchbar {
+    margin-bottom: -5rem;
+    z-index: 2;
+    position: relative;
+    height: 5rem;
   }
+}
+
 .items {
   height: 22em;
   overflow-y: auto;
-  padding-top: 1em;
+  padding-top: 5rem;
   padding-bottom: 1em;
   display: flex;
   flex-direction: column;
   gap: 1em;
   width: 100%;
-  .tech-stack, .wishlist {
-      display: flex;
-        gap: 1.5em;
-        flex-wrap: wrap;
-        align-items: stretch;
-        align-content: flex-start;
+
+  .tech-stack,
+  .wishlist {
+    display: flex;
+    gap: 1.5em;
+    flex-wrap: wrap;
+    align-items: stretch;
+    align-content: flex-start;
+    justify-items: flex-start;
   }
 
   .no-results {
@@ -82,22 +106,26 @@ const wishListResult = computed(() => wishList.filter(({ name }) => name.toLower
 
 .skill-search.mobile {
   .searchbar {
-    margin: 0 calc($page-margin / 2);
+    margin: 0 calc($page-margin-mobile / 2);
   }
+
   .items {
     height: unset;
+    padding-top: 1em;
+
     .title {
       position: sticky;
-      left: calc($page-margin / 2);
+      left: calc($page-margin-mobile / 2);
     }
+
     .tech-stack,
-      .wishlist{
-        gap: 0.5em;
-        flex-wrap: nowrap;
-        height: fit-content;
-        width: fit-content;
-        padding: 0 calc($page-margin / 2)
-      }
+    .wishlist {
+      gap: 0.5em;
+      flex-wrap: nowrap;
+      height: fit-content;
+      width: fit-content;
+      padding: 0 calc($page-margin-mobile / 2)
+    }
   }
 }
 </style>
