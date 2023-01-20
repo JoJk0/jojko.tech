@@ -1,5 +1,5 @@
 <template>
-  <div class="app-scroller">
+  <div class="app-scroller" :class="{ mobile }">
     <slot />
   </div>
 </template>
@@ -8,6 +8,8 @@
 // const props = defineProps({})
 
 // const emit = defineEmits({})
+
+const { mobile } = useDisplay()
 </script>
 
 <style lang="scss" scoped>
@@ -25,10 +27,10 @@
     position: absolute;
     top: 0;
     display: block;
-    height: 1em;
+    height: 2em;
     width: 100%;
     z-index: 4;
-    background: linear-gradient(0deg, rgba($color-background, 0) 0%, $color-background);
+    background: linear-gradient(0deg, rgba($color-background, 0) 0%, rgba($color-background, 0.5));
   }
 
   &::after {
@@ -40,6 +42,11 @@
     width: 100%;
     z-index: 4;
     background: linear-gradient(0deg, $color-background 0%, rgba($color-background, 0));
+  }
+}
+.app-scroller.mobile {
+  &::after, &::before {
+    content: unset;
   }
 }
 </style>

@@ -63,6 +63,7 @@ const { mobile } = useDisplay()
         text-overflow: ellipsis;
         overflow: hidden;
         display: inline-block;
+        min-height: 1.2rem;
     }
 }
 .item.mobile {

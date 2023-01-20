@@ -79,7 +79,7 @@ const { projects } = data
   padding-right: 0;
 
   .title {
-    padding-left: max($page-margin, (100vw - $page-max-width) / 2);
+    padding-left: max($page-margin-desktop, (100vw - $page-max-width) / 2);
   }
 
   .projects-container {
@@ -89,7 +89,7 @@ const { projects } = data
   .swiper {
     width: 100vw;
     max-width: 100vw;
-    padding-left: max($page-margin, (100vw - $page-max-width) / 2);
+    padding-left: max($page-margin-desktop, (100vw - $page-max-width) / 2);
   }
 }
 
