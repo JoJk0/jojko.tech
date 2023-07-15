@@ -4,19 +4,19 @@
     ".write": false,
     "Projects": {
       ".read": true,
-    	".write": false
+      ".write": false
     },
     "Skills": {
       ".read": true,
-    	".write": false
+      ".write": false
     },
     "UniModules": {
       ".read": true,
-    	".write": false
+      ".write": false
     },
     "Topics": {
       ".read": true,
-    	".write": false
+      ".write": false
     }
   }
 }

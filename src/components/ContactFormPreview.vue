@@ -55,7 +55,7 @@ const emit = defineEmits({
 
 const { t } = useI18n()
 
-const updateValue = (value: string) => {
+function updateValue(value: string) {
   emit('update:modelValue', value)
 }
 </script>

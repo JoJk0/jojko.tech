@@ -6,7 +6,7 @@ import type { UserModule } from '~/types'
 
 const GSAP = Symbol('GSAP')
 
-export const createGSAP = () => {
+export function createGSAP() {
   const gsapInstance = gsap
 
   gsapInstance.registerPlugin(ScrollTrigger)
@@ -17,7 +17,7 @@ export const createGSAP = () => {
 
 export const provideGSAP = () => provide(GSAP, createGSAP())
 
-export const useGSAP = () => {
+export function useGSAP() {
   const instance = inject<typeof gsap>(GSAP)
   if (!instance)
     throw new Error('GSAP is not provided')

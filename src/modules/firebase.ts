@@ -1,5 +1,6 @@
 import type { FirebaseApp } from '@firebase/app'
 import { initializeApp } from '@firebase/app'
+
 // import { getAnalytics } from '@firebase/analytics'
 import type { UserModule } from '~/types'
 
@@ -25,7 +26,7 @@ export const install: UserModule = ({ app }) => {
   // app.provide(FIREBASE_ANALYTICS_KEY, analytics)
 }
 
-export const useFirebase = () => {
+export function useFirebase() {
   const instance = inject<FirebaseApp>(FIREBASE_APP_KEY)
   if (!instance)
     console.error('Firebase instance not found')

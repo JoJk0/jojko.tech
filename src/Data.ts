@@ -1,4 +1,4 @@
-import type { I18NString } from './modules/i18n'
+import type { I18NString } from '../.old/src/modules/i18n'
 import { defineData } from './utils'
 import swoopLogo from '~/assets/logos/swoop.svg'
 import uolLogo from '~/assets/logos/uol.svg'
@@ -784,7 +784,7 @@ export default defineData({
     },
     aboutMe: {
       title: 'About me',
-      content: `I'm a fast-learning person constantly looking for opportunities to grow and improve existing patterns.I enjoy following latest tech news, participating in beta programs and developing with latest technologies. 
+      content: `I'm a fast-learning person constantly looking for opportunities to grow and improve existing patterns.I enjoy following latest tech news, participating in beta programs and developing with latest technologies.
 
 My experience allows me to also work with legacy technologies and integrating them with modern systems.
 

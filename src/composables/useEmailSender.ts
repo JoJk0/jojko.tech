@@ -12,7 +12,7 @@ export interface UseEmailSenderInput {
   receipt: boolean
 }
 
-export const useEmailSender = () => {
+export function useEmailSender() {
   const isSuccess = ref(false)
 
   const isSending = ref(false)

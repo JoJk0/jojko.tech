@@ -1,6 +1,6 @@
 <template>
-  <swiper
-    v-if="images.length" ref="swiperEl" :slides-per-view="1" centered-slides centered-slides-bounds
+  <Swiper
+    v-if="images.length" :slides-per-view="1" centered-slides centered-slides-bounds
     edge-swipe-detection="prevent" :speed="0" follow-finger preload-images watch-slides-progress
     :navigation="{ nextEl: '#stories-slider-next', prevEl: '#stories-slider-prev' }" :modules="modules" class="swiper"
     :scrollbar="{ draggable: true }" @swiper="onSwiperReady" @slide-change="reset"
@@ -21,7 +21,7 @@
         />
       </div>
     </template>
-    <swiper-slide v-for="image of images" :key="image.url" class="slide">
+    <SwiperSlide v-for="image of images" :key="image.url" class="slide">
       <div class="img-bg-cnt">
         <img v-if="image.thumbnail" :src="image.thumbnail" class="img-bg">
       </div>
@@ -32,14 +32,13 @@
           </div>
         </template>
       </v-img>
-    </swiper-slide>
-  </swiper>
+    </SwiperSlide>
+  </Swiper>
 </template>
 
 <script lang="ts" setup>
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { A11y, Autoplay, Navigation, Pagination, Zoom } from 'swiper'
+import { A11y, Autoplay, Navigation, Pagination, Zoom } from 'swiper/modules'
 import type { Swiper as SwiperInstance } from 'swiper'
 import type { PropType } from 'vue'
 import { useTimer } from '~/composables/useTimer'
@@ -72,19 +71,19 @@ const modules = [A11y, Autoplay, Zoom, Navigation, Pagination]
 
 const swiperInstance = ref<SwiperInstance>()
 
-const onSwiperReady = (instance: SwiperInstance) => {
+function onSwiperReady(instance: SwiperInstance) {
   swiperInstance.value = instance
 }
 
 let timeout: NodeJS.Timeout
 
-const onTouchStart = (event: TouchEvent) => {
+function onTouchStart(event: TouchEvent) {
   timeout = setTimeout(() => {
     isHolding.value = true
     stop()
   }, 300)
 }
-const onTouchEnd = (event: TouchEvent, type: 'prev' | 'next') => {
+function onTouchEnd(event: TouchEvent, type: 'prev' | 'next') {
   if (!isHolding.value) {
     if (type === 'prev')
       onFirstSlideClicked() || swiperInstance.value?.slidePrev()
@@ -99,17 +98,17 @@ const onTouchEnd = (event: TouchEvent, type: 'prev' | 'next') => {
   }
 }
 
-const onImageLoaded = () => {
+function onImageLoaded() {
   start()
 }
 
-const onFirstSlideClicked = () => {
+function onFirstSlideClicked() {
   if (swiperInstance.value?.isBeginning) {
     reset()
     return true
   }
 }
-const onLastSlideClicked = () => {
+function onLastSlideClicked() {
   if (swiperInstance.value?.isEnd) {
     stop()
     emit('slider:close')

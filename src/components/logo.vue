@@ -14,6 +14,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { onMounted, ref } from 'vue'
 import { drawLogo } from '../composables/useLogo'
 import { useGSAP } from '~/modules/gsap'
+
 // const props = defineProps({});
 
 // const emit = defineEmits({});
@@ -28,7 +29,7 @@ const logo = drawLogo()
 
 const gsap = useGSAP()
 
-const animate = () => {
+function animate() {
   const progress = {
     mainJ: 0,
     mainDot: 0,

@@ -13,7 +13,7 @@ import { setLocale } from '@vee-validate/i18n'
 
 const { locale } = useI18n()
 
-const toggleLocales = (l: string) => {
+function toggleLocales(l: string) {
   locale.value = l
   setLocale(l)
 }

@@ -2,7 +2,7 @@ import { getDownloadURL, getStorage, ref as storageRef } from '@firebase/storage
 import { cvStoragePath } from 'functions/src/config'
 import { useFirebase } from '~/modules/firebase'
 
-export const useCVLink = () => {
+export function useCVLink() {
   const cvLink = ref<string>()
   const loading = ref(false)
   const error = ref(false)
@@ -14,7 +14,13 @@ export const useCVLink = () => {
 
   (async () => {
     loading.value = true
-    cvLink.value = await getDownloadURL(cvRef).catch((e) => { error.value = e; loading.value = false; return undefined })
+    cvLink.value = await getDownloadURL(cvRef).catch(
+      (e) => {
+        error.value = e
+        loading.value = false
+        return undefined
+      },
+    )
     loading.value = false
   })()
 

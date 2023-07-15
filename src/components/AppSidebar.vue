@@ -29,11 +29,12 @@ const [isHovering, setIsHovering] = useToggle(false)
 
 const gsap = useGSAP()
 
-const scrollToTop = () =>
-  window.scrollTo({
+function scrollToTop() {
+  return window.scrollTo({
     top: 0,
     behavior: 'smooth',
   })
+}
 
 onMounted(() => {
   const scrollTrigger: ScrollTrigger.Vars = {

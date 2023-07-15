@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import gsap from 'gsap'
 
-export const useAnimatedName = <T extends string>(names: T[]) => {
+export function useAnimatedName<T extends string>(names: T[]) {
   const removeLetterTime = 0.1
   const addLetterTime = 0.2
   const waitTime = 3

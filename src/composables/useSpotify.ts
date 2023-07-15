@@ -89,7 +89,7 @@ export interface SpotifyCurrentlyPlayingResponse {
   }
 }
 
-export const useSpotify = () => {
+export function useSpotify() {
   const url = 'https://api.spotify.com/v1/me/player/currently-playing'
 
   const { data } = useFetch(url, {

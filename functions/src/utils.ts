@@ -1,17 +1,16 @@
-/* eslint-disable max-len */
-import validator from "validator";
+import validator from 'validator'
 
-export type GRecaptchaResponse = {
+export interface GRecaptchaResponse {
   success: boolean
   score: number
   action: string
   challenge_ts: string
   hostname: string
-  "error-codes"?: string[]
+  'error-codes'?: string[]
 }
 
-export type SendMailCallData = {
-  topic: "COFFEE" | "HIRING_ME" | "COOPERATION" | "FREELANCE_PROJECTS" | "BUGS" | "SOCIAL_MEDIA"
+export interface SendMailCallData {
+  topic: 'COFFEE' | 'HIRING_ME' | 'COOPERATION' | 'FREELANCE_PROJECTS' | 'BUGS' | 'SOCIAL_MEDIA'
   name: string
   email: string
   message: string
@@ -23,18 +22,20 @@ export type SchemaDefinition<T extends Record<string, string>> = {
   [key in keyof T]?: (value: T[key]) => boolean[]
 }
 
-export const validate = <T extends Record<string, string>>(data: T, schema: SchemaDefinition<T>) =>
-  Object.entries<(value: string) => boolean[]>(schema as any).map(([key, validate]) => [key, validate(data[key]).reduce((acc, val) => acc && val, true)] as const).reduce((acc, [_, val]) => acc && val, true);
+export function validate<T extends Record<string, string>>(data: T, schema: SchemaDefinition<T>) {
+  return Object.entries<(value: string) => boolean[]>(schema as any).map(([key, validate]) => [key, validate(data[key]).reduce((acc, val) => acc && val, true)] as const).reduce((acc, [_, val]) => acc && val, true)
+}
 
-export const defineValidationSchema = <T extends Record<string, string>>(schema: SchemaDefinition<T>) => schema;
+export const defineValidationSchema = <T extends Record<string, string>>(schema: SchemaDefinition<T>) => schema
 
-export const sanitize = <T extends Record<string, string>>(data: T) => {
+export function sanitize<T extends Record<string, string>>(data: T) {
   return Object.entries(data)
-      .map(([key, value]) => [key, validator.escape(value)] as const)
-      .reduce((acc, [key, value]) => ({...acc, [key]: value}), {} as T);
-};
+    .map(([key, value]) => [key, validator.escape(value)] as const)
+    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {} as T)
+}
 
-export const emailHTML = ({name, email, topic, message, date}: Pick<SendMailCallData, "name" | "email" | "topic" | "message"> & { date: string }) => `
+export function emailHTML({ name, email, topic, message, date }: Pick<SendMailCallData, 'name' | 'email' | 'topic' | 'message'> & { date: string }) {
+  return `
       <!DOCTYPE html>
       <html>
         <head>
@@ -49,9 +50,11 @@ export const emailHTML = ({name, email, topic, message, date}: Pick<SendMailCall
             <div style="color: rgba(197,255,254,0.3); text-align: center;">Generated on ${date}</div>
           </div>
         </body>
-      </html>`;
+      </html>`
+}
 
-export const emailCopyHTML = ({name, topic, message, date}: Pick<SendMailCallData, "name" | "topic" | "message"> & { date: string }) => `
+export function emailCopyHTML({ name, topic, message, date }: Pick<SendMailCallData, 'name' | 'topic' | 'message'> & { date: string }) {
+  return `
               <!DOCTYPE html>
               <html>
               <head>
@@ -69,4 +72,5 @@ export const emailCopyHTML = ({name, topic, message, date}: Pick<SendMailCallDat
               </div>
               </body>
               </html>
-              `;
+              `
+}

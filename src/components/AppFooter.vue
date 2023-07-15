@@ -34,7 +34,7 @@ const { t } = useI18n()
 
 const thisYear = new Date().getFullYear()
 
-const date = computed(() => new Date(parseInt(__TIMESTAMP__)).toLocaleString())
+const date = computed(() => new Date(Number.parseInt(__TIMESTAMP__)).toLocaleString())
 </script>
 
 <style lang="scss" scoped>

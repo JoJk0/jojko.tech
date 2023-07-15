@@ -12,6 +12,14 @@
             "style"
           ]
         }
-      ]
+      ],
+      "vue/custom-event-name-casing": [
+        "error",
+        {
+          "ignores": [
+            "/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u"
+          ]
+        }
+      ],
   }
 }

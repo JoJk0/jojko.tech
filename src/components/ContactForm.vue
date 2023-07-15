@@ -112,7 +112,6 @@ export interface ContactFormData {
   receipt: boolean
 }
 
-// eslint-disable-next-line vue/define-macros-order
 const props = defineProps({
   modelValue: {
     type: Boolean,
@@ -154,13 +153,13 @@ const { isSending, error, sendMail, onSuccess } = useEmailSender()
 
 const isHiring = computed(() => props.topic.id === 'HIRING_ME')
 
-const onNext = async (field: FieldContext<string>, to: ContactFormState) => {
+async function onNext(field: FieldContext<string>, to: ContactFormState) {
   const { valid } = await field.validate()
   if (valid)
     currentState.value = to
 }
 
-const onBack = (to: ContactFormState) => {
+function onBack(to: ContactFormState) {
   currentState.value = to
 }
 

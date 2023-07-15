@@ -4,7 +4,7 @@ export interface UseTimerOptions {
 
 const PRECISION_MS = 100
 
-export const useTimer = (ms: number, options?: UseTimerOptions) => {
+export function useTimer(ms: number, options?: UseTimerOptions) {
   const onFinishedEvent = new CustomEvent('ticker:finished')
   const onStoppedEvent = new CustomEvent('ticker:stopped')
   const onResumedEvent = new CustomEvent('ticker:resumed')

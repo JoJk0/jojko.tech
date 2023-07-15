@@ -1,6 +1,4 @@
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import Counter from '../src/components/logo.vue'
 
 // describe('Counter.vue', () => {
 //   it('should render', () => {

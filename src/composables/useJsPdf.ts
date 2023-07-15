@@ -2,7 +2,7 @@ import type { jsPDFOptions } from 'jspdf'
 import { jsPDF } from 'jspdf'
 import type { DefineComponent } from 'vue'
 
-export const useJsPdf = (options: jsPDFOptions) => {
+export function useJsPdf(options: jsPDFOptions) {
   const htmlEl = ref<HTMLElement | InstanceType<DefineComponent>>()
 
   const isGenerating = ref(false)

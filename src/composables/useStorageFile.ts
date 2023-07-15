@@ -1,7 +1,7 @@
 import { getDownloadURL, getStorage, list, ref as storageRef } from '@firebase/storage'
 import { useFirebase } from '~/modules/firebase'
 
-export const useStorageFile = (file: string) => {
+export function useStorageFile(file: string) {
   const firebase = useFirebase()
 
   const storage = getStorage(firebase)
@@ -17,7 +17,7 @@ export const useStorageFile = (file: string) => {
   return url
 }
 
-export const useStorageFiles = (dir: string) => {
+export function useStorageFiles(dir: string) {
   const firebase = useFirebase()
 
   const storage = getStorage(firebase)

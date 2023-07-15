@@ -1,518 +1,518 @@
 {
-    "Skills": [
+  "Skills": [
+    {
+      "title": "Front-end development",
+      "SubSkills": [
+        "AJAX",
+        "Angular",
+        "Canvas (HTML)",
+        "CSS3",
+        "HTML5",
+        "JavaScript",
+        "jQuery",
+        "LESS",
+        "pixiJS",
+        "SASS",
+        "TypeScript",
+        "GSAP",
+        "Vue.js",
+        "Vuex",
+        "Vue Composition API"
+      ]
+    },
+    {
+      "title": "Back-end development",
+      "SubSkills": [
+        "Angular CLI",
+        "Node.js",
+        "PHP",
+        "RESTful apps",
+        "Serverless",
+        "Google Firebase",
+        "Apollo Server",
+        "Express.js"
+      ]
+    },
+    {
+      "title": "Software testing",
+      "SubSkills": [
+        "Jest",
+        "Jasmine",
+        "Karma",
+        "JUnit"
+      ]
+    },
+    {
+      "title": "Design",
+      "SubSkills": [
+        "Illustrator",
+        "Logo design",
+        "Photoshop",
+        "Posters",
+        "Website mockups",
+        "Substance 3D Stager"
+      ]
+    },
+    {
+      "title": "Databases",
+      "SubSkills": [
+        "JSON",
+        "MySQL",
+        "PHPMyAdmin",
+        "XML",
+        "GraphQL",
+        "Prisma2 ORM"
+      ]
+    },
+    {
+      "title": "Multi-purpose programming",
+      "SubSkills": [
+        "Assembly",
+        "C/C++",
+        "Eclipse",
+        "Git",
+        "Java",
+        "Python"
+      ]
+    },
+    {
+      "title": "Big data",
+      "SubSkills": [
+        "Hadoop",
+        "Storm"
+      ]
+    },
+    {
+      "title": "Operating systems proficiency",
+      "SubSkills": [
+        "Ubuntu",
+        "macOS",
+        "Windows"
+      ]
+    }
+  ],
+  "Projects": [
+    {
+      "id": 0,
+      "title": "JJK Portfolio 8.0",
+      "date": "1597688872000",
+      "coAuthors": [],
+      "description": "This is my newest portfolio and personal website. I gained loads of new skills while working on this project (like Angular, TypeScript, Node.js). I spent months during the COVID-19 lockdown learning new tools, designing, implementing and deploying the website. It is one of the most exciting projects for me.",
+      "typography": [
         {
-            "title": "Front-end development",
-            "SubSkills": [
-                "AJAX",
-                "Angular",
-                "Canvas (HTML)",
-                "CSS3",
-                "HTML5",
-                "JavaScript",
-                "jQuery",
-                "LESS",
-                "pixiJS",
-                "SASS",
-                "TypeScript",
-                "GSAP",
-                "Vue.js",
-                "Vuex",
-                "Vue Composition API"
-            ]
-        },
-        {
-            "title": "Back-end development",
-            "SubSkills": [
-                "Angular CLI",
-                "Node.js",
-                "PHP",
-                "RESTful apps",
-                "Serverless",
-                "Google Firebase",
-                "Apollo Server",
-                "Express.js"
-            ]
-        },
-        {
-            "title": "Software testing",
-            "SubSkills": [
-                "Jest",
-                "Jasmine",
-                "Karma",
-                "JUnit"
-            ]
-        },
-        {
-            "title": "Design",
-            "SubSkills": [
-                "Illustrator",
-                "Logo design",
-                "Photoshop",
-                "Posters",
-                "Website mockups",
-                "Substance 3D Stager"
-            ]
-        },
-        {
-            "title": "Databases",
-            "SubSkills": [
-                "JSON",
-                "MySQL",
-                "PHPMyAdmin",
-                "XML",
-                "GraphQL",
-                "Prisma2 ORM"
-            ]
-        },
-        {
-            "title": "Multi-purpose programming",
-            "SubSkills": [
-                "Assembly",
-                "C/C++",
-                "Eclipse",
-                "Git",
-                "Java",
-                "Python"
-            ]
-        },
-        {
-            "title": "Big data",
-            "SubSkills": [
-                "Hadoop",
-                "Storm"
-            ]
-        },
-        {
-            "title": "Operating systems proficiency",
-            "SubSkills": [
-                "Ubuntu",
-                "macOS",
-                "Windows"
-            ]
+          "name": "quicksand",
+          "displayName": "Quicksand"
         }
-    ],
-    "Projects": [
+      ],
+      "colourPalette": [
         {
-            "id": 0,
-            "title": "JJK Portfolio 8.0",
-            "date": "1597688872000",
-            "coAuthors": [],
-            "description": "This is my newest portfolio and personal website. I gained loads of new skills while working on this project (like Angular, TypeScript, Node.js). I spent months during the COVID-19 lockdown learning new tools, designing, implementing and deploying the website. It is one of the most exciting projects for me.",
-            "typography": [
-                {
-                    "name": "quicksand",
-                    "displayName": "Quicksand"
-                }
-            ],
-            "colourPalette": [
-                {
-                    "code": "#001427",
-                    "name": "Kuretake black manga"
-                },
-                {
-                    "code": "#797ef7",
-                    "name": "Orchid"
-                },
-                {
-                    "code": "#00ffce",
-                    "name": "Bright teal"
-                },
-                {
-                    "code": "#c4fffe",
-                    "name": "Vic 20 blue"
-                }
-            ],
-            "colours": {
-                "background": "#001427",
-                "panelBg": "#c4fffe",
-                "text": "#001427",
-                "topTitleLeft": "#c4fffe",
-                "topTitleRight": "#001427",
-                "buttons": "linear-gradient(12deg, rgb(121, 126, 247) 0%, rgb(0, 255, 206) 75%)"
-            },
-            "keywords": [
-                "Angular",
-                "Node.js",
-                "TypeScript",
-                "GSAP",
-                "Git",
-                "Google Firebase",
-                "Photoshop",
-                "Illustrator",
-                "HTML5",
-                "CSS3",
-                "JavaScript",
-                "SASS",
-                "TypeScript"
-            ],
-            "liveURL": "",
-            "copyURL": "",
-            "reportURL": "",
-            "githubURL": "",
-            "dribbbleURL": "",
-            "showcasePos": "0"
+          "code": "#001427",
+          "name": "Kuretake black manga"
         },
         {
-            "id": 1,
-            "title": "Motorway Traffic Simulator",
-            "date": "1556668800000",
-            "coAuthors": [],
-            "description": "This is my Masters' final project. The app is simulating a traffic on the motorway and collects data. I've used HTML5 Canvas in order to create game-like experience.",
-            "typography": [
-                {
-                    "name": "roboto",
-                    "displayName": "Roboto"
-                }
-            ],
-            "colourPalette": [
-                {
-                    "code": "#373640",
-                    "name": "Revolver"
-                },
-                {
-                    "code": "#424150",
-                    "name": "Smoked purple"
-                },
-                {
-                    "code": "#1db980",
-                    "name": "April Fool's red"
-                },
-                {
-                    "code": "#37efb9",
-                    "name": "Aquamarine"
-                }
-            ],
-            "colours": {
-                "background": "#373640",
-                "panelBg": "#424150",
-                "text": "#ffffff",
-                "topTitleLeft": "#37efb9",
-                "topTitleRight": "#1db980",
-                "buttons": "#1db980"
-            },
-            "keywords": [
-                "HTML5",
-                "CSS3",
-                "PixiJS",
-                "Canvas (HTML)",
-                "JavaScript",
-                "Photoshop",
-                "JQuery"
-            ],
-            "liveURL": "",
-            "copyURL": "https://motorway-traffic-simulator.web.app/",
-            "reportURL": "https://motorway-traffic-simulator.web.app/Report.pdf",
-            "githubURL": "https://github.com/JoJk0/motorway-traffic-simulator",
-            "dribbbleURL": "",
-            "showcasePos": "1"
+          "code": "#797ef7",
+          "name": "Orchid"
         },
         {
-            "id": 2,
-            "title": "UoL Walking Tour Backend",
-            "date": "1544486400000",
-            "coAuthors": [
-                "Stas Synenko"
-            ],
-            "description": "This is my Masters' group project. I implemented a Backend system for the university's walking tour gallery app. You can login as 'admin' with 'password' as the password. ",
-            "typography": [
-                {
-                    "name": "roboto",
-                    "displayName": "Roboto"
-                }
-            ],
-            "colourPalette": [
-                {
-                    "code": "#FFFFFF",
-                    "name": "White"
-                },
-                {
-                    "code": "#F1F6FE",
-                    "name": "Cotton Ball"
-                },
-                {
-                    "code": "#2a79fe",
-                    "name": "Hailey Blue"
-                },
-                {
-                    "code": "#f44336",
-                    "name": "Vermilion Bird"
-                }
-            ],
-            "colours": {
-                "background": "#F1F6FE",
-                "panelBg": "#FFFFFF",
-                "text": "#000000",
-                "topTitleLeft": "#2a79fe",
-                "topTitleRight": "#2a79fe",
-                "buttons": "#F1F6FE"
-            },
-            "keywords": [
-                "HTML5",
-                "CSS3",
-                "JavaScript",
-                "PHP",
-                "Photoshop",
-                "JSON",
-                "MySQL",
-                "PHPMyAdmin"
-            ],
-            "liveURL": "",
-            "copyURL": "https://uol-walking-tour-backend.000webhostapp.com/",
-            "reportURL": "",
-            "githubURL": "https://github.com/JoJk0/uol-walking-tour-backend",
-            "dribbbleURL": "",
-            "showcasePos": "2"
+          "code": "#00ffce",
+          "name": "Bright teal"
         },
         {
-            "id": 3,
-            "title": "JJK Portfolio 7.0",
-            "date": "1449964800000",
-            "coAuthors": [],
-            "description": "Seventh version of my portfolio, applied simple and modern methodologies.",
-            "typography": [
-                {
-                    "name": "raleway",
-                    "displayName": "Raleway"
-                },
-                {
-                    "name": "open-sans",
-                    "displayName": "Open Sans"
-                }
-            ],
-            "colourPalette": [
-                {
-                    "code": "#026BAC",
-                    "name": "Indigo Bunting"
-                },
-                {
-                    "code": "#FAFAFA",
-                    "name": "Dr. White"
-                },
-                {
-                    "code": "#FFFFFF",
-                    "name": "White"
-                },
-                {
-                    "code": "#000000",
-                    "name": "Black"
-                }
-            ],
-            "colours": {
-                "background": "#FAFAFA",
-                "panelBg": "#FFFFFF",
-                "text": "#000000",
-                "topTitleLeft": "#026BAC",
-                "topTitleRight": "#026BAC",
-                "buttons": "#FAFAFA"
-            },
-            "keywords": [
-                "HTML5",
-                "CSS3",
-                "JQuery",
-                "LESS",
-                "JavaScript",
-                "Photoshop"
-            ],
-            "liveURL": "",
-            "copyURL": "http://uol-walking-tour-backend.000webhostapp.com/projects/jjk-v7/",
-            "dribbbleURL": "",
-            "reportURL": "",
-            "githubURL": "https://github.com/JoJk0/jjk-portfolio-v7",
-            "showcasePos": "-1"
-        },
-        {
-            "id": 4,
-            "title": "JJK Portfolio 6.1",
-            "date": "1376784000000",
-            "coAuthors": [],
-            "description": "Sixth version of my portfolio. Created as a single-page website.",
-            "typography": [
-                {
-                    "name": "oswald",
-                    "displayName": "Oswald"
-                },
-                {
-                    "name": "roboto",
-                    "displayName": "Roboto"
-                }
-            ],
-            "colourPalette": [
-                {
-                    "code": "#03679f",
-                    "name": "Prime Blue"
-                },
-                {
-                    "code": "#00a2ff",
-                    "name": "Protoss Pylon"
-                },
-                {
-                    "code": "#FAFAFA",
-                    "name": "Dr. White"
-                },
-                {
-                    "code": "#CCCCCC",
-                    "name": "Cerebral Grey"
-                }
-            ],
-            "colours": {
-                "background": "#03679f",
-                "panelBg": "#FAFAFA",
-                "text": "#000000",
-                "topTitleLeft": "#00a2ff",
-                "topTitleRight": "#03679f",
-                "buttons": "#00a2ff"
-            },
-            "keywords": [
-                "HTML5",
-                "CSS3",
-                "JQuery",
-                "LESS",
-                "JavaScript",
-                "Photoshop"
-            ],
-            "liveURL": "",
-            "copyURL": "http://uol-walking-tour-backend.000webhostapp.com/projects/jjk-v6.1/",
-            "dribbbleURL": "",
-            "reportURL": "",
-            "githubURL": "https://github.com/JoJk0/jjk-portfolio-v6.1",
-            "showcasePos": "-1"
+          "code": "#c4fffe",
+          "name": "Vic 20 blue"
         }
-    ],
-    "UniModules": [
-        "Advanced Object-Oriented Programming",
-        "Algorithmic Foundations",
-        "Applied Algorithmics",
-        "Artificial Intelligence",
-        "Big Data Analysis",
-        "Complex information and Social Networks",
-        "Complexity of Algorithms",
-        "Computer Systems",
-        "Computer-Aided Software Development",
-        "Database Development",
-        "Decision, Computation and Language",
-        "Efficient Sequential Algorithms",
-        "Foundations Of Computer Science",
-        "Group Software Project",
-        "Honours Year Computer Science Project",
-        "Human-Centric Computing",
-        "Introduction to Databases",
-        "Introduction To Programming In Java",
-        "Knowledge Representation and Reasoning",
-        "Logic in Computer Science",
-        "MEng Group Project",
-        "Meng Individual Project",
-        "Multi-Agent Systems",
-        "Operating System Concepts",
-        "Principles of C and Memory Management",
-        "Privacy and Security",
-        "Professional Skills in Computer Science",
-        "Safety and Dependability",
-        "Software Engineering I",
-        "Software Engineering II",
-        "Technologies for E-Commerce"
-    ],
-    "Topics": [
+      ],
+      "colours": {
+        "background": "#001427",
+        "panelBg": "#c4fffe",
+        "text": "#001427",
+        "topTitleLeft": "#c4fffe",
+        "topTitleRight": "#001427",
+        "buttons": "linear-gradient(12deg, rgb(121, 126, 247) 0%, rgb(0, 255, 206) 75%)"
+      },
+      "keywords": [
+        "Angular",
+        "Node.js",
+        "TypeScript",
+        "GSAP",
+        "Git",
+        "Google Firebase",
+        "Photoshop",
+        "Illustrator",
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "SASS",
+        "TypeScript"
+      ],
+      "liveURL": "",
+      "copyURL": "",
+      "reportURL": "",
+      "githubURL": "",
+      "dribbbleURL": "",
+      "showcasePos": "0"
+    },
+    {
+      "id": 1,
+      "title": "Motorway Traffic Simulator",
+      "date": "1556668800000",
+      "coAuthors": [],
+      "description": "This is my Masters' final project. The app is simulating a traffic on the motorway and collects data. I've used HTML5 Canvas in order to create game-like experience.",
+      "typography": [
         {
-            "name": {
-                "en": "❤️ coffee",
-                "pl": "❤️ kawie",
-                "es": "❤️ café"
-            },
-            "draftText": {
-                "en": "Did you know Guatemala is my favourite coffee region?...",
-                "pl": "Czy wiesz, że Guatemala jest moim ulubionym regionem kawy?...",
-                "es": "¿Sabías que Guatemala es mi región favorita de café?..."
-            },
-            "sentText": {
-                "en": "You're a boss! Thanks for your interest about me. \nI would love to talk to you or meet for a coffee ❤️.",
-                "pl": "Pjona 👊! Dzięki za zainteresowanie się mną. \nChętnie z Tobą porozmawiam lub spotkam się na kawę ❤️.",
-                "es": "¡Eres maravillosx! Gracias por su interés acerca de mí. Me encantaría hablar contigo o quedar para tomar un café ❤️."
-            }
-        },
-        {
-            "name": {
-                "en": "👔 hiring me",
-                "pl": "👔 zatrudnieniu mnie",
-                "es": "👔 contratación de mí"
-            },
-            "draftText": {
-                "en": "By hiring me you will get a young and talented team member ...",
-                "pl": "Zatrudniając mnie zyskasz młodego i utalentowanego członka zespołu...",
-                "es": "Al contratarme obtendrás un miembro de equipo joven y talentoso..."
-            },
-            "sentText": {
-                "en": "You're a boss! Thanks for choosing me as a potential candidate. \nI would love to speak to you soon.",
-                "pl": "Pjona 👊! Dzięki za wybór mnie jako potencjalnego kandydata. \nChętnie wkrótce z Tobą porozmawiam.",
-                "es": "¡Eres maravillosx! Gracias por elegirme como candidato potencial. Me encantaría hablar contigo pronto."
-            }
-        },
-        {
-            "name": {
-                "en": "🤝 cooperation",
-                "pl": "🤝 współpracy",
-                "es": "🤝 cooperación"
-            },
-            "draftText": {
-                "en": "I'm more than happy to co-work on projects ...",
-                "pl": "Bardzo się cieszę ze współpracy przy projektach...",
-                "es": "Estoy más que feliz de colaborar en los proyectos..."
-            },
-            "sentText": {
-                "en": "Nice to meet you! I will write to you soon.",
-                "pl": "Miło Cię poznać! Wkrótce napiszę do Ciebie.",
-                "es": "¡Me encantaría hablar contigo pronto!"
-            }
-        },
-        {
-            "name": {
-                "en": "📑 freelance projects",
-                "pl": "📑 projektach",
-                "es": "📑 proyectos"
-            },
-            "draftText": {
-                "en": "Did you know I've started freelancing in 2011? ...",
-                "pl": "Czy wiesz, że rozpocząłem freelancing w 2011?...",
-                "es": "¿Sabías que empecé a trabajar como freelancer en 2011?..."
-            },
-            "sentText": {
-                "en": "You're a boss! Thanks for asking about freelancing. \nI will send you a reply soon.",
-                "pl": "Pjona 👊! Dzięki za zapytanie o freelancing. \nWkrótce się do Ciebie odezwę.",
-                "es": "¡Eres maravillosx! Gracias por preguntar sobre freelance. \nEnvíate un mensaje pronto."
-            }
-        },
-        {
-            "name": {
-                "en": "🐞 bugs",
-                "pl": "🐞 bugach",
-                "es": "🐞 errores"
-            },
-            "draftText": {
-                "en": "This site is still in early development stages ...",
-                "pl": "Ta strona jest jeszcze w fazie rozwoju...",
-                "es": "Este sitio todavía está en fase de desarrollo..."
-            },
-            "sentText": {
-                "en": "You're a star! Cheers 🍻 for reporting a bug. \nI will have a look at it and will reply soon.",
-                "pl": "Pjona 👊! Dzięki za zgłoszenie błędu. \nSprawdzę go i odpowiem wkrótce.",
-                "es": "¡Eres la leche! ¡Felicidades 🍻 por reportar un error. \nLe echaré un vistazo y te responderé pronto."
-            }
-        },
-        {
-            "name": {
-                "en": "👩‍💻 social media",
-                "pl": "👩‍💻 mediach społecznościowych",
-                "es": "👩‍💻 medios sociales"
-            },
-            "draftText": {
-                "en": "My Facebook site has been created in 2011 and closed in 2022 due to Meta boycott ...",
-                "pl": "Prowadziłem fanpage na Facebooku od 2011 do 2022 kiedy to zbojkotowałem Meta ...",
-                "es": "Mi sitio de Facebook se creó en 2011 y se cerró en 2022 debido al boicot a Meta..."
-            },
-            "sentText": {
-                "en": "All done! Thanks for asking about social media. \nI will send you a reply soon.",
-                "pl": "To tyle! Dzięki za zapytanie o mediach społecznościowych. \nWkrótce się do Ciebie odezwę.",
-                "es": "¡Todo listo! Gracias por preguntar sobre medios sociales. \nEnvíate un mensaje pronto."
-            }
+          "name": "roboto",
+          "displayName": "Roboto"
         }
-    ]
+      ],
+      "colourPalette": [
+        {
+          "code": "#373640",
+          "name": "Revolver"
+        },
+        {
+          "code": "#424150",
+          "name": "Smoked purple"
+        },
+        {
+          "code": "#1db980",
+          "name": "April Fool's red"
+        },
+        {
+          "code": "#37efb9",
+          "name": "Aquamarine"
+        }
+      ],
+      "colours": {
+        "background": "#373640",
+        "panelBg": "#424150",
+        "text": "#ffffff",
+        "topTitleLeft": "#37efb9",
+        "topTitleRight": "#1db980",
+        "buttons": "#1db980"
+      },
+      "keywords": [
+        "HTML5",
+        "CSS3",
+        "PixiJS",
+        "Canvas (HTML)",
+        "JavaScript",
+        "Photoshop",
+        "JQuery"
+      ],
+      "liveURL": "",
+      "copyURL": "https://motorway-traffic-simulator.web.app/",
+      "reportURL": "https://motorway-traffic-simulator.web.app/Report.pdf",
+      "githubURL": "https://github.com/JoJk0/motorway-traffic-simulator",
+      "dribbbleURL": "",
+      "showcasePos": "1"
+    },
+    {
+      "id": 2,
+      "title": "UoL Walking Tour Backend",
+      "date": "1544486400000",
+      "coAuthors": [
+        "Stas Synenko"
+      ],
+      "description": "This is my Masters' group project. I implemented a Backend system for the university's walking tour gallery app. You can login as 'admin' with 'password' as the password. ",
+      "typography": [
+        {
+          "name": "roboto",
+          "displayName": "Roboto"
+        }
+      ],
+      "colourPalette": [
+        {
+          "code": "#FFFFFF",
+          "name": "White"
+        },
+        {
+          "code": "#F1F6FE",
+          "name": "Cotton Ball"
+        },
+        {
+          "code": "#2a79fe",
+          "name": "Hailey Blue"
+        },
+        {
+          "code": "#f44336",
+          "name": "Vermilion Bird"
+        }
+      ],
+      "colours": {
+        "background": "#F1F6FE",
+        "panelBg": "#FFFFFF",
+        "text": "#000000",
+        "topTitleLeft": "#2a79fe",
+        "topTitleRight": "#2a79fe",
+        "buttons": "#F1F6FE"
+      },
+      "keywords": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "PHP",
+        "Photoshop",
+        "JSON",
+        "MySQL",
+        "PHPMyAdmin"
+      ],
+      "liveURL": "",
+      "copyURL": "https://uol-walking-tour-backend.000webhostapp.com/",
+      "reportURL": "",
+      "githubURL": "https://github.com/JoJk0/uol-walking-tour-backend",
+      "dribbbleURL": "",
+      "showcasePos": "2"
+    },
+    {
+      "id": 3,
+      "title": "JJK Portfolio 7.0",
+      "date": "1449964800000",
+      "coAuthors": [],
+      "description": "Seventh version of my portfolio, applied simple and modern methodologies.",
+      "typography": [
+        {
+          "name": "raleway",
+          "displayName": "Raleway"
+        },
+        {
+          "name": "open-sans",
+          "displayName": "Open Sans"
+        }
+      ],
+      "colourPalette": [
+        {
+          "code": "#026BAC",
+          "name": "Indigo Bunting"
+        },
+        {
+          "code": "#FAFAFA",
+          "name": "Dr. White"
+        },
+        {
+          "code": "#FFFFFF",
+          "name": "White"
+        },
+        {
+          "code": "#000000",
+          "name": "Black"
+        }
+      ],
+      "colours": {
+        "background": "#FAFAFA",
+        "panelBg": "#FFFFFF",
+        "text": "#000000",
+        "topTitleLeft": "#026BAC",
+        "topTitleRight": "#026BAC",
+        "buttons": "#FAFAFA"
+      },
+      "keywords": [
+        "HTML5",
+        "CSS3",
+        "JQuery",
+        "LESS",
+        "JavaScript",
+        "Photoshop"
+      ],
+      "liveURL": "",
+      "copyURL": "http://uol-walking-tour-backend.000webhostapp.com/projects/jjk-v7/",
+      "dribbbleURL": "",
+      "reportURL": "",
+      "githubURL": "https://github.com/JoJk0/jjk-portfolio-v7",
+      "showcasePos": "-1"
+    },
+    {
+      "id": 4,
+      "title": "JJK Portfolio 6.1",
+      "date": "1376784000000",
+      "coAuthors": [],
+      "description": "Sixth version of my portfolio. Created as a single-page website.",
+      "typography": [
+        {
+          "name": "oswald",
+          "displayName": "Oswald"
+        },
+        {
+          "name": "roboto",
+          "displayName": "Roboto"
+        }
+      ],
+      "colourPalette": [
+        {
+          "code": "#03679f",
+          "name": "Prime Blue"
+        },
+        {
+          "code": "#00a2ff",
+          "name": "Protoss Pylon"
+        },
+        {
+          "code": "#FAFAFA",
+          "name": "Dr. White"
+        },
+        {
+          "code": "#CCCCCC",
+          "name": "Cerebral Grey"
+        }
+      ],
+      "colours": {
+        "background": "#03679f",
+        "panelBg": "#FAFAFA",
+        "text": "#000000",
+        "topTitleLeft": "#00a2ff",
+        "topTitleRight": "#03679f",
+        "buttons": "#00a2ff"
+      },
+      "keywords": [
+        "HTML5",
+        "CSS3",
+        "JQuery",
+        "LESS",
+        "JavaScript",
+        "Photoshop"
+      ],
+      "liveURL": "",
+      "copyURL": "http://uol-walking-tour-backend.000webhostapp.com/projects/jjk-v6.1/",
+      "dribbbleURL": "",
+      "reportURL": "",
+      "githubURL": "https://github.com/JoJk0/jjk-portfolio-v6.1",
+      "showcasePos": "-1"
+    }
+  ],
+  "UniModules": [
+    "Advanced Object-Oriented Programming",
+    "Algorithmic Foundations",
+    "Applied Algorithmics",
+    "Artificial Intelligence",
+    "Big Data Analysis",
+    "Complex information and Social Networks",
+    "Complexity of Algorithms",
+    "Computer Systems",
+    "Computer-Aided Software Development",
+    "Database Development",
+    "Decision, Computation and Language",
+    "Efficient Sequential Algorithms",
+    "Foundations Of Computer Science",
+    "Group Software Project",
+    "Honours Year Computer Science Project",
+    "Human-Centric Computing",
+    "Introduction to Databases",
+    "Introduction To Programming In Java",
+    "Knowledge Representation and Reasoning",
+    "Logic in Computer Science",
+    "MEng Group Project",
+    "Meng Individual Project",
+    "Multi-Agent Systems",
+    "Operating System Concepts",
+    "Principles of C and Memory Management",
+    "Privacy and Security",
+    "Professional Skills in Computer Science",
+    "Safety and Dependability",
+    "Software Engineering I",
+    "Software Engineering II",
+    "Technologies for E-Commerce"
+  ],
+  "Topics": [
+    {
+      "name": {
+        "en": "❤️ coffee",
+        "pl": "❤️ kawie",
+        "es": "❤️ café"
+      },
+      "draftText": {
+        "en": "Did you know Guatemala is my favourite coffee region?...",
+        "pl": "Czy wiesz, że Guatemala jest moim ulubionym regionem kawy?...",
+        "es": "¿Sabías que Guatemala es mi región favorita de café?..."
+      },
+      "sentText": {
+        "en": "You're a boss! Thanks for your interest about me. \nI would love to talk to you or meet for a coffee ❤️.",
+        "pl": "Pjona 👊! Dzięki za zainteresowanie się mną. \nChętnie z Tobą porozmawiam lub spotkam się na kawę ❤️.",
+        "es": "¡Eres maravillosx! Gracias por su interés acerca de mí. Me encantaría hablar contigo o quedar para tomar un café ❤️."
+      }
+    },
+    {
+      "name": {
+        "en": "👔 hiring me",
+        "pl": "👔 zatrudnieniu mnie",
+        "es": "👔 contratación de mí"
+      },
+      "draftText": {
+        "en": "By hiring me you will get a young and talented team member ...",
+        "pl": "Zatrudniając mnie zyskasz młodego i utalentowanego członka zespołu...",
+        "es": "Al contratarme obtendrás un miembro de equipo joven y talentoso..."
+      },
+      "sentText": {
+        "en": "You're a boss! Thanks for choosing me as a potential candidate. \nI would love to speak to you soon.",
+        "pl": "Pjona 👊! Dzięki za wybór mnie jako potencjalnego kandydata. \nChętnie wkrótce z Tobą porozmawiam.",
+        "es": "¡Eres maravillosx! Gracias por elegirme como candidato potencial. Me encantaría hablar contigo pronto."
+      }
+    },
+    {
+      "name": {
+        "en": "🤝 cooperation",
+        "pl": "🤝 współpracy",
+        "es": "🤝 cooperación"
+      },
+      "draftText": {
+        "en": "I'm more than happy to co-work on projects ...",
+        "pl": "Bardzo się cieszę ze współpracy przy projektach...",
+        "es": "Estoy más que feliz de colaborar en los proyectos..."
+      },
+      "sentText": {
+        "en": "Nice to meet you! I will write to you soon.",
+        "pl": "Miło Cię poznać! Wkrótce napiszę do Ciebie.",
+        "es": "¡Me encantaría hablar contigo pronto!"
+      }
+    },
+    {
+      "name": {
+        "en": "📑 freelance projects",
+        "pl": "📑 projektach",
+        "es": "📑 proyectos"
+      },
+      "draftText": {
+        "en": "Did you know I've started freelancing in 2011? ...",
+        "pl": "Czy wiesz, że rozpocząłem freelancing w 2011?...",
+        "es": "¿Sabías que empecé a trabajar como freelancer en 2011?..."
+      },
+      "sentText": {
+        "en": "You're a boss! Thanks for asking about freelancing. \nI will send you a reply soon.",
+        "pl": "Pjona 👊! Dzięki za zapytanie o freelancing. \nWkrótce się do Ciebie odezwę.",
+        "es": "¡Eres maravillosx! Gracias por preguntar sobre freelance. \nEnvíate un mensaje pronto."
+      }
+    },
+    {
+      "name": {
+        "en": "🐞 bugs",
+        "pl": "🐞 bugach",
+        "es": "🐞 errores"
+      },
+      "draftText": {
+        "en": "This site is still in early development stages ...",
+        "pl": "Ta strona jest jeszcze w fazie rozwoju...",
+        "es": "Este sitio todavía está en fase de desarrollo..."
+      },
+      "sentText": {
+        "en": "You're a star! Cheers 🍻 for reporting a bug. \nI will have a look at it and will reply soon.",
+        "pl": "Pjona 👊! Dzięki za zgłoszenie błędu. \nSprawdzę go i odpowiem wkrótce.",
+        "es": "¡Eres la leche! ¡Felicidades 🍻 por reportar un error. \nLe echaré un vistazo y te responderé pronto."
+      }
+    },
+    {
+      "name": {
+        "en": "👩‍💻 social media",
+        "pl": "👩‍💻 mediach społecznościowych",
+        "es": "👩‍💻 medios sociales"
+      },
+      "draftText": {
+        "en": "My Facebook site has been created in 2011 and closed in 2022 due to Meta boycott ...",
+        "pl": "Prowadziłem fanpage na Facebooku od 2011 do 2022 kiedy to zbojkotowałem Meta ...",
+        "es": "Mi sitio de Facebook se creó en 2011 y se cerró en 2022 debido al boicot a Meta..."
+      },
+      "sentText": {
+        "en": "All done! Thanks for asking about social media. \nI will send you a reply soon.",
+        "pl": "To tyle! Dzięki za zapytanie o mediach społecznościowych. \nWkrótce się do Ciebie odezwę.",
+        "es": "¡Todo listo! Gracias por preguntar sobre medios sociales. \nEnvíate un mensaje pronto."
+      }
+    }
+  ]
 }

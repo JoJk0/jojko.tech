@@ -12,7 +12,6 @@
 <script lang="ts" setup>
 import { useToggle } from '@vueuse/core'
 import type { PropType } from 'vue'
-import { ref } from 'vue'
 
 const props = defineProps({
   text: {

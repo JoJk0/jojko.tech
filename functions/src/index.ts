@@ -1,23 +1,25 @@
-/* eslint-disable max-len */
-import * as functions from "firebase-functions";
-import {launch} from "puppeteer";
-import {initializeApp, cert, ServiceAccount} from "firebase-admin/app";
-import {getStorage} from "firebase-admin/storage";
-import {createTransport} from "nodemailer";
+import * as functions from 'firebase-functions'
+import { launch } from 'puppeteer'
+import type { ServiceAccount } from 'firebase-admin/app'
+import { cert, initializeApp } from 'firebase-admin/app'
+import { getStorage } from 'firebase-admin/storage'
+import { createTransport } from 'nodemailer'
 
-import serviceAccount from "./key.local.json";
+import validator from 'validator'
+import axios from 'axios'
+import serviceAccount from './key.local.json'
+import type {
+  GRecaptchaResponse,
+  SendMailCallData,
+} from './utils'
 import {
   defineValidationSchema,
   emailCopyHTML,
   emailHTML,
-  GRecaptchaResponse,
   sanitize,
-  SendMailCallData,
   validate,
-} from "./utils";
-import validator from "validator";
-import {cvStoragePath, cvBwStoragePath, cvWebUrl, region} from "./config";
-import axios from "axios";
+} from './utils'
+import { cvBwStoragePath, cvStoragePath, cvWebUrl, region } from './config'
 
 // JJK Functions
 // https://jojko.tech
@@ -31,159 +33,151 @@ import axios from "axios";
 //
 
 export const savePdf = functions.region(region).runWith({
-  memory: "1GB",
-}).database.ref("/cv")
-    .onWrite(async (snapshot) => {
+  memory: '1GB',
+}).database.ref('/cv')
+  .onWrite(async (snapshot) => {
     // puppeteer
-      const browser = await launch({waitForInitialPage: false});
+    const browser = await launch({ waitForInitialPage: false })
 
-      const app = initializeApp({
-        credential: cert(serviceAccount as ServiceAccount),
-        storageBucket: "jjk-portfolio.appspot.com",
-      });
+    const app = initializeApp({
+      credential: cert(serviceAccount as ServiceAccount),
+      storageBucket: 'jjk-portfolio.appspot.com',
+    })
 
-      const storage = getStorage(app);
+    const storage = getStorage(app)
 
-      const saveFile = async (bw?: true) => {
-        const page = await browser.newPage();
+    const saveFile = async (bw?: true) => {
+      const page = await browser.newPage()
 
-        const url = bw ? `${cvWebUrl}?blackAndWhite` : cvWebUrl;
+      const url = bw ? `${cvWebUrl}?blackAndWhite` : cvWebUrl
 
-        await page.goto(url, {
-          waitUntil: "networkidle2",
-        });
+      await page.goto(url, {
+        waitUntil: 'networkidle2',
+      })
 
-        const pdfOptions = {
-          format: "a4",
-          printBackground: true,
-          pageRanges: "1",
-        } as const;
+      const pdfOptions = {
+        format: 'a4',
+        printBackground: true,
+        pageRanges: '1',
+      } as const
 
-        const pdf = await page.pdf(pdfOptions);
+      const pdf = await page.pdf(pdfOptions)
 
-        const path = bw ? cvBwStoragePath : cvStoragePath;
+      const path = bw ? cvBwStoragePath : cvStoragePath
 
-        const file = storage.bucket().file(path);
+      const file = storage.bucket().file(path)
 
-        await file.save(pdf, {public: true})
-            .catch((e) => functions.logger.error(e));
-      };
+      await file.save(pdf, { public: true })
+        .catch(e => functions.logger.error(e))
+    }
 
-      try {
-        await Promise.all([
-          saveFile(),
-          saveFile(true),
-        ]);
-      } catch (e) {
-        functions.logger.error(e);
-      }
+    try {
+      await Promise.all([
+        saveFile(),
+        saveFile(true),
+      ])
+    }
+    catch (e) {
+      functions.logger.error(e)
+    }
 
-      await browser.close();
+    await browser.close()
 
-      return snapshot;
-    });
-
+    return snapshot
+  })
 
 export const sendMail = functions.region(region).https
-    .onCall(async (data: SendMailCallData) => {
-      const schema = defineValidationSchema<SendMailCallData>({
-        topic: (val) => [
-          validator.isAlphanumeric(val),
-          !validator.isEmpty(val),
-          validator.isLength(val, {min: 3, max: 100}),
-        ],
-        name: (val) => [
-          validator.isAlphanumeric(val),
-          !validator.isEmpty(val),
-          validator.isLength(val, {min: 3, max: 100}),
-        ],
-        email: (val) => [
-          validator.isEmail(val),
-          !validator.isEmpty(val),
-          validator.isLength(val, {min: 3, max: 100}),
-        ],
-        message: (val) => [
-          validator.isAlphanumeric(val),
-          !validator.isEmpty(val),
-          validator.isLength(val, {min: 120, max: 8192}),
-        ],
-      });
+  .onCall(async (data: SendMailCallData) => {
+    const schema = defineValidationSchema<SendMailCallData>({
+      topic: val => [
+        validator.isAlphanumeric(val),
+        !validator.isEmpty(val),
+        validator.isLength(val, { min: 3, max: 100 }),
+      ],
+      name: val => [
+        validator.isAlphanumeric(val),
+        !validator.isEmpty(val),
+        validator.isLength(val, { min: 3, max: 100 }),
+      ],
+      email: val => [
+        validator.isEmail(val),
+        !validator.isEmpty(val),
+        validator.isLength(val, { min: 3, max: 100 }),
+      ],
+      message: val => [
+        validator.isAlphanumeric(val),
+        !validator.isEmpty(val),
+        validator.isLength(val, { min: 120, max: 8192 }),
+      ],
+    })
 
-      validate(data, schema);
+    validate(data, schema)
 
-      const {
-        topic,
-        name,
-        message,
-        receipt,
-        email,
-        gRecaptchaToken,
-      } = sanitize(data);
+    const {
+      topic,
+      name,
+      message,
+      receipt,
+      email,
+      gRecaptchaToken,
+    } = sanitize(data)
 
-      // RECAPTCHA VERIFICATION
+    // RECAPTCHA VERIFICATION
 
-      const {data: response} = await axios.get<GRecaptchaResponse>(
+    const { data: response } = await axios.get<GRecaptchaResponse>(
           `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.GRECAPTCHA_SECRET}&response=${gRecaptchaToken}`
-          , {responseType: "json"});
+          , { responseType: 'json' })
 
-      const {score} = response;
+    const { score } = response
 
-      console.log(score);
+    // console.info(score)
 
-      if (score < 0.5) {
-        functions.logger.error("Unsuccessful verification");
-        return;
-      }
+    if (score < 0.5) {
+      functions.logger.error('Unsuccessful verification')
+      return
+    }
 
-      const transporter = createTransport({
-        host: "smtppro.zoho.eu",
-        port: 465,
-        secure: true,
-        auth: {
-          user: process.env.NODEMAILER_USERNAME,
-          pass: process.env.NODEMAILER_PASSWORD,
-        },
-      });
+    const transporter = createTransport({
+      host: 'smtppro.zoho.eu',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.NODEMAILER_USERNAME,
+        pass: process.env.NODEMAILER_PASSWORD,
+      },
+    })
 
-      transporter.verify(function(err, success) {
-        if (err) {
-          console.error(`SMTP Error: ${err}`);
-        }
-        if (success) {
-          console.log("SMTP ready...");
-        } else {
-          console.error("SMTP not ready!");
-        }
-      });
+    transporter.verify()
 
-      const date = new Date().toISOString();
+    const date = new Date().toISOString()
 
-      const topicNames: Record<SendMailCallData["topic"], string> = {
-        "HIRING_ME": "hiring me",
-        "BUGS": "bugs",
-        "COFFEE": "coffee",
-        "COOPERATION": "cooperation",
-        "FREELANCE_PROJECTS": "freelance projects",
-        "SOCIAL_MEDIA": "social medias",
-      };
+    const topicNames: Record<SendMailCallData['topic'], string> = {
+      HIRING_ME: 'hiring me',
+      BUGS: 'bugs',
+      COFFEE: 'coffee',
+      COOPERATION: 'cooperation',
+      FREELANCE_PROJECTS: 'freelance projects',
+      SOCIAL_MEDIA: 'social medias',
+    }
 
-      const {messageId} = await transporter.sendMail({
-        from: `${name} <jacob@jojko.tech>`,
-        to: "jacob@jojko.tech",
-        subject: `${name} sent you a message about ${topicNames[topic]}`,
-        html: emailHTML({name, email, topic, message, date}),
-      });
+    const { messageId } = await transporter.sendMail({
+      from: `${name} <jacob@jojko.tech>`,
+      to: 'jacob@jojko.tech',
+      subject: `${name} sent you a message about ${topicNames[topic]}`,
+      html: emailHTML({ name, email, topic, message, date }),
+    })
 
-      console.log("Message sent: %s", messageId);
+    // console.info('Message sent: %s', messageId)
 
-      if (!receipt) return;
+    if (!receipt)
+      return
 
-      const {messageId: copyMessageId} = await transporter.sendMail({
-        from: "jojko.tech <jacob@jojko.tech>",
-        to: email,
-        subject: `Thanks ${name} for contacting me about ${topicNames[topic]}`,
-        html: emailCopyHTML({name, topic, message, date}),
-      });
+    const { messageId: copyMessageId } = await transporter.sendMail({
+      from: 'jojko.tech <jacob@jojko.tech>',
+      to: email,
+      subject: `Thanks ${name} for contacting me about ${topicNames[topic]}`,
+      html: emailCopyHTML({ name, topic, message, date }),
+    })
 
-      console.log("Copy of message sent: %s", copyMessageId);
-    });
+    // console.info('Copy of message sent: %s', copyMessageId)
+  })

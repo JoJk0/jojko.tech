@@ -8,6 +8,7 @@
 <script lang="ts" setup>
 import { url } from '@vee-validate/rules'
 import { validateIconName } from '@iconify/utils'
+
 const props = defineProps({
   icon: {
     type: String,

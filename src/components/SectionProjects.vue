@@ -4,8 +4,8 @@
       {{ t('PROJECTS') }}
     </app-title>
     <div class="projects-container">
-      <swiper
-        ref="swiperEl" slides-per-view="auto" :space-between="mobile ? 0 : 30" follow-finger :free-mode="true" preload-images
+      <Swiper
+        slides-per-view="auto" :space-between="mobile ? 0 : 30" follow-finger :free-mode="true" preload-images
         :mousewheel="{
           forceToAxis: true,
           releaseOnEdges: true,
@@ -14,13 +14,13 @@
         :modules="[Navigation, Mousewheel, Scrollbar, Pagination]" class="swiper" :scrollbar="{ draggable: true }"
         @swiper="instance => swiperInstance = instance"
       >
-        <swiper-slide v-for="project of projects" :key="project.id" class="slide">
+        <SwiperSlide v-for="project of projects" :key="project.id" class="slide">
           <ProjectCard
             :project="project" class="card" @slide:next:set="swiperInstance?.slideNext()"
             @slide:prev:set="swiperInstance?.slidePrev()"
           />
-        </swiper-slide>
-      </swiper>
+        </SwiperSlide>
+      </Swiper>
     </div>
   </section>
 </template>
@@ -29,12 +29,13 @@
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import type { Swiper as SwiperInstance } from 'swiper'
-import { Mousewheel, Navigation, Pagination, Scrollbar } from 'swiper'
+import { Mousewheel, Navigation, Pagination, Scrollbar } from 'swiper/modules'
 import data from '~/Data'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+
 // const props = defineProps({})
 
 // const emit = defineEmits({})

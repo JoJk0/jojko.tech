@@ -1,14 +1,14 @@
 <template>
   <div class="photos" :class="{ mobile }">
-    <swiper
+    <Swiper
       v-if="!mobile" nested slides-per-view="auto" :space-between="30" :mousewheel="{
         forceToAxis: true,
       }" :modules="modules" class="mySwiper" navigation :scrollbar="{ draggable: true }"
     >
-      <swiper-slide v-for="image of images" :key="image.url" class="slide">
+      <SwiperSlide v-for="image of images" :key="image.url" class="slide">
         <GalleryImage :src="image.url" :alt="image.alt" :lazy-src="image.thumbnail" />
-      </swiper-slide>
-    </swiper>
+      </SwiperSlide>
+    </Swiper>
     <GalleryImages v-else :images="images" :name="name">
       <template #activator="props">
         <v-img
@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { A11y, Mousewheel, Navigation, Scrollbar } from 'swiper'
+import { A11y, Mousewheel, Navigation, Scrollbar } from 'swiper/modules'
 import { useStorageFiles } from '~/composables/useStorageFile'
 import 'swiper/css'
 import 'swiper/css/navigation'

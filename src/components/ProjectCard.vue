@@ -80,11 +80,13 @@ const { mobile } = useDisplay()
 
 const slide = useSwiperSlide()
 
-const setSlide = () => {
+function setSlide() {
   if (slide.value.isNext)
+    // eslint-disable-next-line vue/custom-event-name-casing
     emit('slide:next:set')
 
   else if (slide.value.isPrev)
+    // eslint-disable-next-line vue/custom-event-name-casing
     emit('slide:prev:set')
 }
 

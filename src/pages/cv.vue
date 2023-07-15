@@ -1,7 +1,7 @@
 <template>
   <div id="section-cv" :class="{ mobile }">
     <div class="cv-renderer">
-      <CVRenderer ref="rendererEl" class="h" :data="cv" :black-and-white="isBlackAndWhite" />
+      <CVRenderer class="h" :data="cv" :black-and-white="isBlackAndWhite" />
     </div>
     <div class="right-panel" :class="{ mobile }">
       <AppTitle v-if="!mobile" class="title">

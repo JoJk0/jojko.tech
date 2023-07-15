@@ -1,10 +1,9 @@
 import { Color, Line3, Vector3 } from 'three'
 import type { DeepReadonly } from 'vue'
-import deepMerge from 'deepmerge'
-import type { JJKData } from './Data'
-import type { AppLocale, I18NString } from './modules/i18n'
-import { availableLocales } from './modules/i18n'
-import { THUMB_FILENAME } from './main'
+import type { AppLocale, I18NString } from '~/modules/i18n'
+import { availableLocales } from '~/modules/i18n'
+import { THUMB_FILENAME } from '~/main'
+import type { JJKData } from '~/Data'
 
 export type I18n<T extends string, TKey extends string = string> = {
   [key in AppLocale]: T;
@@ -19,19 +18,19 @@ export const variables = {
   colorBackground: '#001427',
 }
 
-export const resolveCSSVar = (variable: string) =>
-  getComputedStyle(document.querySelector('body')!).getPropertyValue(variable)
+export function resolveCSSVar(variable: string) {
+  return getComputedStyle(document.querySelector('body')!).getPropertyValue(variable)
+}
 
 export const colorToHex = (color: string) => new Color(color.trim()).getHex()
 
-export const cssVarToHex = (variable: string) =>
-  colorToHex(resolveCSSVar(variable))
+export function cssVarToHex(variable: string) {
+  return colorToHex(resolveCSSVar(variable))
+}
 
-export const getAngle = (
-  point1: Vector3,
+export function getAngle(point1: Vector3,
   point2: Vector3,
-  offset = 0,
-) => {
+  offset = 0) {
   const helperPoint = new Vector3(point2.x, point1.y, 0)
 
   const helperLine1 = new Line3(point2, helperPoint)
@@ -40,22 +39,23 @@ export const getAngle = (
   const isPositive = point2.y - point1.y > 0
   const angleRaw = Math.atan(helperLine1.distance() / helperLine2.distance())
 
-  console.log(angleRaw)
-
   return isPositive ? 2 * Math.PI - angleRaw + offset : angleRaw + offset
   // return point1.angleTo(point2)
 }
 
-const isNode = () => {
-  try { return this === global }
+function isNode(this: any) {
+  try {
+    // eslint-disable-next-line no-restricted-globals
+    return this === global
+  }
   catch (e) { return false }
 }
 
-export const defineData = <T extends DeepReadonly<JJKData>>(data: T) => {
+export function defineData<T extends DeepReadonly<JJKData>>(data: T) {
   if (isNode()) {
     const write = async () => {
-      const { writeFileSync } = await import('fs')
-      const { resolve } = await import('path')
+      const { writeFileSync } = await import('node:fs')
+      const { resolve } = await import('node:path')
       writeFileSync(resolve('Data.json'), JSON.stringify(data))
     }
     write()
@@ -63,19 +63,21 @@ export const defineData = <T extends DeepReadonly<JJKData>>(data: T) => {
   return data
 }
 
-export const guessLocale = () => {
+export function guessLocale() {
   const userLangs = navigator.languages ? navigator.languages.map(lang => lang.split('-')[0]) : ['en']
 
   return userLangs.find(lang => (availableLocales as string[]).includes(lang)) as AppLocale || 'en'
 }
 
-export const addMessage = <T extends string>(data: I18NString, key: T) =>
-  Object.entries(data).map(([locale, message]) => [locale, { [key]: message }] as const).reduce<Record<keyof typeof data, Record<typeof key, string>>>((acc, [locale, message]) => ({ ...acc, [locale]: message }), {} as any)
+export function addMessage<T extends string>(data: I18NString, key: T) {
+  return Object.entries(data).map(([locale, message]) => [locale, { [key]: message }] as const).reduce<Record<keyof typeof data, Record<typeof key, string>>>((acc, [locale, message]) => ({ ...acc, [locale]: message }), {} as any)
+}
 
-export const addMessages = <T extends string>(data: Record<T, I18NString>) =>
-  Object.entries<I18NString>(data)
+export function addMessages<T extends string>(data: Record<T, I18NString>) {
+  return Object.entries<I18NString>(data)
+}
 
-export const getThumbFilename = (filename: string) => {
+export function getThumbFilename(filename: string) {
   const filenameArr = filename.split('.')
   const extension = filenameArr.pop()
 
@@ -84,6 +86,6 @@ export const getThumbFilename = (filename: string) => {
   return extension ? [filenameArr.join(''), extension].join('.') : undefined
 }
 
-export const clamp01 = (a: number) => {
+export function clamp01(a: number) {
   return a < 0 ? 0 : a > 1 ? 1 : a
 }

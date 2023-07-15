@@ -157,9 +157,9 @@
 import type { PropType } from 'vue'
 import { DateTime } from 'luxon'
 import type { CVData } from '~/Data'
+
 // TODO: Fix PDF generation
 
-// eslint-disable-next-line vue/define-macros-order
 const props = defineProps({
   data: {
     type: Object as PropType<CVData>,
@@ -173,7 +173,7 @@ const props = defineProps({
 const getMonth = (date: string) => DateTime.fromISO(date).get('monthShort')
 const getYear = (date: string) => DateTime.fromISO(date).get('year')
 
-const getLength = (startDate: string, endDate: string) => {
+function getLength(startDate: string, endDate: string) {
   const start = DateTime.fromISO(startDate)
   const end = DateTime.fromISO(endDate)
 

@@ -37,7 +37,7 @@ export interface MainJPoints {
   end: Vector3
 }
 
-export const addShadow = (model: Object3D) => {
+export function addShadow(model: Object3D) {
   model.traverse((n) => {
     if (n.type === 'Mesh') {
       n.castShadow = true
@@ -47,14 +47,12 @@ export const addShadow = (model: Object3D) => {
   })
 }
 
-export const drawCurvedPill = (
-  path: CurvePath<Vector3>,
+export function drawCurvedPill(path: CurvePath<Vector3>,
   divisions: number,
   radius: number,
   material: Material,
   tubularSegments: number,
-  radialSegments: number,
-) => {
+  radialSegments: number) {
   const pathPoints = path.getSpacedPoints(divisions)
 
   let currentPath: CurvePath<Vector3> | undefined = path
@@ -107,7 +105,7 @@ export const drawCurvedPill = (
     const progress
       = typeof e === 'number'
         ? e
-        : parseFloat((e?.target as HTMLInputElement)?.value)
+        : Number.parseFloat((e?.target as HTMLInputElement)?.value)
     const length = 60
 
     const currentPointsNumber = divisions + 1
@@ -160,14 +158,12 @@ export const drawCurvedPill = (
   }
 }
 
-export const drawCircle = (
-  points: MainJPoints,
+export function drawCircle(points: MainJPoints,
   divisions: number,
   radius: number,
   material: Material,
   tubularSegments: number,
-  radialSegments: number,
-) => {
+  radialSegments: number) {
   const { top, start, middle, middle2, middle3, end } = points
 
   const curveQuad1 = new QuadraticBezierCurve3(start, middle, middle2)
@@ -193,11 +189,9 @@ export const drawCircle = (
   }
 }
 
-export const drawPoint = (
-  point: Vector3,
+export function drawPoint(point: Vector3,
   radius: number,
-  material: Material,
-) => {
+  material: Material) {
   /* Main dot */
   const mainDotGeo = new SphereGeometry(radius, 32, 32)
   const mainDot = new Mesh(mainDotGeo, material)
@@ -211,7 +205,7 @@ export const drawPoint = (
     const progress
       = typeof e === 'number'
         ? e
-        : parseFloat((e?.target as HTMLInputElement)?.value)
+        : Number.parseFloat((e?.target as HTMLInputElement)?.value)
     mainDot.scale.set(progress, progress, progress)
   }
 
@@ -221,17 +215,15 @@ export const drawPoint = (
   }
 }
 
-export const drawRect = (
-  points: {
-    start: Vector3
-    end: Vector3
-  },
-  divisions: number,
-  radius: number,
-  material: Material,
-  tubularSegments: number,
-  radialSegments: number,
-) => {
+export function drawRect(points: {
+  start: Vector3
+  end: Vector3
+},
+divisions: number,
+radius: number,
+material: Material,
+tubularSegments: number,
+radialSegments: number) {
   const lineCurve = new LineCurve3(points.start, points.end)
   const path = new CurvePath<Vector3>()
   path.add(lineCurve)
@@ -245,7 +237,7 @@ export const drawRect = (
   )
 }
 
-export const getGroundMaterial = () => {
+export function getGroundMaterial() {
   const options = {
     color: variables.colorBackground,
     metalness: 0,
@@ -284,7 +276,7 @@ export const getGroundMaterial = () => {
     clearcoatNormalScale: new Vector2(options.clearcoatNormalScale),
   })
 }
-export const getClayMaterial = (colorProp?: ColorRepresentation) => {
+export function getClayMaterial(colorProp?: ColorRepresentation) {
   const color = colorProp || variables.colorText
   const materialSide = DoubleSide
   const textureLoader = new TextureLoader()
@@ -310,7 +302,7 @@ export const getClayMaterial = (colorProp?: ColorRepresentation) => {
   })
 }
 
-export const getGlassMaterial = () => {
+export function getGlassMaterial() {
   const options = {
     enableSwoopingCamera: false,
     enableRotation: false,
@@ -368,7 +360,7 @@ export const getGlassMaterial = () => {
   })
 }
 
-export const drawLogo = () => {
+export function drawLogo() {
   const tubularSegments = 64
   const radius = 10
   const radialSegments = 200
@@ -460,7 +452,7 @@ export const drawLogo = () => {
     const progress
       = typeof e === 'number'
         ? e
-        : parseFloat((e?.target as HTMLInputElement)?.value)
+        : Number.parseFloat((e?.target as HTMLInputElement)?.value)
 
     mainJ.setProgress(clamp01(progress / 0.6))
     mainDot.setProgress(clamp01(progress / 0.3 - 2))
@@ -482,7 +474,7 @@ export const drawLogo = () => {
   }
 }
 
-export const addHelpers = (scene: Scene) => {
+export function addHelpers(scene: Scene) {
   const axesHelper = new AxesHelper(500)
   scene.add(axesHelper)
 
@@ -492,4 +484,3 @@ export const addHelpers = (scene: Scene) => {
   const gridHelper = new GridHelper(size, divisions)
   scene.add(gridHelper)
 }
-

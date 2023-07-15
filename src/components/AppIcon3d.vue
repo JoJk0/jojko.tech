@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="canvasEl" class="icon-canvas" :style="{width, height}" />
+  <canvas ref="canvasEl" class="icon-canvas" :style="{ width, height }" />
 </template>
 
 <script lang="ts" setup>
@@ -29,7 +29,7 @@ const scene = new Scene()
 
 const center = new Vector3(0, 0, 0)
 
-const processSVG = (iconSvgData: string) => {
+function processSVG(iconSvgData: string) {
   const removeAttributes = ['aria-hidden', 'role', 'preserveAspectRatio']
   const addAttributes = { width: 20, height: 20 }
 
@@ -46,7 +46,7 @@ const processSVG = (iconSvgData: string) => {
   if (!viewBoxSearch)
     throw new Error('No viewBox found')
 
-  const viewBox = viewBoxSearch[1].split(' ').map(v => parseInt(v, 10))
+  const viewBox = viewBoxSearch[1].split(' ').map(v => Number.parseInt(v, 10))
   const centeredViewBox = [-20, -20, 20, 20]
 
   const normalWidth = centeredViewBox[2] - centeredViewBox[0]
@@ -74,7 +74,7 @@ const processSVG = (iconSvgData: string) => {
   // return proc
 }
 
-const loadSVG = () => {
+function loadSVG() {
   const loader = new SVGLoader()
 
   const { centeredSvg, viewBox, scale } = processSVG(props.icon)
@@ -115,7 +115,8 @@ const loadSVG = () => {
 }
 
 onMounted(() => {
-  if (!canvasEl.value) return
+  if (!canvasEl.value)
+    return
 
   const width = canvasEl.value.clientWidth
   const height = canvasEl.value.clientHeight
@@ -174,7 +175,6 @@ onMounted(() => {
     renderer.render(scene, camera)
   })
 })
-
 </script>
 
 <style lang="scss" scoped>
