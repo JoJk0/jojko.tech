@@ -2,37 +2,25 @@
   "database": {
     "rules": "database.rules.json"
   },
-  "hosting": {
-    "site": "jjk-portfolio-next",
-    "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  },
   "storage": {
     "rules": "storage.rules"
   },
   "functions": {
-    "ignore": [
-      "node_modules",
-      ".git",
-      "firebase-debug.log",
-      "firebase-debug.*.log"
-    ],
-    "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run lint",
-      "npm --prefix \"$RESOURCE_DIR\" run build"
-    ],
-    "source": "functions"
+    "source": ".output/server"
   },
+  "hosting": [
+    {
+      "site": "jjk-nuxt-example",
+      "public": ".output/public",
+      "cleanUrls": true,
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "server"
+        }
+      ]
+    }
+  ],
   "emulators": {
     "functions": {
       "port": 2139
