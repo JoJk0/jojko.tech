@@ -63,7 +63,7 @@
     "eslint-plugin-cypress": "^2.13.3",
     "firebase-tools": "^12.4.4",
     "https-localhost": "^4.7.1",
-    "pnpm": "^8.6.7",
+    "pnpm": "^8.6.8",
     "sass": "^1.63.6",
     "typescript": "^5.1.6",
     "unplugin-auto-import": "^0.16.6",
