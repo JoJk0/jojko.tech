@@ -126,8 +126,8 @@ devDependencies:
     specifier: ^2.4.0
     version: 2.4.0(vue@3.3.4)
   critters:
-    specifier: ^0.0.19
-    version: 0.0.19
+    specifier: ^0.0.20
+    version: 0.0.20
   cross-env:
     specifier: ^7.0.3
     version: 7.0.3
@@ -181,7 +181,7 @@ devDependencies:
     version: 1.0.2(vite@4.4.4)(vue@3.3.4)(vuetify@3.3.8)
   vite-ssg:
     specifier: ^0.23.0
-    version: 0.23.0(@unhead/vue@1.1.30)(critters@0.0.19)(vite@4.4.4)(vue-router@4.2.4)(vue@3.3.4)
+    version: 0.23.0(@unhead/vue@1.1.30)(critters@0.0.20)(vite@4.4.4)(vue-router@4.2.4)(vue@3.3.4)
   vite-ssg-sitemap:
     specifier: ^0.5.1
     version: 0.5.1
@@ -432,7 +432,7 @@ packages:
       '@babel/helper-plugin-utils': 7.22.5
       debug: 4.3.4(supports-color@8.1.1)
       lodash.debounce: 4.0.8
-      resolve: 1.22.2
+      resolve: 1.22.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5179,8 +5179,8 @@ packages:
       readable-stream: 3.6.2
     dev: true
 
-  /critters@0.0.19:
-    resolution: {integrity: sha512-Fm4ZAXsG0VzWy1U30rP4qxbaWGSsqXDgSupJW1OUJGDAs0KWC+j37v7p5a2kZ9BPJvhRzWm3be+Hc9WvQOBUOw==}
+  /critters@0.0.20:
+    resolution: {integrity: sha512-CImNRorKOl5d8TWcnAz5n5izQ6HFsvz29k327/ELy6UFcmbiZNOsinaKvzv16WZR0P6etfSWYzE47C4/56B3Uw==}
     dependencies:
       chalk: 4.1.2
       css-select: 5.1.0
@@ -5918,7 +5918,7 @@ packages:
     dependencies:
       debug: 3.2.7(supports-color@8.1.1)
       is-core-module: 2.12.1
-      resolve: 1.22.2
+      resolve: 1.22.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -9879,7 +9879,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.22.2
+      resolve: 1.22.3
       semver: 5.7.2
       validate-npm-package-license: 3.0.4
     dev: true
@@ -11074,6 +11074,7 @@ packages:
       is-core-module: 2.12.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
+    dev: true
 
   /resolve@1.22.3:
     resolution: {integrity: sha512-P8ur/gp/AmbEzjr729bZnLjXK5Z+4P0zhIJgBgzqRih7hL7BOukHGtSTA3ACMY467GRFz3duQsi0bDZdR7DKdw==}
@@ -11082,7 +11083,6 @@ packages:
       is-core-module: 2.12.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
-    dev: true
 
   /restore-cursor@3.1.0:
     resolution: {integrity: sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==}
@@ -12713,7 +12713,7 @@ packages:
     resolution: {integrity: sha512-X3ZImSVpFMypBTIhaTqEOdKj7tO9n7Puzd8vsxuQluFUyu6x/e2Dzv8qk5qZsC34ZR6iHt0wa2sPhDu1OjdOsA==}
     dev: true
 
-  /vite-ssg@0.23.0(@unhead/vue@1.1.30)(critters@0.0.19)(vite@4.4.4)(vue-router@4.2.4)(vue@3.3.4):
+  /vite-ssg@0.23.0(@unhead/vue@1.1.30)(critters@0.0.20)(vite@4.4.4)(vue-router@4.2.4)(vue@3.3.4):
     resolution: {integrity: sha512-15hH++eI98dNVuIu1ZaziL24arFsUWDepII6DPWe4dq6DPO6iDo0qW1BjdKz4htXu3CTbNaJzBqsL9PwZBOL8g==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -12731,7 +12731,7 @@ packages:
     dependencies:
       '@unhead/dom': 1.1.30
       '@unhead/vue': 1.1.30(vue@3.3.4)
-      critters: 0.0.19
+      critters: 0.0.20
       fs-extra: 11.1.1
       html-minifier: 4.0.0
       html5parser: 2.0.2
