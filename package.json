@@ -56,7 +56,7 @@
     "@vitest/coverage-c8": "^0.33.0",
     "@vue/compiler-sfc": "^3.3.4",
     "@vue/test-utils": "^2.4.0",
-    "critters": "^0.0.19",
+    "critters": "^0.0.20",
     "cross-env": "^7.0.3",
     "cypress": "^12.17.1",
     "eslint": "^8.45.0",
