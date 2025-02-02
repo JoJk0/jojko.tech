@@ -18,6 +18,23 @@
           "source": "**",
           "function": "server"
         }
+      ],
+      "redirects": [
+        {
+          "source": "/.well-known/host-meta",
+          "destination": "https://101010.pl/.well-known/host-meta?resource=acct:jojko@101010.pl",
+          "type": 301
+        },
+        {
+          "source": "/.well-known/webfinger",
+          "destination": "https://101010.pl/.well-known/webfinger?resource=acct:jojko@101010.pl",
+          "type": 301
+        },
+        {
+          "source": "/mastodon",
+          "destination": "https://101010.pl/@jojko",
+          "type": 302
+        }
       ]
     }
   ],

@@ -1,0 +1,5 @@
+:root {
+  --page-gutter: var(--space-m);
+}
+
+.grecaptcha-badge { visibility: hidden; }
