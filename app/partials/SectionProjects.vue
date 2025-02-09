@@ -1,10 +1,3 @@
-<template>
-  <section id="projects">
-    <h2 class="gradiented step-5" id="skills-title">{{ t('PROJECTS') }}</h2>
-    <codersrank-portfolio :grid="true" username="jojk0" class="codersrank-portfolio"></codersrank-portfolio>
-  </section>
-</template>
-
 <script lang="ts" setup>
 // const props = defineProps({})
 
@@ -12,10 +5,17 @@
 
 const { t } = useI18n()
 
-onMounted(async () => {
-  await import('https://unpkg.com/@codersrank/portfolio@x.x.x/codersrank-portfolio.min.js')
-})
+const projects = await useFetch('/api/projects')
 </script>
+
+<template>
+  <section id="projects">
+    <h2 id="skills-title" class="gradiented step-5">
+      {{ t('PROJECTS') }}
+    </h2>
+    {{ projects }}
+  </section>
+</template>
 
 <style>
 .codersrank-portfolio {
@@ -26,10 +26,8 @@ onMounted(async () => {
   --item-spacing: var(--space-m);
   --item-padding: var(--space-m);
   --item-bg-color: var(--app-color-surface);
-
 }
 </style>
-
 
 <i18n locale="en">
   {

@@ -3,13 +3,13 @@ export default defineI18nConfig(() => ({
   fallbackLocale: 'en',
   messages: {
     en: {
-      welcome: 'Welcome'
+      welcome: 'Welcome',
     },
     pl: {
-      welcome: 'Witaj'
+      welcome: 'Witaj',
     },
     es: {
-      welcome: 'Bienvenido'
-    }
-  }
+      welcome: 'Bienvenido',
+    },
+  },
 }))

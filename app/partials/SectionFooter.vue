@@ -1,3 +1,20 @@
+<script lang="ts" setup>
+import { AppChip } from 'jjk-ui'
+import { useI18n } from 'vue-i18n'
+
+const { number, isUnstable, channel, milestone } = useVersion()
+
+// const props = defineProps({});
+
+// const emit = defineEmits({});
+
+const { t } = useI18n()
+
+const thisYear = new Date().getFullYear()
+
+const date = computed(() => new Date(Number.parseInt(__TIMESTAMP__)).toLocaleString())
+</script>
+
 <template>
   <footer>
     <div v-if="isUnstable" class="version-status">
@@ -19,23 +36,6 @@
     </div>
   </footer>
 </template>
-
-<script lang="ts" setup>
-import { useI18n } from 'vue-i18n'
-import { AppChip } from 'jjk-ui';
-
-const { number, isUnstable, channel, milestone } = useVersion()
-
-// const props = defineProps({});
-
-// const emit = defineEmits({});
-
-const { t } = useI18n()
-
-const thisYear = new Date().getFullYear()
-
-const date = computed(() => new Date(parseInt(__TIMESTAMP__)).toLocaleString())
-</script>
 
 <style scoped>
 footer {
@@ -60,10 +60,10 @@ footer {
       font-weight: 500;
     }
   }
-    p {
-      opacity: 0.7;
-      font-size: 0.9em;
-    }
+  p {
+    opacity: 0.7;
+    font-size: 0.9em;
+  }
   .version {
     font-size: 0.7em;
     opacity: 0.5;

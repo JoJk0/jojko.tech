@@ -21,16 +21,16 @@ export interface JJKSkillCategory {
 }
 
 export type SkillCategoryKeys =
-    | 'FRONTEND_DEVELOPMENT'
-    | 'BACKEND_DEVELOPMENT'
-    | 'DESIGN'
-    | 'DEVELOPMENT_TOOLS'
-    | 'SOFTWARE_TESTING'
-    | 'DATABASES'
-    | 'MULTI-PURPOSE_PROGRAMMING'
-    | 'LANGUAGES'
-    | 'IDE'
-    | 'OPERATING_SYSTEMS_PROFICIENCY'
+  | 'FRONTEND_DEVELOPMENT'
+  | 'BACKEND_DEVELOPMENT'
+  | 'DESIGN'
+  | 'DEVELOPMENT_TOOLS'
+  | 'SOFTWARE_TESTING'
+  | 'DATABASES'
+  | 'MULTI-PURPOSE_PROGRAMMING'
+  | 'LANGUAGES'
+  | 'IDE'
+  | 'OPERATING_SYSTEMS_PROFICIENCY'
 
 export type SkillNames =
   | 'TypeScript'

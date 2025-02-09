@@ -1,5 +1,5 @@
-import { readFile } from 'fs/promises'
-import { resolve } from 'path'
+import { readFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
 
 const __dirname = new URL('.', import.meta.url).pathname
 
@@ -106,7 +106,20 @@ I take care of any piece of code I interact with, in line with Clean Code princi
       },
     ],
     otherSkills: [
-      'TypeScript', 'Apollo', 'AWS Amplify', 'Serverless', 'Ionic', 'Vuetify', 'Google Firebase', 'Prisma', 'MySQL', 'Docker', 'Adobe Xd', 'Photoshop', 'Illustrator', 'Substance 3D',
+      'TypeScript',
+      'Apollo',
+      'AWS Amplify',
+      'Serverless',
+      'Ionic',
+      'Vuetify',
+      'Google Firebase',
+      'Prisma',
+      'MySQL',
+      'Docker',
+      'Adobe Xd',
+      'Photoshop',
+      'Illustrator',
+      'Substance 3D',
     ],
   },
 } as const

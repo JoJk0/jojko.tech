@@ -1,11 +1,11 @@
 <template>
   <div class="app-scroller">
     <div class="start">
-      <slot name="start"></slot>
+      <slot name="start" />
     </div>
     <slot />
     <div class="end">
-      <slot name="end"></slot>
+      <slot name="end" />
     </div>
   </div>
 </template>

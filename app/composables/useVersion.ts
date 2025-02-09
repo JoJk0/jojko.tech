@@ -16,7 +16,7 @@ export const versionInfo = defineVersion({
   milestone: 'alpha',
 })
 
-export const useVersion = () => {
+export function useVersion() {
   const { channel, number, milestone } = versionInfo
 
   const isUnstable = channel === 'dev' || milestone === 'alpha' || milestone === 'beta'

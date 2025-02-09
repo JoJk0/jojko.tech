@@ -1,3 +1,5 @@
+import type { CodersrankProjectsResponse } from '../codersrankApi'
+
 const projects = [
   {
     id: '11',
@@ -131,7 +133,11 @@ const projects = [
       },
     ],
     keywords: [
-      'Github Actions', 'GSAP', 'Adobe Substance 3D Stager', 'three.js', 'Vite',
+      'Github Actions',
+      'GSAP',
+      'Adobe Substance 3D Stager',
+      'three.js',
+      'Vite',
     ],
     urls: {
       live: 'https://swoopdata.com/',
@@ -212,4 +218,8 @@ const projects = [
   },
 ] as const
 
-export default defineEventHandler(() => projects)
+export default defineEventHandler(async () => {
+  const projects = await $fetch<CodersrankProjectsResponse>('https://api.codersrank.io/v2/users/jojk0/projects')
+
+  return projects
+})

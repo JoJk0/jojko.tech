@@ -1,6 +1,6 @@
 <template>
   <main class="main-content">
-    <router-view />
+    <NuxtPage />
   </main>
 </template>
 
@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: var(--space-xl);
 }
 </style>

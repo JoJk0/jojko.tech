@@ -1,11 +1,11 @@
 import validator from 'validator'
 
 export interface GRecaptchaResponse {
-  success: boolean
-  score: number
-  action: string
-  challenge_ts: string
-  hostname: string
+  'success': boolean
+  'score': number
+  'action': string
+  'challenge_ts': string
+  'hostname': string
   'error-codes'?: string[]
 }
 

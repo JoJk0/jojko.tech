@@ -1,14 +1,30 @@
+<script lang="ts" setup>
+import { AppButton, AppDialog, AppTextField } from 'jjk-ui'
+
+// const props = defineProps({})
+
+// const emit = defineEmits({})
+
+const { t } = useI18n()
+</script>
+
 <template>
   <section id="contact">
-    <h2 class="gradiented step-5" id="skills-title">{{ t('GET_IN_TOUCH') }}</h2>
+    <h2 id="skills-title" class="gradiented step-5">
+      {{ t('GET_IN_TOUCH') }}
+    </h2>
     <p>{{ t('LETS_DO_SOMETHING_AMAZING') }}</p>
     <AppTextField type="textarea" class="textarea" />
     <AppDialog>
       <template #trigger>
-        <AppButton variant="primary" class="send-button">{{ t('SEND') }}</AppButton>
+        <AppButton variant="primary" class="send-button">
+          {{ t('SEND') }}
+        </AppButton>
       </template>
       <template #default>
-        <h2 class="gradiented step-3">Just one more thing...</h2>
+        <h2 class="gradiented step-3">
+          Just one more thing...
+        </h2>
         <AppTextField placeholder="Enter your contact email" />
         <AppTextField placeholder="Enter your name (optional)" />
         <div class="attribution">
@@ -21,16 +37,6 @@
     </AppDialog>
   </section>
 </template>
-
-<script lang="ts" setup>
-import { AppButton, AppTextField, AppDialog } from 'jjk-ui';
-
-// const props = defineProps({})
-
-// const emit = defineEmits({})
-
-const { t } = useI18n()
-</script>
 
 <style scoped>
 #contact {

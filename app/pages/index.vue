@@ -3,13 +3,13 @@ const { data } = await useFetch('/api/onload')
 </script>
 
 <template>
-    <SectionHi />
-    <SectionSkills />
-    <SectionProjects />
-    <SectionBento />
-    <SectionContact />
-    <SectionFooter />
-    <!-- <Suspense>
+  <SectionHi />
+  <SectionSkills />
+  <SectionProjects />
+  <SectionBento />
+  <SectionContact />
+  <SectionFooter />
+  <!-- <Suspense>
       <ClientOnly>
         <PageView v-if="online" />
         <div v-else text-gray:80>
@@ -22,5 +22,5 @@ const { data } = await useFetch('/api/onload')
         </div>
       </template>
     </Suspense> -->
-    <!-- <InputEntry /> -->
+  <!-- <InputEntry /> -->
 </template>

@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+// const props = defineProps({})
+
+// const emit = defineEmits({})
+</script>
+
 <template>
   <section id="bento">
     <TwitterWidget />
@@ -7,14 +13,6 @@
     </div>
   </section>
 </template>
-
-<script lang="ts" setup>
-import { AppCard } from 'jjk-ui';
-
-// const props = defineProps({})
-
-// const emit = defineEmits({})
-</script>
 
 <style scoped>
 #bento {

@@ -14,67 +14,10 @@ export default defineNuxtConfig({
 
   components: [
     '~/components',
-    '~/partials'
+    '~/partials',
   ],
-  future: {
-    compatibilityVersion: 4,
-  },
-
-  i18n: {
-    locales: ['en', 'pl', 'es'],
-    defaultLocale: 'en',
-    vueI18n: './i18n.config.ts'
-  },
-
-  experimental: {
-    // when using generate, payload js assets included in sw precache manifest
-    // but missing on offline, disabling extraction it until fixed
-    payloadExtraction: false,
-    renderJsonPayloads: true,
-    typedPages: true,
-  },
-
-  compatibilityDate: '2025-02-02',
-
-  css: [
-    'jjk-ui/styles',
-    '~/assets/style.css',
-  ],
-
-  colorMode: {
-    classSuffix: '',
-  },
-
-  vite: {
-    server: {
-      fs: {
-        allow: ['../jjk-ui'],
-      },
-    },
-    define: {
-      __TIMESTAMP__: JSON.stringify(new Date().getTime())
-    }
-    // plugins: [
-    //   VueI18n({
-    //     runtimeOnly: true,
-    //     compositionOnly: true,
-    //     fullInstall: true,
-    //     include: [resolve(__dirname, 'locales/**')],
-    //   }),
-    // ]
-  },
-
-  nitro: {
-    esbuild: {
-      options: {
-        target: 'esnext',
-      },
-    },
-    prerender: {
-      crawlLinks: false,
-      routes: ['/'],
-      ignore: ['/hi'],
-    },
+  devtools: {
+    enabled: true,
   },
 
   app: {
@@ -94,7 +37,59 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa,
+  css: [
+    'jjk-ui/styles',
+    '~/assets/style.css',
+  ],
+
+  colorMode: {
+    classSuffix: '',
+  },
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  experimental: {
+    // when using generate, payload js assets included in sw precache manifest
+    // but missing on offline, disabling extraction it until fixed
+    payloadExtraction: false,
+    renderJsonPayloads: true,
+    typedPages: true,
+  },
+
+  compatibilityDate: '2025-02-02',
+
+  nitro: {
+    esbuild: {
+      options: {
+        target: 'esnext',
+      },
+    },
+    prerender: {
+      crawlLinks: false,
+      routes: ['/'],
+      ignore: ['/hi'],
+    },
+  },
+
+  vite: {
+    server: {
+      fs: {
+        allow: ['../jjk-ui'],
+      },
+    },
+    define: {
+      __TIMESTAMP__: JSON.stringify(new Date().getTime()),
+    },
+    // plugins: [
+    //   VueI18n({
+    //     runtimeOnly: true,
+    //     compositionOnly: true,
+    //     fullInstall: true,
+    //     include: [resolve(__dirname, 'locales/**')],
+    //   }),
+    // ]
+  },
   eslint: {
     config: {
       standalone: false,
@@ -103,7 +98,12 @@ export default defineNuxtConfig({
       },
     },
   },
-  devtools: {
-    enabled: true,
+
+  i18n: {
+    locales: ['en', 'pl', 'es'],
+    defaultLocale: 'en',
+    vueI18n: './i18n.config.ts',
   },
+
+  pwa,
 })

@@ -1,4 +1,6 @@
-const wishlist = [
+import type { Skill } from '../types'
+
+const wishlist: Skill[] = [
   {
     name: 'React',
     icon: 'logos/react',
@@ -45,7 +47,7 @@ const wishlist = [
   {
     name: 'Figma',
     icon: 'logos/figma',
-  }
-] as const
+  },
+]
 
 export default defineEventHandler(() => wishlist)

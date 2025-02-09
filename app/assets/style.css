@@ -1,5 +1,12 @@
 :root {
   --page-gutter: var(--space-m);
+  --page-max-width: calc(var(--step-0) * 75);
 }
 
-.grecaptcha-badge { visibility: hidden; }
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
+body {
+  background-image: url('/assets/pattern.svg');
+}

@@ -1,28 +1,3 @@
-<template>
-  <section id="hi" :aria-label="`${t('HEY')}, ${t('IM')} Jacob`">
-    <div class="content">
-      <header aria-labelledby="headline-title" aria-describedby="headline-description" class="headline">
-        <h1 aria-hidden="true" id="headline-title" class="gradiented step-5">{{ t('HEY') }}, {{ t('IM') }} <span class="current-name">{{
-          currentName
-        }}</span><span class="cursor">|</span></h1>
-        <p class="desc" id="headline-description">
-          {{ t('INTRO_SUBTITLE') }}
-        </p>
-        <AppSocials />
-      </header>
-      <div class="me">
-        <img src="/me.webp" alt="Jacob Janisz smiling, wearing light blue shirt">
-      </div>
-    </div>
-    <div class="top-bar">
-      <AppLogo size="small" />
-      <AppButton class="lang-switcher" @click="locale = availableLocales[(availableLocales.indexOf(locale) + 1) % availableLocales.length]">
-        {{ locale }}
-      </AppButton>
-    </div>
-  </section>
-</template>
-
 <script lang="ts" setup>
 import { AppButton, AppLogo } from 'jjk-ui'
 
@@ -36,6 +11,38 @@ const { locale, availableLocales } = useI18n({
   useScope: 'global',
 })
 </script>
+
+<template>
+  <section id="hi" :aria-label="`${t('HEY')}, ${t('IM')} Jacob`">
+    <div class="content">
+      <header aria-labelledby="headline-title" aria-describedby="headline-description" class="headline">
+        <h1 id="headline-title" aria-hidden="true" class="gradiented step-5">
+          {{ t('HEY') }}, {{ t('IM') }} <span
+            class="current-name"
+          >{{
+            currentName
+          }}</span><span class="cursor">|</span>
+        </h1>
+        <p id="headline-description" class="desc">
+          {{ t('INTRO_SUBTITLE') }}
+        </p>
+        <AppSocials />
+      </header>
+      <div class="me">
+        <img src="/me.webp" alt="Jacob Janisz smiling, wearing light blue shirt">
+      </div>
+    </div>
+    <div class="top-bar">
+      <AppLogo size="small" />
+      <AppButton
+        class="lang-switcher"
+        @click="locale = availableLocales[(availableLocales.indexOf(locale) + 1) % availableLocales.length]"
+      >
+        {{ locale }}
+      </AppButton>
+    </div>
+  </section>
+</template>
 
 <style scoped>
 #hi {
@@ -54,7 +61,7 @@ const { locale, availableLocales } = useI18n({
     justify-content: center;
   }
 
-  >* {
+  > * {
     grid-area: 1 / 1;
   }
 }
@@ -109,10 +116,11 @@ const { locale, availableLocales } = useI18n({
   #headline-title {
     white-space: nowrap;
     min-width: 15ch;
+
     .current-name {
-      text-underline-offset: .25em;
+      text-underline-offset: 0.25em;
       text-decoration: underline;
-      text-decoration-color: rgba(var(--app-color-secondary-rgb), .3);
+      text-decoration-color: rgba(var(--app-color-secondary-rgb), 0.3);
       text-decoration-style: dotted;
     }
   }
@@ -130,7 +138,7 @@ const { locale, availableLocales } = useI18n({
   height: fit-content;
 
   .lang-switcher {
-    letter-spacing: .05ch;
+    letter-spacing: 0.05ch;
     --jjk-button-padding: var(--space-xs) var(--space-s);
   }
 }
@@ -174,7 +182,7 @@ const { locale, availableLocales } = useI18n({
   {
       "HEY": "Hey",
       "IM": "I'm",
-      "INTRO_SUBTITLE": "a full-stack developer and UI/UX designer."
+      "INTRO_SUBTITLE": "a Software Engineer and UI/UX designer."
   }
   </i18n>
 
@@ -182,7 +190,7 @@ const { locale, availableLocales } = useI18n({
   {
       "HEY": "Hej",
       "IM": "Jestem",
-      "INTRO_SUBTITLE": "full-stack developer i UI/UX designer."
+      "INTRO_SUBTITLE": "Software Engineer i UI/UX designer."
   }
   </i18n>
 
@@ -190,6 +198,6 @@ const { locale, availableLocales } = useI18n({
   {
       "HEY": "Hola",
       "IM": "Soy",
-      "INTRO_SUBTITLE": "un desarrollador full-stack y diseñador UI/UX."
+      "INTRO_SUBTITLE": "un ingenerio de software y diseñador UI/UX."
   }
   </i18n>
