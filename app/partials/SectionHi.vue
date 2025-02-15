@@ -22,6 +22,9 @@ const { locale, availableLocales } = useI18n({
           >{{
             currentName
           }}</span><span class="cursor">|</span>
+          <!-- <span class="pronouns">
+            ({{ t('PRONOUNS') }})
+          </span> -->
         </h1>
         <p id="headline-description" class="desc">
           {{ t('INTRO_SUBTITLE') }}
@@ -123,6 +126,13 @@ const { locale, availableLocales } = useI18n({
       text-decoration-color: rgba(var(--app-color-secondary-rgb), 0.3);
       text-decoration-style: dotted;
     }
+
+    .pronouns {
+      opacity: 0.3;
+      font-weight: 400;
+      color: white;
+      font-size: 0.8em;
+    }
   }
 
   .desc {
@@ -182,7 +192,8 @@ const { locale, availableLocales } = useI18n({
   {
       "HEY": "Hey",
       "IM": "I'm",
-      "INTRO_SUBTITLE": "a Software Engineer and UI/UX designer."
+      "INTRO_SUBTITLE": "a Software Engineer and UI/UX designer.",
+      "PRONOUNS": "he/him"
   }
   </i18n>
 
@@ -190,7 +201,8 @@ const { locale, availableLocales } = useI18n({
   {
       "HEY": "Hej",
       "IM": "Jestem",
-      "INTRO_SUBTITLE": "Software Engineer i UI/UX designer."
+      "INTRO_SUBTITLE": "Software Engineer i UI/UX designer.",
+      "PRONOUNS": "on/jego"
   }
   </i18n>
 
@@ -198,6 +210,7 @@ const { locale, availableLocales } = useI18n({
   {
       "HEY": "Hola",
       "IM": "Soy",
-      "INTRO_SUBTITLE": "un ingenerio de software y diseñador UI/UX."
+      "INTRO_SUBTITLE": "un ingenerio de software y diseñador UI/UX.",
+      "PRONOUNS": "él"
   }
   </i18n>

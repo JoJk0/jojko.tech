@@ -13,57 +13,53 @@ const wishListResult = computed(() => wishlist.value?.filter(({ name }) => name.
 </script>
 
 <template>
-  <div class="skill-search">
-    <AppScroller class="scroller">
-      <template #start>
-        <AppTextField
-          v-model="search"
-          class="searchbar"
-          expanded
-          :placeholder="t('INPUT_PLACEHOLDER')"
-          icon-before="material-symbols:search-rounded"
+  <AppScroller class="scroller">
+    <template #start>
+      <AppTextField
+        v-model="search"
+        class="searchbar"
+        expanded
+        :placeholder="t('INPUT_PLACEHOLDER')"
+        icon-before="material-symbols:search-rounded"
+      />
+    </template>
+    <div class="items">
+      <div class="tech-stack">
+        <AppTechCard
+          v-for="{ name, icon, inverted } of result" :key="name" :name="name" :icon="icon"
+          :inverted="inverted"
         />
-      </template>
-      <div class="items">
-        <div class="tech-stack">
-          <AppTechCard
-            v-for="{ name, icon, inverted } of result" :key="name" :name="name" :icon="icon"
-            :inverted="inverted"
-          />
-        </div>
-        <AppTitle v-if="wishListResult?.length" size="small" class="title">
-          {{ t('WISH_LIST') }}
-        </AppTitle>
-        <div v-if="wishListResult?.length" class="wishlist">
-          <AppTechCard
-            v-for="{ name, icon, inverted } of wishListResult" :key="name" :name="name" :icon="icon"
-            :inverted="inverted" wishlisted
-          />
-        </div>
-        <div v-if="!result?.length && !wishListResult?.length" class="no-results">
-          <div class="emoji">
-            🤷‍♂️
-          </div>
-          {{ t('NO_RESULTS') }}
-        </div>
       </div>
-    </AppScroller>
-  </div>
+      <AppTitle v-if="wishListResult?.length" size="small" class="title">
+        {{ t('WISH_LIST') }}
+      </AppTitle>
+      <div v-if="wishListResult?.length" class="wishlist">
+        <AppTechCard
+          v-for="{ name, icon, inverted } of wishListResult" :key="name" :name="name" :icon="icon"
+          :inverted="inverted" wishlisted
+        />
+      </div>
+      <div v-if="!result?.length && !wishListResult?.length" class="no-results">
+        <div class="emoji">
+          🤷‍♂️
+        </div>
+        {{ t('NO_RESULTS') }}
+      </div>
+    </div>
+  </AppScroller>
 </template>
 
 <style scoped>
 :deep(.app-text-field) {
   backdrop-filter: blur(15px);
 }
-.skill-search {
+.scroller {
   min-width: 20em;
   max-width: 35em;
   width: 100%;
   z-index: 1;
-
-  .scroller {
-    --app-scroller-padding: 0px;
-  }
+  --app-scroller-padding: 4px;
+  --app-scroller-height: 20em;
 }
 
 .items {

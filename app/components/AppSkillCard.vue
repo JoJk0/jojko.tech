@@ -1,13 +1,11 @@
 <script lang="ts" setup>
 import { AppCard } from 'jjk-ui'
 
-const props = defineProps<{
+defineProps<{
   title: string
   icon: string
   description: string
 }>()
-
-// const emit = defineEmits({})
 </script>
 
 <template>

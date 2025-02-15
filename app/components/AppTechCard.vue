@@ -28,7 +28,8 @@ const props = defineProps({
     <AppChip size="small" class="chip" transparent>
       {{ name }}
     </AppChip>
-    <AppIcon :icon="icon" class="icon" :inverted="inverted" />
+    <AppIcon v-if="!icon.startsWith('http')" :icon="icon" class="icon" :class="{ inverted }" />
+    <img v-else :src="icon" class="icon url" :class="{ inverted }" alt="icon">
   </div>
 </template>
 
@@ -55,6 +56,13 @@ const props = defineProps({
     aspect-ratio: 1;
     margin: 0.2em;
     flex: 1;
+    &.inverted {
+      filter: invert(1) hue-rotate(180deg);
+    }
+    &.url {
+      width: 1em;
+      height: 1em;
+    }
   }
 
   .chip {

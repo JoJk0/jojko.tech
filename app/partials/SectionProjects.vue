@@ -5,27 +5,45 @@
 
 const { t } = useI18n()
 
-const projects = await useFetch('/api/projects')
+const { data } = await useFetch('/api/projects')
 </script>
 
 <template>
   <section id="projects">
-    <h2 id="skills-title" class="gradiented step-5">
-      {{ t('PROJECTS') }}
-    </h2>
-    {{ projects }}
+    <header>
+      <h2 class="gradiented step-5">
+        {{ t('PROJECTS') }}
+      </h2>
+      <div class="text">
+        Lorem ipsum dolor sit amet
+      </div>
+    </header>
+    <div class="content">
+      <AppProjectCard v-for="(project, i) of data?.projects" :key="i" v-bind="project" />
+    </div>
   </section>
 </template>
 
-<style>
-.codersrank-portfolio {
-  --grid-columns: 2;
+<style scoped>
+#projects {
+  max-width: var(--page-max-width);
+  align-self: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
 
-  --item-border: 1px solid var(--app-color-outline);
-  --item-border-radius: var(--space-m);
-  --item-spacing: var(--space-m);
-  --item-padding: var(--space-m);
-  --item-bg-color: var(--app-color-surface);
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    padding-inline: var(--space-m);
+  }
+  .content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    gap: var(--space-m);
+  }
 }
 </style>
 

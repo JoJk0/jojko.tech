@@ -45,7 +45,9 @@ const { t } = useI18n()
   align-items: center;
   gap: 1em;
   min-width: 40ch;
-  max-width: 80ch;
+  max-width: var(--page-max-width);
+  width: 100%;
+  align-self: center;
 
   .app-text-field {
     align-self: stretch;

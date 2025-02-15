@@ -3,50 +3,50 @@ import type { Skill } from '../types'
 const wishlist: Skill[] = [
   {
     name: 'React',
-    icon: 'logos/react',
+    icon: 'logos:react',
   },
   {
     name: 'Next.js',
-    icon: 'logos/nextjs-icon',
+    icon: 'logos:nextjs-icon',
     inverted: true,
   },
   {
     name: 'Svelte / SvelteKit',
-    icon: 'logos/svelte-icon',
+    icon: 'logos:svelte-icon',
   },
   {
     name: 'Deno',
-    icon: 'logos/deno',
+    icon: 'logos:deno',
     inverted: true,
   },
   {
     name: 'Rust',
-    icon: 'vscode-icons/file-type-rust',
+    icon: 'vscode-icons:file-type-rust',
     inverted: true,
   },
   {
     name: 'RabbitMQ',
-    icon: 'logos/rabbitmq-icon',
+    icon: 'logos:rabbitmq-icon',
   },
   {
     name: 'Jira',
-    icon: 'logos/jira',
+    icon: 'logos:jira',
   },
   {
     name: 'Kubernetes',
-    icon: 'logos/kubernetes',
+    icon: 'logos:kubernetes',
   },
   {
     name: 'Relay Modern',
-    icon: 'logos/relay',
+    icon: 'logos:relay',
   },
   {
     name: 'MongoDB / DynamoDB',
-    icon: 'logos/mongodb-icon',
+    icon: 'logos:mongodb-icon',
   },
   {
     name: 'Figma',
-    icon: 'logos/figma',
+    icon: 'logos:figma',
   },
 ]
 

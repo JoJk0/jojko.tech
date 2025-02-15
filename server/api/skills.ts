@@ -44,7 +44,7 @@ const skills: Skill[] = [
   },
   {
     name: 'Histoire',
-    icon: 'https://histoire.dev:logo.svg',
+    icon: 'https://histoire.dev/logo.svg',
   },
   {
     name: 'Percy',
@@ -87,7 +87,7 @@ const skills: Skill[] = [
   },
   {
     name: 'Keycloak',
-    icon: 'https://www.keycloak.org/resources/images:keycloak_icon_512px.svg',
+    icon: 'https://www.keycloak.org/resources/images/keycloak_icon_512px.svg',
   },
   {
     name: 'Vite',
@@ -112,7 +112,7 @@ const skills: Skill[] = [
   },
   {
     name: 'Adobe Substance 3D Stager',
-    icon: 'https://www.adobe.com/content/dam/cc/icons:sg_appicon_256.svg',
+    icon: 'https://www.adobe.com/content/dam/cc/icons/sg_appicon_256.svg',
   },
   {
     name: 'AWS',
@@ -146,7 +146,7 @@ const skills: Skill[] = [
   },
   {
     name: 'Pinia / VueX',
-    icon: 'https://pinia.vuejs.org:logo.svg',
+    icon: 'https://pinia.vuejs.org/logo.svg',
   },
   {
     name: 'Vue',
@@ -182,11 +182,11 @@ const skills: Skill[] = [
   },
   {
     name: 'Vue i18n',
-    icon: 'https://vue-i18n.intlify.dev:vue-i18n-logo.svg',
+    icon: 'https://vue-i18n.intlify.dev/vue-i18n-logo.svg',
   },
   {
     name: 'GSAP',
-    icon: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327:logo-man.svg',
+    icon: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/logo-man.svg',
   },
   {
     name: 'PHP',
@@ -206,7 +206,7 @@ const skills: Skill[] = [
   },
   {
     name: 'Vectary',
-    icon: 'https://www.vectary.com/images:Logo_1.dc7000.svg',
+    icon: 'https://www.vectary.com/images/Logo_1.dc7000.svg',
   },
   {
     name: 'Material 3 (MD3)',
