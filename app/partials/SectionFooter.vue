@@ -8,11 +8,14 @@ const { number, isUnstable, channel, milestone } = useVersion()
 
 // const emit = defineEmits({});
 
+const config = useRuntimeConfig()
+
+const { __TIMESTAMP__ } = config.public
+
 const { t } = useI18n()
 
 const thisYear = new Date().getFullYear()
 
-const date = computed(() => new Date(Number.parseInt(__TIMESTAMP__)).toLocaleString())
 </script>
 
 <template>
@@ -32,7 +35,7 @@ const date = computed(() => new Date(Number.parseInt(__TIMESTAMP__)).toLocaleStr
     </div>
     <div class="version">
       v{{ number }}<br>
-      Last updated: {{ date }}
+      Last updated: {{ __TIMESTAMP__ }}
     </div>
   </footer>
 </template>

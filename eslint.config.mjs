@@ -1,12 +1,7 @@
 // @ts-check
-import antfu from '@antfu/eslint-config'
 import nuxt from './.nuxt/eslint.config.mjs'
+import { sxzz } from '@sxzz/eslint-config'
 
 export default nuxt(
-  antfu(
-    {
-      unocss: false,
-      formatters: true,
-    },
-  ),
+  sxzz()
 )

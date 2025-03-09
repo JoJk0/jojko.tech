@@ -1,48 +1,43 @@
 <script lang="ts" setup>
-import { AppTooltip } from 'jjk-ui'
-import IconGithub from '~icons/line-md/github'
-import IconLinkedin from '~icons/line-md/linkedin'
-import IconMastodon from '~icons/line-md/mastodon'
-import IconTwitter from '~icons/line-md/twitter'
+import IconGithub from "~icons/line-md/github";
+import IconLinkedin from "~icons/line-md/linkedin";
+import IconMastodon from "~icons/line-md/mastodon";
+import IconTwitter from "~icons/line-md/twitter";
+import { AppTooltip } from "jjk-ui";
 
-const props = defineProps({
-  // socials: {
-  //     type: Array as PropType<JJKSocial[]>
-  // }
+defineProps({
   inline: {
     type: Boolean,
     default: false,
   },
-})
-
-// const emit = defineEmits({});
+});
 
 const socials = [
   {
-    name: 'Github',
-    url: 'https://github.com/jojk0',
-    urlName: '@jojk0',
+    name: "Github",
+    url: "https://github.com/jojk0",
+    urlName: "@jojk0",
     icon: IconGithub,
   },
   {
-    name: 'BlueSky',
-    url: 'https://bsky.app/profile/jojko.bsky.social',
-    urlName: '@jojko.bsky.social',
+    name: "BlueSky",
+    url: "https://bsky.app/profile/jojko.bsky.social",
+    urlName: "@jojko.bsky.social",
     icon: IconTwitter,
   },
   {
-    name: 'Mastodon',
-    url: '/mastodon',
-    urlName: '@jacob@jojko.tech',
+    name: "Mastodon",
+    url: "/mastodon",
+    urlName: "@jacob@jojko.tech",
     icon: IconMastodon,
   },
   {
-    name: 'Linkedin',
-    url: 'https://linkedin.com/in/jojko',
-    urlName: 'in/jojko',
+    name: "Linkedin",
+    url: "https://linkedin.com/in/jojko",
+    urlName: "in/jojko",
     icon: IconLinkedin,
   },
-]
+];
 </script>
 
 <template>
@@ -53,11 +48,11 @@ const socials = [
       class="social"
     >
       <a :href="url" target="_blank">
-        <AppTooltip position="bottom">
-          <component :is="icon" :title="name" class="svg-icon" />
-          <template #content>
-            {{ urlName }}
+        <AppTooltip position="block-end">
+          <template #trigger>
+            <component :is="icon" :title="name" class="svg-icon" />
           </template>
+          {{ urlName }}
         </AppTooltip>
       </a>
     </div>

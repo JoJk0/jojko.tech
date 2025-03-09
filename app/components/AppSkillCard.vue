@@ -3,9 +3,10 @@ import { AppCard } from 'jjk-ui'
 
 defineProps<{
   title: string
-  icon: string
+  icon: Component
   description: string
-}>()
+}>();
+
 </script>
 
 <template>

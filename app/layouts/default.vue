@@ -12,6 +12,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  gap: var(--space-xl);
+  gap: var(--space-3xl);
 }
 </style>

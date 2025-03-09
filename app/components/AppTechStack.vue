@@ -1,15 +1,23 @@
 <script lang="ts" setup>
-import { AppTextField } from 'jjk-ui'
+import { AppTextField } from "jjk-ui";
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const search = ref('')
+const search = ref("");
 
-const { data: skills } = useFetch('/api/skills')
-const { data: wishlist } = useFetch('/api/wishlist')
+const { data: skills } = useFetch("/api/skills");
+const { data: wishlist } = useFetch("/api/wishlist");
 
-const result = computed(() => skills.value?.filter(({ name }) => name.toLowerCase().includes(search.value.toLowerCase())))
-const wishListResult = computed(() => wishlist.value?.filter(({ name }) => name.toLowerCase().includes(search.value.toLowerCase())))
+const result = computed(() =>
+  skills.value?.filter(({ name }) =>
+    name.toLowerCase().includes(search.value.toLowerCase()),
+  ),
+);
+const wishListResult = computed(() =>
+  wishlist.value?.filter(({ name }) =>
+    name.toLowerCase().includes(search.value.toLowerCase()),
+  ),
+);
 </script>
 
 <template>
@@ -26,40 +34,54 @@ const wishListResult = computed(() => wishlist.value?.filter(({ name }) => name.
     <div class="items">
       <div class="tech-stack">
         <AppTechCard
-          v-for="{ name, icon, inverted } of result" :key="name" :name="name" :icon="icon"
+          v-for="{ name, icon, inverted } of result"
+          :key="name"
+          :name="name"
+          :icon="icon"
           :inverted="inverted"
         />
       </div>
-      <AppTitle v-if="wishListResult?.length" size="small" class="title">
-        {{ t('WISH_LIST') }}
-      </AppTitle>
+      <h3 v-if="wishListResult?.length" size="small" class="title">
+        {{ t("WISH_LIST") }}
+      </h3>
       <div v-if="wishListResult?.length" class="wishlist">
         <AppTechCard
-          v-for="{ name, icon, inverted } of wishListResult" :key="name" :name="name" :icon="icon"
-          :inverted="inverted" wishlisted
+          v-for="{ name, icon, inverted } of wishListResult"
+          :key="name"
+          :name="name"
+          :icon="icon"
+          :inverted="inverted"
+          wishlisted
         />
       </div>
       <div v-if="!result?.length && !wishListResult?.length" class="no-results">
-        <div class="emoji">
-          🤷‍♂️
-        </div>
-        {{ t('NO_RESULTS') }}
+        <div class="emoji">🤷‍♂️</div>
+        {{ t("NO_RESULTS") }}
       </div>
     </div>
   </AppScroller>
 </template>
 
 <style scoped>
-:deep(.app-text-field) {
-  backdrop-filter: blur(15px);
-}
 .scroller {
   min-width: 20em;
   max-width: 35em;
   width: 100%;
   z-index: 1;
   --app-scroller-padding: 4px;
-  --app-scroller-height: 20em;
+  --app-scroller-height: 21em;
+  border-radius: var(--space-s);
+}
+
+.searchbar {
+  width: 100%;
+  backdrop-filter: blur(15px);
+}
+
+.title {
+  padding-block-start: var(--space-s);
+  padding-block-end: var(--space-xs);
+  padding-inline: var(--space-s);
 }
 
 .items {
@@ -97,7 +119,7 @@ const wishListResult = computed(() => wishlist.value?.filter(({ name }) => name.
   }
   </i18n>
 
-  <i18n locale="pl">
+<i18n locale="pl">
   {
       "INPUT_PLACEHOLDER": "Wpisz umiejętności, aby wyszukać...",
       "NO_RESULTS": "Hmm wygląda na to, że nie robię tego, spróbuj poszerzyć wyrażenie",
@@ -105,7 +127,7 @@ const wishListResult = computed(() => wishlist.value?.filter(({ name }) => name.
   }
   </i18n>
 
-  <i18n locale="es">
+<i18n locale="es">
   {
       "INPUT_PLACEHOLDER": "Escribe habilidades para buscar...",
       "NO_RESULTS": "Parece que no lo hago, tal vez prueba ampliar la búsqueda?",

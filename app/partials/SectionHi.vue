@@ -1,45 +1,55 @@
 <script lang="ts" setup>
-import { AppButton, AppLogo } from 'jjk-ui'
+import { AppButton, AppLogo } from "jjk-ui";
 
-const { data: myNames } = useFetch('/api/names')
+const { data: myNames } = useFetch("/api/names");
 
-const currentName = useAnimatedName(myNames)
+const currentName = useAnimatedName(myNames);
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const { locale, availableLocales } = useI18n({
-  useScope: 'global',
-})
+  useScope: "global",
+});
 </script>
 
 <template>
   <section id="hi" :aria-label="`${t('HEY')}, ${t('IM')} Jacob`">
     <div class="content">
-      <header aria-labelledby="headline-title" aria-describedby="headline-description" class="headline">
+      <header
+        aria-labelledby="headline-title"
+        aria-describedby="headline-description"
+        class="headline"
+      >
         <h1 id="headline-title" aria-hidden="true" class="gradiented step-5">
-          {{ t('HEY') }}, {{ t('IM') }} <span
-            class="current-name"
-          >{{
-            currentName
-          }}</span><span class="cursor">|</span>
+          {{ t("HEY") }}, {{ t("IM") }}
+          <span class="current-name">{{ currentName }}</span
+          ><span class="cursor">|</span>
           <!-- <span class="pronouns">
             ({{ t('PRONOUNS') }})
           </span> -->
         </h1>
         <p id="headline-description" class="desc">
-          {{ t('INTRO_SUBTITLE') }}
+          {{ t("INTRO_SUBTITLE") }}
         </p>
         <AppSocials />
       </header>
       <div class="me">
-        <img src="/me.webp" alt="Jacob Janisz smiling, wearing light blue shirt">
+        <img
+          src="/me.webp"
+          alt="Jacob Janisz smiling, wearing light blue shirt"
+        />
       </div>
     </div>
     <div class="top-bar">
       <AppLogo size="small" />
       <AppButton
         class="lang-switcher"
-        @click="locale = availableLocales[(availableLocales.indexOf(locale) + 1) % availableLocales.length]"
+        @click="
+          locale =
+            availableLocales[
+              (availableLocales.indexOf(locale) + 1) % availableLocales.length
+            ]!
+        "
       >
         {{ locale }}
       </AppButton>
@@ -75,7 +85,7 @@ const { locale, availableLocales } = useI18n({
   display: grid;
   grid-template-columns: 1fr;
   width: calc(var(--step-2) * 23);
-  max-height: 70%;
+  /* max-height: 70%; */
   aspect-ratio: calc(190 / 281);
 
   img {
@@ -90,7 +100,7 @@ const { locale, availableLocales } = useI18n({
 
   &:before,
   &:after {
-    content: '';
+    content: "";
     display: block;
     aspect-ratio: 1;
     grid-area: 1 / 1;
@@ -98,13 +108,23 @@ const { locale, availableLocales } = useI18n({
   }
 
   &:before {
-    background: radial-gradient(ellipse at center, white 0%, rgba(0, 0, 0, 0) 50%, transparent 100%);
+    background: radial-gradient(
+      ellipse at center,
+      white 0%,
+      rgba(0, 0, 0, 0) 50%,
+      transparent 100%
+    );
     translate: -25% -25%;
     scale: 2;
   }
 
   &:after {
-    background: radial-gradient(ellipse at center, black 0%, rgba(0, 0, 0, 0) 50%, transparent 100%);
+    background: radial-gradient(
+      ellipse at center,
+      black 0%,
+      rgba(0, 0, 0, 0) 50%,
+      transparent 100%
+    );
     scale: 2;
     translate: 25% 50%;
   }
@@ -149,6 +169,7 @@ const { locale, availableLocales } = useI18n({
 
   .lang-switcher {
     letter-spacing: 0.05ch;
+    line-height: 1.5;
     --jjk-button-padding: var(--space-xs) var(--space-s);
   }
 }

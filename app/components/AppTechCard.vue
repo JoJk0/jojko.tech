@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { AppChip, AppIcon } from 'jjk-ui'
+import { AppChip, AppIcon } from "jjk-ui";
 
-const props = defineProps({
+defineProps({
   name: {
     type: String,
     required: true,
@@ -18,7 +18,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-})
+});
 
 // const emit = defineEmits({})
 </script>
@@ -28,8 +28,13 @@ const props = defineProps({
     <AppChip size="small" class="chip" transparent>
       {{ name }}
     </AppChip>
-    <AppIcon v-if="!icon.startsWith('http')" :icon="icon" class="icon" :class="{ inverted }" />
-    <img v-else :src="icon" class="icon url" :class="{ inverted }" alt="icon">
+    <AppIcon
+      v-if="!icon.startsWith('http')"
+      :icon="icon"
+      class="icon"
+      :class="{ inverted }"
+    />
+    <img v-else :src="icon" class="icon url" :class="{ inverted }" alt="icon" />
   </div>
 </template>
 
@@ -39,9 +44,9 @@ const props = defineProps({
   flex-direction: column;
   align-items: center;
   background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 0.7em;
-  border-radius: 1.5em;
+  border: 1px solid var(--app-color-outline);
+  padding: var(--space-2xs);
+  border-radius: var(--space-s);
   aspect-ratio: 1;
   flex-basis: 8em;
   height: fit-content;

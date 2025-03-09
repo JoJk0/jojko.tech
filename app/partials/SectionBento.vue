@@ -6,7 +6,6 @@
 
 <template>
   <section id="bento">
-    <TwitterWidget />
     <div class="row">
       <SpotifyWidget />
       <GithubWidget />

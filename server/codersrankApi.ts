@@ -12,7 +12,7 @@ export interface CodersrankProject {
   other_technologies?: string[]
   project_title: string
   role: string
-  startDate: string
+  startDate?: string
   link_to_project?: string
   link_to_source_code?: string
 }

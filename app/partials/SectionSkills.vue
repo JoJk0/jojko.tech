@@ -1,48 +1,57 @@
 <script lang="ts" setup>
-import IconLibrary from '~icons/material-symbols/collections-bookmark-outline-rounded'
-import IconTools from '~icons/material-symbols/design-services-outline-rounded'
-import IconDesign from '~icons/material-symbols/square-foot'
+import IconLibrary from "~icons/material-symbols/collections-bookmark-outline-rounded";
+import IconTools from "~icons/material-symbols/design-services-outline-rounded";
+import IconDesign from "~icons/material-symbols/square-foot";
 // const props = defineProps({})
 
 // const emit = defineEmits({})
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const skills = [
   {
-    title: 'UI libraries',
+    title: "UI libraries",
     icon: IconLibrary,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend dolor.',
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend dolor.",
   },
   {
-    title: 'Design systems',
+    title: "Design systems",
     icon: IconDesign,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend dolor.',
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend dolor.",
   },
   {
-    title: 'DX tooling',
+    title: "DX tooling",
     icon: IconTools,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend dolor.',
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend dolor.",
   },
-] as const
+] as const;
 </script>
 
 <template>
   <section id="skills" arial-labelledby="skills-title">
-    <header>
-      <h2 id="skills-title" class="gradiented step-5">
-        {{ t('WHAT_I_DO') }}
-      </h2>
-      <div class="text">
-        Lorem ipsum dolor sit amet
-      </div>
-    </header>
-    <main class="content">
-      <div class="cards">
-        <AppSkillCard v-for="({ title, icon, description }, id) of skills" :key="id" :title :icon :description />
-      </div>
-      <AppTechStack />
-    </main>
+    <div class="start">
+      <header>
+        <h2 id="skills-title" class="gradiented step-5">
+          {{ t("WHAT_I_DO") }}
+        </h2>
+        <div class="text">Lorem ipsum dolor sit amet</div>
+      </header>
+      <main class="content">
+        <div class="cards">
+          <AppSkillCard
+            v-for="({ title, icon, description }, id) of skills"
+            :key="id"
+            :title
+            :icon
+            :description
+          />
+        </div>
+      </main>
+    </div>
+    <AppTechStack />
   </section>
 </template>
 
@@ -50,12 +59,18 @@ const skills = [
 #skills {
   max-width: var(--page-max-width);
   display: flex;
-  flex-direction: column;
   z-index: 1;
   align-self: center;
   gap: var(--space-l);
   width: 100%;
   margin-block-start: var(--space-3xl);
+
+  .start {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+    flex: 1;
+  }
 
   header {
     display: flex;
